@@ -39,7 +39,7 @@ public class UnclaimTaskAction extends GReopenTaskAction {
 
 	@Override
 	public boolean isExecutable() {
-		if (task.isClosed()) return false;
+		if (task.isClosed() || !task.isOwnerSet()) return false;
 		if (!getCurrentProject().isTeamMember(getCurrentUser())) return false;
 		return true;
 	}
