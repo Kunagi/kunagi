@@ -27,7 +27,7 @@ public class TextBundleViews {
     }
 
     public String impediments() {
-        return "<p>The Scrum Master uses the Impediment view to keep track of Impediments that encumber\nthe project.</p>\n\n<h3>The lifecycle of Impediments</h3>\n<p>When impediments come up (e. g. are given by a Team Member during a Daily Scrum Meeting),\nthe Scrum Master creates an Impediment to document it\'s existence. He then works to\nremove Impediments that obstruct the Team\'s work. As soon as a solution is found, he\ncloses the Impediment by selecting <tt>Close</tt> from the entity menu and documents the\nsolution, so then Team Members can check back to see if and how an Impediment was\nsolved.</p>";
+        return "<p>The Scrum Master uses the Impediment view to keep track of Impediments that encumber\nthe project.</p>\n\n<h3>The lifecycle of Impediments</h3>\n<p>When impediments come up (e. g. are given by a Team Member during a Daily Scrum Meeting),\nthe Scrum Master creates an Impediment to document its existence. He then works to\nremove Impediments that obstruct the Team\'s work. As soon as a solution is found, he\ncloses the Impediment by selecting <tt>Close</tt> from the entity menu and documents the\nsolution, so then Team Members can check back to see if and how an Impediment was\nsolved.</p>";
     }
 
     public String issues() {

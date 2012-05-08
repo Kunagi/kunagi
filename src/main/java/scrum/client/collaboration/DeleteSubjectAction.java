@@ -29,7 +29,7 @@ public class DeleteSubjectAction extends GDeleteSubjectAction {
 
 	@Override
 	protected void updateTooltip(TooltipBuilder tb) {
-		tb.setText("Delete this Subject and all it's comments permanently.");
+		tb.setText("Delete this Subject and all its comments permanently.");
 		if (!subject.getProject().isScrumMaster(getCurrentUser())) tb.addRemark(TooltipBuilder.NOT_SCRUMMASTER);
 	}
 
