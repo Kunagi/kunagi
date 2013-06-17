@@ -72,6 +72,14 @@ public class UserStatusDetailsWidget extends AScrumWidget {
 				setContent(ScrumGwt.createReferencesWidget(issues));
 			}
 		});
+		tb.addFieldRow("Work left", new AFieldValueWidget() {
+
+			@Override
+			protected void onUpdate() {
+				List<Task> tasks = project.getCurrentSprint().getClaimedTasks(user);
+				setText(Integer.toString(Task.sumRemainingWork(tasks)));
+			}
+		});
 		return tb.createTable();
 	}
 
