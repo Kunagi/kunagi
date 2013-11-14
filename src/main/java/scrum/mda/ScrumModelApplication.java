@@ -416,6 +416,7 @@ public class ScrumModelApplication extends AGeneratorApplication {
 			requirementModel.addReference("epic", getRequirementModel());
 			getApplicationModel().addCreateAction(requirementModel);
 			requirementModel.addAction("DeleteRequirement");
+			requirementModel.addAction("SuspendRequirement");
 			requirementModel.addAction("AddRequirementToCurrentSprint");
 			requirementModel.addAction("RemoveRequirementFromSprint");
 			requirementModel.addAction("SetRequirementDirty");
