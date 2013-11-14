@@ -183,6 +183,7 @@ public class StoryBurndownChart {
 		List<Double> mainDates = new ArrayList<Double>();
 		List<Double> mainTotal = new ArrayList<Double>();
 		List<Double> mainOpen = new ArrayList<Double>();
+		List<Double> mainIdeal = new ArrayList<Double>();
 
 		List<SprintDaySnapshot> snapshots;
 		WeekdaySelector freeDays;
@@ -195,8 +196,10 @@ public class StoryBurndownChart {
 		boolean workStarted;
 		boolean workFinished;
 
-		int totalOpen;
-		int totalStories;
+		double totalIdeal = 0;
+		int totalOpen = 0;
+		int totalStories = 0;
+		int totalWorkDays = 0;
 		double totalRemaining;
 		int workDays;
 
@@ -209,27 +212,44 @@ public class StoryBurndownChart {
 
 			date = firstDay;
 			while (date.isBeforeOrSame(lastDay)) {
+				if (!freeDays.isFree(date.getWeekday().getDayOfWeek())) {
+					totalWorkDays++;
+				}
 				date = date.nextDay();
 			}
 
 			setDate(firstDay);
 			while (true) {
-				if (!workFinished) {
+				if (date.isBeforeOrSame(new Date())) {
 					totalOpen = snapshot.getTotalStories() - snapshot.getClosedStories();
 					totalStories = snapshot.getTotalStories();
+					processRealData();
+					// TODO Was machen wir mit dem heutigen Tag?
+				} else {
+					mainDates.add((double) millisBegin);
+					mainDates.add((double) millisEnd);
+
+					mainTotal.add((double) totalStories);
+					mainTotal.add((double) totalStories);
+
+					double diff = (double) totalOpen / (double) (totalWorkDays - workDays);
+
+					if (totalIdeal == 0) {
+						totalIdeal = totalOpen;
+					}
+
+					mainIdeal.add(totalIdeal);
+					if (!freeDay) totalIdeal -= diff;
+					mainIdeal.add(totalIdeal);
 				}
 
-				if (workFinished) {
-					processSuffix();
-				} else {
-					processCenter();
-				}
 				if (date.equals(lastDay)) break;
 				setDate(date.nextDay());
 			}
 
 			dataset = new DefaultXYDataset();
 			dataset.addSeries("Open", toArray(mainDates, mainOpen));
+			dataset.addSeries("Ideal", toArray(mainDates, mainIdeal));
 			dataset.addSeries("Total", toArray(mainDates, mainTotal));
 		}
 
@@ -241,21 +261,23 @@ public class StoryBurndownChart {
 			if (!workFinished) snapshot = getSnapshot();
 		}
 
-		private void processCenter() {
+		private void processRealData() {
 			mainDates.add((double) millisBegin);
+			mainDates.add((double) millisEnd);
+
 			mainTotal.add((double) totalStories);
+			mainTotal.add((double) totalStories);
+
+			mainOpen.add((double) totalOpen);
 			mainOpen.add((double) totalOpen);
 
-			mainDates.add((double) millisEnd);
-			mainTotal.add((double) totalStories);
-			mainOpen.add((double) totalOpen);
+			mainIdeal.add((double) totalOpen);
+			mainIdeal.add((double) totalOpen);
 
 			if (!freeDay) {
 				workDays++;
 			}
 		}
-
-		private void processSuffix() {}
 
 		private SprintDaySnapshot getSnapshot() {
 			for (SprintDaySnapshot snapshot : snapshots) {
