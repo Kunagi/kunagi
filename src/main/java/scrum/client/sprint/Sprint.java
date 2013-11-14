@@ -124,6 +124,11 @@ public class Sprint extends GSprint implements ForumSupport, ReferenceSupport, L
 				+ height;
 	}
 
+	public String getStoryBurndown(int width, int height) {
+		return GWT.getModuleBaseURL() + "storyBurndownChart.png?sprintId=" + getId() + "&width=" + width + "&height="
+				+ height;
+	}
+
 	public boolean isCompleted() {
 		return getVelocity() != null;
 	}

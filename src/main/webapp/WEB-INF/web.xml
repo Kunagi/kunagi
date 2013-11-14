@@ -153,6 +153,17 @@
 		<url-pattern>/scrum.ScrumGwtApplication/sprintBurndownChart.png</url-pattern>
 	</servlet-mapping>
 
+	<!-- story burndown chart -->
+	<servlet>
+		<servlet-name>storyBurndownChart</servlet-name>
+		<servlet-class>scrum.server.sprint.StoryBurndownChartServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+	</servlet>		
+	<servlet-mapping>
+		<servlet-name>storyBurndownChart</servlet-name>
+		<url-pattern>/scrum.ScrumGwtApplication/storyBurndownChart.png</url-pattern>
+	</servlet-mapping>	
+
     <!-- sprint report -->
     <servlet>
         <servlet-name>pdf</servlet-name>

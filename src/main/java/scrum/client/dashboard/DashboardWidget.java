@@ -37,6 +37,11 @@ public class DashboardWidget extends AScrumWidget {
 			new HyperlinkWidget(nav.createSwitchAction(widgets.getSprintBacklog())));
 		sprintBurndown.addSection(new SprintBurndownWidget());
 
+		PagePanel storyBurndown = new PagePanel();
+		storyBurndown.addHeader("Story Burndown",
+			new HyperlinkWidget(nav.createSwitchAction(widgets.getSprintBacklog())));
+		storyBurndown.addSection(new StoryBurndownWidget());
+
 		PagePanel teamsTasks = new PagePanel();
 		teamsTasks.addHeader("Teams current work",
 			new HyperlinkWidget(nav.createSwitchAction(widgets.getWhiteboard())),
@@ -66,7 +71,7 @@ public class DashboardWidget extends AScrumWidget {
 		events.addHeader("Latest Events", new HyperlinkWidget(nav.createSwitchAction(widgets.getProjectEventList())));
 		events.addSection(new LatestEventsWidget());
 
-		Widget left = TableBuilder.column(5, sprintBurndown, teamsTasks, posTasks);
+		Widget left = TableBuilder.column(5, sprintBurndown, storyBurndown, teamsTasks, posTasks);
 		Widget right = TableBuilder.column(5, impediments, risks, events);
 
 		return TableBuilder.row(5, left, right);
