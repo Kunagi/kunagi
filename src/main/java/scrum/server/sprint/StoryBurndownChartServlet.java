@@ -25,8 +25,8 @@ public class StoryBurndownChartServlet extends AKunagiServlet {
 
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-		ScrumWebApplication.get().getBurndownChart()
-				.writeSprintBurndownChart(out, sprintId, Integer.parseInt(width), Integer.parseInt(height));
+		ScrumWebApplication.get().getStoryBurndownChart()
+				.writeStoryBurndownChart(out, sprintId, Integer.parseInt(width), Integer.parseInt(height));
 
 		req.write(out.toByteArray());
 	}

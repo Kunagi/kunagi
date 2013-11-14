@@ -20,6 +20,17 @@ import scrum.server.project.Project;
 
 public class SprintDaySnapshot extends GSprintDaySnapshot implements BurndownSnapshot {
 
+	public int getClosedStories() {
+		return closedStories;
+	}
+
+	public int getTotalStories() {
+		return totalStories;
+	}
+
+	private int closedStories;
+	private int totalStories;
+
 	public void addBurnedWorkFromDeleted(int work) {
 		setBurnedWorkFromDeleted(getBurnedWorkFromDeleted() + work);
 	}
@@ -46,6 +57,18 @@ public class SprintDaySnapshot extends GSprintDaySnapshot implements BurndownSna
 	@Override
 	public String toString() {
 		return getDate() + ": " + getBurnedWorkTotal() + ", " + getRemainingWork();
+	}
+
+	public void setClosedStories(int closedStories) {
+		this.closedStories = closedStories;
+		updateLastModified();
+		fireModified("closedStories=" + closedStories);
+	}
+
+	public void setTotalStories(int totalStories) {
+		this.totalStories = totalStories;
+		updateLastModified();
+		fireModified("totalStories=" + totalStories);
 	}
 
 }

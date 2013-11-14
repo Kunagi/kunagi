@@ -14,13 +14,19 @@
  */
 package scrum.server.sprint;
 
+import ilarkesto.core.logging.Log;
 import ilarkesto.core.time.Date;
 import ilarkesto.fp.Predicate;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+
+import scrum.server.project.Requirement;
 
 public class SprintDaySnapshotDao extends GSprintDaySnapshotDao {
+
+	private static final Log log = Log.get(SprintDaySnapshotDao.class);
 
 	public SprintDaySnapshot getSprintDaySnapshot(final Sprint sprint, final Date date, boolean autoCreate) {
 		SprintDaySnapshot snapshot = getEntity(new Predicate<SprintDaySnapshot>() {
@@ -35,6 +41,23 @@ public class SprintDaySnapshotDao extends GSprintDaySnapshotDao {
 			snapshot = newEntityInstance();
 			snapshot.setSprint(sprint);
 			snapshot.setDate(date);
+
+			Set<Requirement> requirements = sprint.getRequirements();
+
+			int closedStories = 0;
+			for (Requirement req : requirements) {
+				if (req.isClosed()) {
+					closedStories++;
+				}
+			}
+			snapshot.setClosedStories(closedStories);
+
+			int totalStories = requirements.size();
+			snapshot.setTotalStories(totalStories);
+
+			log.info("total Stories: " + totalStories);
+			log.info("closed Stories: " + closedStories);
+
 			saveEntity(snapshot);
 		}
 
@@ -57,6 +80,7 @@ public class SprintDaySnapshotDao extends GSprintDaySnapshotDao {
 					snapshot.setBurnedWork(previousSnapshot.getBurnedWork());
 				}
 			}
+
 			ret.add(snapshot);
 			previousSnapshot = snapshot;
 			date = date.nextDay();
