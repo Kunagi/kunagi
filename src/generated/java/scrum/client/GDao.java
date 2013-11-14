@@ -2093,6 +2093,14 @@ public abstract class GDao
         return ret;
     }
 
+    public final List<scrum.client.project.Requirement> getRequirementsBySuspended(boolean suspended) {
+        List<scrum.client.project.Requirement> ret = new ArrayList<scrum.client.project.Requirement>();
+        for (scrum.client.project.Requirement entity : requirements.values()) {
+            if (entity.isSuspended(suspended)) ret.add(entity);
+        }
+        return ret;
+    }
+
     public final List<scrum.client.project.Requirement> getRequirementsByDirty(boolean dirty) {
         List<scrum.client.project.Requirement> ret = new ArrayList<scrum.client.project.Requirement>();
         for (scrum.client.project.Requirement entity : requirements.values()) {

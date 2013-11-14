@@ -66,6 +66,7 @@ public class Requirement extends GRequirement implements ReferenceSupport, Label
 	public Requirement(Project project) {
 		setProject(project);
 		setDirty(true);
+		setSuspended(false);
 	}
 
 	public Requirement(Map data) {

@@ -628,6 +628,11 @@ public class ScrumServiceImpl extends GScrumServiceImpl {
 				requirement);
 		}
 
+		if (properties.containsKey("suspended") && requirement.isSuspended()) {
+			postProjectEvent(conversation, currentUser.getName() + " suspended " + requirement.getReferenceAndLabel(),
+				requirement);
+		}
+
 		if (sprint != previousRequirementSprint) {
 			if (properties.containsKey("sprintId")) {
 				if (inCurrentSprint) {

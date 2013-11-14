@@ -49,6 +49,7 @@ public abstract class GRequirement
         properties.put("estimatedWork", this.estimatedWork);
         properties.put("rejectDate", this.rejectDate == null ? null : this.rejectDate.toString());
         properties.put("closed", this.closed);
+        properties.put("suspended", this.suspended);
         properties.put("dirty", this.dirty);
         properties.put("workEstimationVotingActive", this.workEstimationVotingActive);
         properties.put("workEstimationVotingShowoff", this.workEstimationVotingShowoff);
@@ -584,6 +585,36 @@ public abstract class GRequirement
     }
 
     // -----------------------------------------------------------
+    // - suspended
+    // -----------------------------------------------------------
+
+    private boolean suspended;
+
+    public final boolean isSuspended() {
+        return suspended;
+    }
+
+    public final void setSuspended(boolean suspended) {
+        suspended = prepareSuspended(suspended);
+        if (isSuspended(suspended)) return;
+        this.suspended = suspended;
+        updateLastModified();
+        fireModified("suspended="+suspended);
+    }
+
+    protected boolean prepareSuspended(boolean suspended) {
+        return suspended;
+    }
+
+    public final boolean isSuspended(boolean suspended) {
+        return this.suspended == suspended;
+    }
+
+    protected final void updateSuspended(Object value) {
+        setSuspended((Boolean)value);
+    }
+
+    // -----------------------------------------------------------
     // - dirty
     // -----------------------------------------------------------
 
@@ -927,6 +958,7 @@ public abstract class GRequirement
             if (property.equals("estimatedWork")) updateEstimatedWork(value);
             if (property.equals("rejectDate")) updateRejectDate(value);
             if (property.equals("closed")) updateClosed(value);
+            if (property.equals("suspended")) updateSuspended(value);
             if (property.equals("dirty")) updateDirty(value);
             if (property.equals("workEstimationVotingActive")) updateWorkEstimationVotingActive(value);
             if (property.equals("workEstimationVotingShowoff")) updateWorkEstimationVotingShowoff(value);

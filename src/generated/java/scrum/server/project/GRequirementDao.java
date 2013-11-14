@@ -62,6 +62,7 @@ public abstract class GRequirementDao
         requirementsByRejectDateCache.clear();
         rejectDatesCache = null;
         requirementsByClosedCache.clear();
+        requirementsBySuspendedCache.clear();
         requirementsByDirtyCache.clear();
         requirementsByWorkEstimationVotingActiveCache.clear();
         requirementsByWorkEstimationVotingShowoffCache.clear();
@@ -514,6 +515,35 @@ public abstract class GRequirementDao
 
         public boolean test(Requirement e) {
             return value == e.isClosed();
+        }
+
+    }
+
+    // -----------------------------------------------------------
+    // - suspended
+    // -----------------------------------------------------------
+
+    private final Cache<Boolean,Set<Requirement>> requirementsBySuspendedCache = new Cache<Boolean,Set<Requirement>>(
+            new Cache.Factory<Boolean,Set<Requirement>>() {
+                public Set<Requirement> create(Boolean suspended) {
+                    return getEntities(new IsSuspended(suspended));
+                }
+            });
+
+    public final Set<Requirement> getRequirementsBySuspended(boolean suspended) {
+        return new HashSet<Requirement>(requirementsBySuspendedCache.get(suspended));
+    }
+
+    private static class IsSuspended implements Predicate<Requirement> {
+
+        private boolean value;
+
+        public IsSuspended(boolean value) {
+            this.value = value;
+        }
+
+        public boolean test(Requirement e) {
+            return value == e.isSuspended();
         }
 
     }

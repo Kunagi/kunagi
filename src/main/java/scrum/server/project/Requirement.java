@@ -249,5 +249,4 @@ public class Requirement extends GRequirement implements Numbered, ReferenceSupp
 		Collections.sort(tasks, getTasksOrderComparator());
 		return tasks;
 	}
-
 }

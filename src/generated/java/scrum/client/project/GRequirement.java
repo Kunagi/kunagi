@@ -561,6 +561,59 @@ public abstract class GRequirement
 
     }
 
+    // --- suspended ---
+
+    private boolean suspended ;
+
+    public final boolean isSuspended() {
+        return this.suspended ;
+    }
+
+    public final Requirement setSuspended(boolean suspended) {
+        if (isSuspended(suspended)) return (Requirement)this;
+        this.suspended = suspended ;
+        propertyChanged("suspended", this.suspended);
+        return (Requirement)this;
+    }
+
+    public final boolean isSuspended(boolean suspended) {
+        return equals(this.suspended, suspended);
+    }
+
+    private transient SuspendedModel suspendedModel;
+
+    public SuspendedModel getSuspendedModel() {
+        if (suspendedModel == null) suspendedModel = createSuspendedModel();
+        return suspendedModel;
+    }
+
+    protected SuspendedModel createSuspendedModel() { return new SuspendedModel(); }
+
+    protected class SuspendedModel extends ilarkesto.gwt.client.editor.ABooleanEditorModel {
+
+        @Override
+        public String getId() {
+            return "Requirement_suspended";
+        }
+
+        @Override
+        public java.lang.Boolean getValue() {
+            return isSuspended();
+        }
+
+        @Override
+        public void setValue(java.lang.Boolean value) {
+            setSuspended(value);
+        }
+
+        @Override
+        protected void onChangeValue(java.lang.Boolean oldValue, java.lang.Boolean newValue) {
+            super.onChangeValue(oldValue, newValue);
+            addUndo(this, oldValue);
+        }
+
+    }
+
     // --- dirty ---
 
     private boolean dirty ;
@@ -801,6 +854,7 @@ public abstract class GRequirement
         String rejectDateAsString = (String) props.get("rejectDate");
         rejectDate  =  rejectDateAsString == null ? null : new ilarkesto.core.time.Date(rejectDateAsString);
         closed  = (Boolean) props.get("closed");
+        suspended  = (Boolean) props.get("suspended");
         dirty  = (Boolean) props.get("dirty");
         workEstimationVotingActive  = (Boolean) props.get("workEstimationVotingActive");
         workEstimationVotingShowoff  = (Boolean) props.get("workEstimationVotingShowoff");
@@ -824,6 +878,7 @@ public abstract class GRequirement
         properties.put("estimatedWork", this.estimatedWork);
         properties.put("rejectDate", this.rejectDate == null ? null : this.rejectDate.toString());
         properties.put("closed", this.closed);
+        properties.put("suspended", this.suspended);
         properties.put("dirty", this.dirty);
         properties.put("workEstimationVotingActive", this.workEstimationVotingActive);
         properties.put("workEstimationVotingShowoff", this.workEstimationVotingShowoff);

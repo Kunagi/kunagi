@@ -407,6 +407,7 @@ public class ScrumModelApplication extends AGeneratorApplication {
 						+ "Big Stories (Epics) close to being worked on should be split to be smaller.");
 			requirementModel.addProperty("rejectDate", Date.class);
 			requirementModel.addProperty("closed", boolean.class);
+			requirementModel.addProperty("suspended", boolean.class);
 			requirementModel.addProperty("dirty", boolean.class);
 			requirementModel.addProperty("workEstimationVotingActive", boolean.class);
 			requirementModel.addProperty("workEstimationVotingShowoff", boolean.class);
