@@ -173,18 +173,15 @@ public class StoryBurndownChart {
 	static DefaultXYDataset createStoryBurndownChartDataset(final List<SprintDaySnapshot> snapshots,
 			final Date firstDay, final Date lastDay, Date originallyLastDay, final WeekdaySelector freeDays,
 			Sprint sprint) {
-
-		ChartDataFactory factory = new ChartDataFactory();
-		factory.createDataset(snapshots, firstDay, lastDay, originallyLastDay, freeDays, sprint);
-		return factory.getDataset();
+		return new ChartDataFactory().createDataset(snapshots, firstDay, lastDay, originallyLastDay, freeDays, sprint);
 	}
 
 	static class ChartDataFactory {
 
-		List<Double> mainDates = new ArrayList<Double>();
-		List<Double> mainTotal = new ArrayList<Double>();
-		List<Double> mainOpen = new ArrayList<Double>();
-		List<Double> mainIdeal = new ArrayList<Double>();
+		List<Double> dateLine = new ArrayList<Double>();
+		List<Double> totalStoriesLine = new ArrayList<Double>();
+		List<Double> openStoriesLine = new ArrayList<Double>();
+		List<Double> expectedStoriesLine = new ArrayList<Double>();
 
 		List<SprintDaySnapshot> snapshots;
 		WeekdaySelector freeDays;
@@ -194,20 +191,17 @@ public class StoryBurndownChart {
 		long millisEnd;
 		boolean freeDay;
 		SprintDaySnapshot snapshot;
-		boolean workStarted;
 		boolean workFinished;
 
-		double totalIdeal = 0;
-		int totalOpen = 0;
+		double expectedStories = 0;
+		int openStories = 0;
 		int totalStories = 0;
+
 		int totalWorkDays = 0;
-		double totalRemaining;
 		int workDays;
 
-		DefaultXYDataset dataset;
-
-		public void createDataset(final List<SprintDaySnapshot> snapshots, final Date firstDay, final Date lastDay,
-				final Date originallyLastDay, final WeekdaySelector freeDays, Sprint sprint) {
+		public DefaultXYDataset createDataset(final List<SprintDaySnapshot> snapshots, final Date firstDay,
+				final Date lastDay, final Date originallyLastDay, final WeekdaySelector freeDays, Sprint sprint) {
 			this.snapshots = snapshots;
 			this.freeDays = freeDays;
 
@@ -221,40 +215,37 @@ public class StoryBurndownChart {
 
 			setDate(firstDay);
 			while (true) {
-				if (date.isBefore(new Date())) {
+				if (date.isPastOrToday()) {
 					totalStories = snapshot.getTotalStories();
-					totalOpen = totalStories - snapshot.getClosedStories();
-					processRealData();
-				} else if (date.isToday()) {
-					totalStories = sprint.getRequirements().size();
-					totalOpen = totalStories - sprint.getClosedRequirements().size();
+					openStories = totalStories - snapshot.getClosedStories();
 					processRealData();
 				} else {
-					mainDates.add((double) millisBegin);
-					mainDates.add((double) millisEnd);
+					dateLine.add((double) millisBegin);
+					dateLine.add((double) millisEnd);
 
-					mainTotal.add((double) totalStories);
-					mainTotal.add((double) totalStories);
+					totalStoriesLine.add((double) totalStories);
+					totalStoriesLine.add((double) totalStories);
 
-					double diff = (double) totalOpen / (double) (totalWorkDays - workDays);
+					double diff = (double) openStories / (double) (totalWorkDays - workDays);
 
-					if (totalIdeal == 0) {
-						totalIdeal = totalOpen;
+					if (expectedStories == 0) {
+						expectedStories = openStories;
 					}
 
-					mainIdeal.add(totalIdeal);
-					if (!freeDay) totalIdeal -= diff;
-					mainIdeal.add(totalIdeal);
+					expectedStoriesLine.add(expectedStories);
+					if (!freeDay) expectedStories -= diff;
+					expectedStoriesLine.add(expectedStories);
 				}
 
 				if (date.equals(lastDay)) break;
 				setDate(date.nextDay());
 			}
 
-			dataset = new DefaultXYDataset();
-			dataset.addSeries("Open", toArray(mainDates, mainOpen));
-			dataset.addSeries("Ideal", toArray(mainDates, mainIdeal));
-			dataset.addSeries("Total", toArray(mainDates, mainTotal));
+			DefaultXYDataset dataset = new DefaultXYDataset();
+			dataset.addSeries("Open", toArray(dateLine, openStoriesLine));
+			dataset.addSeries("Ideal", toArray(dateLine, expectedStoriesLine));
+			dataset.addSeries("Total", toArray(dateLine, totalStoriesLine));
+			return dataset;
 		}
 
 		private void setDate(Date newDate) {
@@ -266,17 +257,17 @@ public class StoryBurndownChart {
 		}
 
 		private void processRealData() {
-			mainDates.add((double) millisBegin);
-			mainDates.add((double) millisEnd);
+			dateLine.add((double) millisBegin);
+			dateLine.add((double) millisEnd);
 
-			mainTotal.add((double) totalStories);
-			mainTotal.add((double) totalStories);
+			totalStoriesLine.add((double) totalStories);
+			totalStoriesLine.add((double) totalStories);
 
-			mainOpen.add((double) totalOpen);
-			mainOpen.add((double) totalOpen);
+			openStoriesLine.add((double) openStories);
+			openStoriesLine.add((double) openStories);
 
-			mainIdeal.add((double) totalOpen);
-			mainIdeal.add((double) totalOpen);
+			expectedStoriesLine.add((double) openStories);
+			expectedStoriesLine.add((double) openStories);
 
 			if (!freeDay) {
 				workDays++;
@@ -289,12 +280,7 @@ public class StoryBurndownChart {
 			}
 
 			workFinished = true;
-			totalRemaining = snapshot.getTotalStories() - snapshot.getClosedStories();
 			return null;
-		}
-
-		public DefaultXYDataset getDataset() {
-			return dataset;
 		}
 
 	}
