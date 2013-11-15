@@ -52,7 +52,7 @@ import scrum.server.admin.ProjectUserConfig;
 import scrum.server.admin.SystemConfig;
 import scrum.server.admin.User;
 import scrum.server.admin.UserDao;
-import scrum.server.common.BurndownChart;
+import scrum.server.common.TaskBurndownChart;
 import scrum.server.common.StoryBurndownChart;
 import scrum.server.journal.ProjectEvent;
 import scrum.server.pr.EmailSender;
@@ -67,7 +67,7 @@ public class ScrumWebApplication extends GScrumWebApplication {
 
 	private static final Log log = Log.get(ScrumWebApplication.class);
 
-	private BurndownChart burndownChart;
+	private TaskBurndownChart burndownChart;
 	private StoryBurndownChart storyBurndownChart;
 	private KunagiRootConfig config;
 	private ScrumEntityfilePreparator entityfilePreparator;
@@ -88,9 +88,9 @@ public class ScrumWebApplication extends GScrumWebApplication {
 
 	// --- composites ---
 
-	public BurndownChart getBurndownChart() {
+	public TaskBurndownChart getBurndownChart() {
 		if (burndownChart == null) {
-			burndownChart = new BurndownChart();
+			burndownChart = new TaskBurndownChart();
 			burndownChart.setSprintDao(getSprintDao());
 		}
 		return burndownChart;

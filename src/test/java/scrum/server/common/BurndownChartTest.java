@@ -81,7 +81,7 @@ public class BurndownChartTest extends ATest {
 		log.info(file.getAbsolutePath());
 		IO.createDirectory(file.getParentFile());
 		BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file));
-		BurndownChart.writeSprintBurndownChart(out, shots, sprintBeginDate, sprintEndDate, sprintOriginallyEndDate,
+		TaskBurndownChart.writeSprintBurndownChart(out, shots, sprintBeginDate, sprintEndDate, sprintOriginallyEndDate,
 			freeDays, 1000, 500);
 		out.close();
 	}

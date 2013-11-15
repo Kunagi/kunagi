@@ -45,7 +45,7 @@ import scrum.server.admin.User;
 import scrum.server.collaboration.Comment;
 import scrum.server.collaboration.CommentDao;
 import scrum.server.collaboration.Wikipage;
-import scrum.server.common.BurndownChart;
+import scrum.server.common.TaskBurndownChart;
 import scrum.server.issues.Issue;
 import scrum.server.pr.BlogEntry;
 import scrum.server.release.Release;
@@ -230,7 +230,7 @@ public class HomepageUpdater {
 	}
 
 	private void createSprintBurndownChart(int width, int height) {
-		byte[] imageData = BurndownChart.createBurndownChartAsByteArray(project.getCurrentSprint(), width, height);
+		byte[] imageData = TaskBurndownChart.createBurndownChartAsByteArray(project.getCurrentSprint(), width, height);
 		IO.copyDataToFile(imageData,
 			new File(outputDir.getPath() + "/sprint-burndown-" + width + "x" + height + ".png"));
 	}

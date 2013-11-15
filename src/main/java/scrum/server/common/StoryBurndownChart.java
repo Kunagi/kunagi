@@ -2,7 +2,6 @@ package scrum.server.common;
 
 import ilarkesto.base.Str;
 import ilarkesto.base.Sys;
-import ilarkesto.base.Utl;
 import ilarkesto.core.logging.Log;
 import ilarkesto.core.time.Date;
 
@@ -31,24 +30,12 @@ import org.jfree.data.Range;
 import org.jfree.data.xy.DefaultXYDataset;
 
 import scrum.client.common.WeekdaySelector;
-import scrum.server.css.ScreenCssBuilder;
 import scrum.server.sprint.Sprint;
-import scrum.server.sprint.SprintDao;
 import scrum.server.sprint.SprintDaySnapshot;
 
-public class StoryBurndownChart {
+public class StoryBurndownChart extends BurndownChart {
 
 	private static final Log LOG = Log.get(StoryBurndownChart.class);
-
-	private static final Color COLOR_PAST_LINE = Utl.parseHtmlColor(ScreenCssBuilder.cBurndownLine);
-	private static final Color COLOR_PROJECTION_LINE = Utl.parseHtmlColor(ScreenCssBuilder.cBurndownProjectionLine);
-	private static final Color COLOR_OPTIMUM_LINE = Utl.parseHtmlColor(ScreenCssBuilder.cBurndownOptimalLine);
-
-	private SprintDao sprintDao;
-
-	public void setSprintDao(SprintDao sprintDao) {
-		this.sprintDao = sprintDao;
-	}
 
 	public void writeStoryBurndownChart(ByteArrayOutputStream out, String sprintId, int width, int height) {
 		Sprint sprint = sprintDao.getById(sprintId);
@@ -102,7 +89,7 @@ public class StoryBurndownChart {
 			freeDays, sprint);
 
 		double tick = 1.0;
-		double max = StoryBurndownChart.getMaximum(data);
+		double max = DefaultXYDatasetUtil.getMaximum(data);
 
 		while (max / tick > 25) {
 			tick *= 2;
@@ -191,9 +178,8 @@ public class StoryBurndownChart {
 		long millisEnd;
 		boolean freeDay;
 		SprintDaySnapshot snapshot;
-		boolean workFinished;
 
-		double expectedStories = 0;
+		double expectedStories = -1;
 		int openStories = 0;
 		int totalStories = 0;
 
@@ -216,25 +202,9 @@ public class StoryBurndownChart {
 			setDate(firstDay);
 			while (true) {
 				if (date.isPastOrToday()) {
-					totalStories = snapshot.getTotalStories();
-					openStories = totalStories - snapshot.getClosedStories();
-					processRealData();
+					calculateOnRealData();
 				} else {
-					dateLine.add((double) millisBegin);
-					dateLine.add((double) millisEnd);
-
-					totalStoriesLine.add((double) totalStories);
-					totalStoriesLine.add((double) totalStories);
-
-					double diff = (double) openStories / (double) (totalWorkDays - workDays);
-
-					if (expectedStories == 0) {
-						expectedStories = openStories;
-					}
-
-					expectedStoriesLine.add(expectedStories);
-					if (!freeDay) expectedStories -= diff;
-					expectedStoriesLine.add(expectedStories);
+					calculateForFuture();
 				}
 
 				if (date.equals(lastDay)) break;
@@ -248,15 +218,28 @@ public class StoryBurndownChart {
 			return dataset;
 		}
 
-		private void setDate(Date newDate) {
-			date = newDate;
-			millisBegin = date.toMillis();
-			millisEnd = date.nextDay().toMillis();
-			freeDay = freeDays.isFree(date.getWeekday().getDayOfWeek());
-			if (!workFinished) snapshot = getSnapshot();
+		private void calculateForFuture() {
+			dateLine.add((double) millisBegin);
+			dateLine.add((double) millisEnd);
+
+			totalStoriesLine.add((double) totalStories);
+			totalStoriesLine.add((double) totalStories);
+
+			double diff = (double) openStories / (double) (totalWorkDays - workDays);
+
+			if (expectedStories == -1) {
+				expectedStories = openStories;
+			}
+
+			expectedStoriesLine.add(expectedStories);
+			if (!freeDay) expectedStories -= diff;
+			expectedStoriesLine.add(expectedStories);
 		}
 
-		private void processRealData() {
+		private void calculateOnRealData() {
+			totalStories = snapshot.getTotalStories();
+			openStories = totalStories - snapshot.getClosedStories();
+
 			dateLine.add((double) millisBegin);
 			dateLine.add((double) millisEnd);
 
@@ -274,38 +257,21 @@ public class StoryBurndownChart {
 			}
 		}
 
-		private SprintDaySnapshot getSnapshot() {
+		private void setDate(Date newDate) {
+			date = newDate;
+			millisBegin = date.toMillis();
+			millisEnd = date.nextDay().toMillis();
+			freeDay = freeDays.isFree(date.getWeekday().getDayOfWeek());
+			snapshot = getSnapshot(date);
+		}
+
+		private SprintDaySnapshot getSnapshot(Date date) {
 			for (SprintDaySnapshot snapshot : snapshots) {
 				if (snapshot.getDate().equals(date)) return snapshot;
 			}
-
-			workFinished = true;
 			return null;
 		}
 
-	}
-
-	private static double[][] toArray(List<Double> a, List<Double> b) {
-		int min = Math.min(a.size(), b.size());
-		double[][] array = new double[2][min];
-		for (int i = 0; i < min; i++) {
-			array[0][i] = a.get(i);
-			array[1][i] = b.get(i);
-		}
-		return array;
-	}
-
-	static double getMaximum(DefaultXYDataset data) {
-		double max = 0;
-		for (int i = 0; i < data.getSeriesCount(); i++) {
-			for (int j = 0; j < data.getItemCount(i); j++) {
-				double value = data.getYValue(i, j);
-				if (value > max) {
-					max = value;
-				}
-			}
-		}
-		return max;
 	}
 
 }
