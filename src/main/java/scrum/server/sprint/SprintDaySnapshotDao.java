@@ -14,7 +14,6 @@
  */
 package scrum.server.sprint;
 
-import ilarkesto.core.logging.Log;
 import ilarkesto.core.time.Date;
 import ilarkesto.fp.Predicate;
 
@@ -26,8 +25,6 @@ import scrum.server.project.Requirement;
 
 public class SprintDaySnapshotDao extends GSprintDaySnapshotDao {
 
-	private static final Log log = Log.get(SprintDaySnapshotDao.class);
-
 	public SprintDaySnapshot getSprintDaySnapshot(final Sprint sprint, final Date date, boolean autoCreate) {
 		SprintDaySnapshot snapshot = getEntity(new Predicate<SprintDaySnapshot>() {
 
@@ -37,31 +34,37 @@ public class SprintDaySnapshotDao extends GSprintDaySnapshotDao {
 			}
 		});
 
+		if (snapshot != null && snapshot.getDate().isToday()) {
+			updateStoryCount(sprint, snapshot);
+			saveEntity(snapshot);
+		}
+
 		if (autoCreate && snapshot == null) {
 			snapshot = newEntityInstance();
 			snapshot.setSprint(sprint);
 			snapshot.setDate(date);
 
-			Set<Requirement> requirements = sprint.getRequirements();
-
-			int closedStories = 0;
-			for (Requirement req : requirements) {
-				if (req.isClosed()) {
-					closedStories++;
-				}
-			}
-			snapshot.setClosedStories(closedStories);
-
-			int totalStories = requirements.size();
-			snapshot.setTotalStories(totalStories);
-
-			log.info("total Stories: " + totalStories);
-			log.info("closed Stories: " + closedStories);
+			updateStoryCount(sprint, snapshot);
 
 			saveEntity(snapshot);
 		}
 
 		return snapshot;
+	}
+
+	private void updateStoryCount(final Sprint sprint, SprintDaySnapshot snapshot) {
+		Set<Requirement> requirements = sprint.getRequirements();
+
+		int closedStories = 0;
+		for (Requirement req : requirements) {
+			if (req.isClosed()) {
+				closedStories++;
+			}
+		}
+		snapshot.setClosedStories(closedStories);
+
+		int totalStories = requirements.size();
+		snapshot.setTotalStories(totalStories);
 	}
 
 	public List<SprintDaySnapshot> getSprintDaySnapshots(Sprint sprint) {

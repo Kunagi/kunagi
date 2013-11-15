@@ -60,12 +60,14 @@ public class SprintDaySnapshot extends GSprintDaySnapshot implements BurndownSna
 	}
 
 	public void setClosedStories(int closedStories) {
+		if (closedStories == this.closedStories) return;
 		this.closedStories = closedStories;
 		updateLastModified();
 		fireModified("closedStories=" + closedStories);
 	}
 
 	public void setTotalStories(int totalStories) {
+		if (totalStories == this.totalStories) return;
 		this.totalStories = totalStories;
 		updateLastModified();
 		fireModified("totalStories=" + totalStories);

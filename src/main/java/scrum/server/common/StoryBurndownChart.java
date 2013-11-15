@@ -69,11 +69,11 @@ public class StoryBurndownChart {
 		WeekdaySelector freeDays = sprint.getProject().getFreeDaysAsWeekdaySelector();
 
 		writeSprintBurndownChart(out, snapshots, sprint.getBegin(), sprint.getEnd(), sprint.getOriginallyEnd(),
-			freeDays, width, height);
+			freeDays, width, height, sprint);
 	}
 
 	static void writeSprintBurndownChart(OutputStream out, List<? extends SprintDaySnapshot> snapshots, Date firstDay,
-			Date lastDay, Date originallyLastDay, WeekdaySelector freeDays, int width, int height) {
+			Date lastDay, Date originallyLastDay, WeekdaySelector freeDays, int width, int height, Sprint sprint) {
 		LOG.debug("Creating burndown chart:", snapshots.size(), "snapshots from", firstDay, "to", lastDay, "(" + width
 				+ "x" + height + " px)");
 
@@ -87,7 +87,7 @@ public class StoryBurndownChart {
 
 		List<SprintDaySnapshot> burndownSnapshots = new ArrayList<SprintDaySnapshot>(snapshots);
 		JFreeChart chart = createStoryBurndownChart(burndownSnapshots, firstDay, lastDay, originallyLastDay, freeDays,
-			dateMarkTickUnit, widthPerDay);
+			dateMarkTickUnit, widthPerDay, sprint);
 		try {
 			ChartUtilities.writeScaledChartAsPNG(out, chart, width, height, 1, 1);
 			out.flush();
@@ -97,9 +97,9 @@ public class StoryBurndownChart {
 	}
 
 	private static JFreeChart createStoryBurndownChart(List<SprintDaySnapshot> snapshots, Date firstDay, Date lastDay,
-			Date originallyLastDay, WeekdaySelector freeDays, int dateMarkTickUnit, float widthPerDay) {
+			Date originallyLastDay, WeekdaySelector freeDays, int dateMarkTickUnit, float widthPerDay, Sprint sprint) {
 		DefaultXYDataset data = createStoryBurndownChartDataset(snapshots, firstDay, lastDay, originallyLastDay,
-			freeDays);
+			freeDays, sprint);
 
 		double tick = 1.0;
 		double max = StoryBurndownChart.getMaximum(data);
@@ -171,10 +171,11 @@ public class StoryBurndownChart {
 	}
 
 	static DefaultXYDataset createStoryBurndownChartDataset(final List<SprintDaySnapshot> snapshots,
-			final Date firstDay, final Date lastDay, Date originallyLastDay, final WeekdaySelector freeDays) {
+			final Date firstDay, final Date lastDay, Date originallyLastDay, final WeekdaySelector freeDays,
+			Sprint sprint) {
 
 		ChartDataFactory factory = new ChartDataFactory();
-		factory.createDataset(snapshots, firstDay, lastDay, originallyLastDay, freeDays);
+		factory.createDataset(snapshots, firstDay, lastDay, originallyLastDay, freeDays, sprint);
 		return factory.getDataset();
 	}
 
@@ -206,7 +207,7 @@ public class StoryBurndownChart {
 		DefaultXYDataset dataset;
 
 		public void createDataset(final List<SprintDaySnapshot> snapshots, final Date firstDay, final Date lastDay,
-				final Date originallyLastDay, final WeekdaySelector freeDays) {
+				final Date originallyLastDay, final WeekdaySelector freeDays, Sprint sprint) {
 			this.snapshots = snapshots;
 			this.freeDays = freeDays;
 
@@ -220,11 +221,14 @@ public class StoryBurndownChart {
 
 			setDate(firstDay);
 			while (true) {
-				if (date.isBeforeOrSame(new Date())) {
-					totalOpen = snapshot.getTotalStories() - snapshot.getClosedStories();
+				if (date.isBefore(new Date())) {
 					totalStories = snapshot.getTotalStories();
+					totalOpen = totalStories - snapshot.getClosedStories();
 					processRealData();
-					// TODO Was machen wir mit dem heutigen Tag?
+				} else if (date.isToday()) {
+					totalStories = sprint.getRequirements().size();
+					totalOpen = totalStories - sprint.getClosedRequirements().size();
+					processRealData();
 				} else {
 					mainDates.add((double) millisBegin);
 					mainDates.add((double) millisEnd);
