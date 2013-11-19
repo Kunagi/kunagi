@@ -51,7 +51,7 @@ public class SuspendRequirementAction extends GSuspendRequirementAction {
 
 	@Override
 	protected void onExecute() {
-		requirement.getProject().removeRequirement(requirement);
+		requirement.getProject().suspendRequirement(requirement);
 		addUndo(new Undo());
 	}
 
@@ -59,13 +59,12 @@ public class SuspendRequirementAction extends GSuspendRequirementAction {
 
 		@Override
 		public String getLabel() {
-			return "Undo Remove " + requirement.getReferenceAndLabel();
+			return "Undo delete " + requirement.getReferenceAndLabel() + " from Product Backlog";
 		}
 
 		@Override
 		protected void onUndo() {
 			requirement.setSuspended(false);
-			// getDao().createRequirement(requirement);
 		}
 
 	}

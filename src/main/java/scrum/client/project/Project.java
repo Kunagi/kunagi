@@ -534,7 +534,7 @@ public class Project extends GProject implements ForumSupport {
 		List<Requirement> ret = new ArrayList<Requirement>();
 		for (Requirement requirement : getRequirements()) {
 			if (requirement.isClosed()) continue;
-			if (requirement.isSuspended()) continue; // MLO-TADA
+			if (requirement.isSuspended()) continue;
 			if (requirement.isInCurrentSprint()) continue;
 			ret.add(requirement);
 		}
@@ -712,7 +712,7 @@ public class Project extends GProject implements ForumSupport {
 		return freeDaysWeekdaySelectorModel;
 	}
 
-	public void removeRequirement(Requirement requirement) {
+	public void suspendRequirement(Requirement requirement) {
 		requirement.setSuspended(true);
 	}
 }
