@@ -243,4 +243,12 @@ public class Task extends GTask implements ReferenceSupport, LabelSupport, Forum
 		return workTextModel;
 	}
 
+	public void deleteOrCloseIfBurned(User user) {
+		if (getBurnedWork() > 0) {
+			setDone(user);
+		} else {
+			getRequirement().deleteTask(this);
+		}
+	}
+
 }

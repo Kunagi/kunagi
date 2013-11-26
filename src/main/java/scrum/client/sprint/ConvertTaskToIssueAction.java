@@ -16,6 +16,7 @@ package scrum.client.sprint;
 
 import ilarkesto.core.logging.Log;
 import scrum.client.collaboration.Comment;
+import scrum.client.common.AScrumGwtEntity;
 import scrum.client.common.TooltipBuilder;
 import scrum.client.issues.Issue;
 
@@ -53,17 +54,26 @@ public class ConvertTaskToIssueAction extends GConvertTaskToIssueAction {
 
 	@Override
 	protected void onExecute() {
+		Issue issue = createIssueTask(task);
+		copyComments(task, issue);
+		task.deleteOrCloseIfBurned(getCurrentUser());
+		addUndo(new Undo(issue));
+	}
+
+	private Issue createIssueTask(Task task) {
 		Issue issue = getCurrentProject().createNewIssue();
 		issue.setCreator(getCurrentUser());
 		issue.setDescription(task.getDescription());
 		issue.setLabel(task.getLabel());
-		for (Comment copyComment : task.getComments()) {
-			Comment comment = new Comment(issue, copyComment.getAuthor(), copyComment.getText());
-			comment.setDateAndTime(copyComment.getDateAndTime());
-			getDao().createComment(comment);
+		return issue;
+	}
+
+	private void copyComments(AScrumGwtEntity source, AScrumGwtEntity destination) {
+		for (Comment sourceComment : source.getComments()) {
+			Comment destinationComment = new Comment(destination, sourceComment.getAuthor(), sourceComment.getText());
+			destinationComment.setDateAndTime(sourceComment.getDateAndTime());
+			getDao().createComment(destinationComment);
 		}
-		task.getRequirement().deleteTask(task);
-		addUndo(new Undo(issue));
 	}
 
 	class Undo extends ALocalUndo {
@@ -81,7 +91,11 @@ public class ConvertTaskToIssueAction extends GConvertTaskToIssueAction {
 
 		@Override
 		protected void onUndo() {
-			getDao().createTask(task);
+			if (task.isClosed()) {
+				task.setUnDone(getAuth().getUser());
+			} else {
+				getDao().createTask(task);
+			}
 			getDao().deleteIssue(issue);
 		}
 
