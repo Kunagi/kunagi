@@ -51,6 +51,14 @@ public abstract class AScrumGwtEntity extends AGwtEntity implements ToHtmlSuppor
 		return latest;
 	}
 
+	public void copyCommentsTo(AScrumGwtEntity destination) {
+		for (Comment sourceComment : getComments()) {
+			Comment destinationComment = new Comment(destination, sourceComment.getAuthor(), sourceComment.getText());
+			destinationComment.setDateAndTime(sourceComment.getDateAndTime());
+			getDao().createComment(destinationComment);
+		}
+	}
+
 	public DateAndTime getLatestCommentDateAndTime() {
 		Comment latest = getLatestComment();
 		return latest == null ? null : latest.getDateAndTime();
