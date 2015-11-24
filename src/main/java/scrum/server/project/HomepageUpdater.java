@@ -1,14 +1,14 @@
 /*
  * Copyright 2011 Witoslaw Koczewsi <wi@koczewski.de>, Artjom Kochtchi
- *
+ * 
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero
  * General Public License as published by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
  * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public
  * License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
@@ -20,6 +20,7 @@ import ilarkesto.base.Sys;
 import ilarkesto.base.Tm;
 import ilarkesto.base.Utl;
 import ilarkesto.core.logging.Log;
+import ilarkesto.core.time.Date;
 import ilarkesto.core.time.DateAndTime;
 import ilarkesto.integration.velocity.ContextBuilder;
 import ilarkesto.integration.velocity.Velocity;
@@ -131,7 +132,7 @@ public class HomepageUpdater {
 		fillProject(context.putSubContext("project"));
 		fillWiki(context.putSubContext("wiki"));
 		fillBlog(context.putSubContext("blog"));
-		fillSprintBacklog(context.putSubContext("sprintBacklog"));
+		fillSprint(context.putSubContext("sprintBacklog"), project.getCurrentSprint());
 		fillProductBacklog(context.putSubContext("productBacklog"));
 		fillBugs(context);
 		fillIdeas(context);
@@ -158,7 +159,7 @@ public class HomepageUpdater {
 		fillConfig(context.putSubContext("config"));
 		fillProject(context.putSubContext("project"));
 		fillProductBacklog(context.putSubContext("productBacklog"));
-		fillSprintBacklog(context.putSubContext("sprintBacklog"));
+		fillSprint(context.putSubContext("sprintBacklog"), project.getCurrentSprint());
 		fillWiki(context.putSubContext("wiki"));
 
 		String prefix = reference.substring(0, 3);
@@ -328,7 +329,7 @@ public class HomepageUpdater {
 		}
 		context.put("date", Tm.FORMAT_WEEKDAY_LONGMONTH_DAY_YEAR_HOUR_MINUTE.format(comment.getDateAndTime()));
 		context.put("dateDe", new SimpleDateFormat("EEE, d. MMMMM yyyy, HH:mm", Locale.GERMANY).format(comment
-			.getDateAndTime().toJavaDate()));
+				.getDateAndTime().toJavaDate()));
 	}
 
 	private void fillRelease(ContextBuilder context, Release release) {
@@ -368,6 +369,15 @@ public class HomepageUpdater {
 		context.put("reference", sprint.getReference());
 		context.put("label", toHtml(sprint.getLabel()));
 		context.put("goal", wikiToHtml(sprint.getGoal()));
+		context.put("goal", wikiToHtml(sprint.getGoal()));
+		if (sprint.isBeginSet()) {
+			context.put("begin", Tm.FORMAT_LONGMONTH_DAY_YEAR.format(sprint.getBegin()));
+			context.put("beginDe", sprint.getBegin().formatDayMonthYear());
+		}
+		if (sprint.isEndSet()) {
+			context.put("end", Tm.FORMAT_LONGMONTH_DAY_YEAR.format(sprint.getEnd()));
+			context.put("endDe", sprint.getEnd().formatDayMonthYear());
+		}
 
 		for (Requirement requirement : Utl.sort(sprint.getRequirements(), sprint.getRequirementsOrderComparator())) {
 			fillStory(context.addSubContext("stories"), requirement);
@@ -396,30 +406,17 @@ public class HomepageUpdater {
 		context.put("plainText", wikiToText(entry.getText()));
 		DateAndTime date = entry.getDateAndTime();
 		context.put("date", Tm.FORMAT_LONGMONTH_DAY_YEAR.format(date));
-		context.put("dateDe", new SimpleDateFormat("dd. MMMM yyyy", Locale.GERMANY).format(date.toJavaDate()));
+		context.put("dateDe", dateDe(date));
 		context.put("rssDate", Tm.FORMAT_RFC822.format(date));
 		fillComments(context, entry);
 	}
 
-	private void fillSprintBacklog(ContextBuilder context) {
-		Sprint sprint = project.getCurrentSprint();
-		context.put("label", toHtml(sprint.getLabel()));
-		context.put("goal", wikiToHtml(sprint.getGoal()));
-		if (sprint.isBeginSet()) {
-			context.put("begin", Tm.FORMAT_LONGMONTH_DAY_YEAR.format(sprint.getBegin()));
-			context.put("beginDe", sprint.getBegin().formatDayMonthYear());
-		}
-		if (sprint.isEndSet()) {
-			context.put("end", Tm.FORMAT_LONGMONTH_DAY_YEAR.format(sprint.getEnd()));
-			context.put("endDe", sprint.getEnd().formatDayMonthYear());
-		}
-		Release release = sprint.getNextRelease();
-		if (release != null) context.put("release", release.getLabel());
-		List<Requirement> requirements = new ArrayList<Requirement>(sprint.getRequirements());
-		Collections.sort(requirements, sprint.getRequirementsOrderComparator());
-		for (Requirement requirement : requirements) {
-			fillStory(context.addSubContext("stories"), requirement);
-		}
+	private String dateDe(DateAndTime dateAndTime) {
+		return new SimpleDateFormat("dd. MMMM yyyy", Locale.GERMANY).format(dateAndTime.toJavaDate());
+	}
+
+	private String dateDe(Date date) {
+		return new SimpleDateFormat("dd. MMMM yyyy", Locale.GERMANY).format(date.toJavaDate());
 	}
 
 	private void fillProductBacklog(ContextBuilder context) {
