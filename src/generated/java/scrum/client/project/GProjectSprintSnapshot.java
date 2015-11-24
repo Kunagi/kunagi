@@ -24,6 +24,78 @@ public abstract class GProjectSprintSnapshot
             extends scrum.client.common.AScrumGwtEntity
             implements java.lang.Comparable<ProjectSprintSnapshot> {
 
+    public static class ProjectSprintSnapshotMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata sprint = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "sprint";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectSprintSnapshot)entity).getSprint();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata remainingWork = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "remainingWork";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectSprintSnapshot)entity).getRemainingWork();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata burnedWork = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "burnedWork";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectSprintSnapshot)entity).getBurnedWork();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            sprint
+            ,remainingWork
+            ,burnedWork
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("sprint".equals(fieldName)) return sprint;
+            if ("sprintId".equals(fieldName)) return sprint;
+            if ("remainingWork".equals(fieldName)) return remainingWork;
+            if ("burnedWork".equals(fieldName)) return burnedWork;
+            return null;
+        }
+
+    }
+
+    public static transient final ProjectSprintSnapshotMetadata metadata = new ProjectSprintSnapshotMetadata();
+
+    @Override
+    public ProjectSprintSnapshotMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(ProjectSprintSnapshot.class);
 
     private static transient ilarkesto.core.persistance.AEntityBackReferenceHelper<ProjectSprintSnapshot> sprintBackReferencesCache = new ilarkesto.core.persistance.AEntityBackReferenceHelper<ProjectSprintSnapshot>() {
@@ -118,7 +190,6 @@ public abstract class GProjectSprintSnapshot
     private static final ilarkesto.core.logging.Log LOG = ilarkesto.core.logging.Log.get(GProjectSprintSnapshot.class);
 
     public static final String TYPE = "ProjectSprintSnapshot";
-
     // -----------------------------------------------------------
     // - sprint
     // -----------------------------------------------------------
@@ -180,7 +251,6 @@ public abstract class GProjectSprintSnapshot
         return sprint != null && sprint.getId().equals(this.sprintId);
     }
 
-
     // -----------------------------------------------------------
     // - remainingWork
     // -----------------------------------------------------------
@@ -217,7 +287,6 @@ public abstract class GProjectSprintSnapshot
     protected final void updateRemainingWork(Object value) {
         setRemainingWork((Integer)value);
     }
-
     // -----------------------------------------------------------
     // - burnedWork
     // -----------------------------------------------------------

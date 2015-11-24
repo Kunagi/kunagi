@@ -26,6 +26,147 @@ public abstract class GChange
             extends ilarkesto.persistence.AEntity
             implements ilarkesto.auth.ViewProtected<scrum.server.admin.User>, java.lang.Comparable<Change> {
 
+    public static class ChangeMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata parent = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "parent";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Change)entity).getParent();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata user = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "user";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Change)entity).getUser();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata dateAndTime = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "dateAndTime";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Change)entity).getDateAndTime();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata key = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "key";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Change)entity).getKey();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata oldValue = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "oldValue";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Change)entity).getOldValue();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata newValue = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "newValue";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Change)entity).getNewValue();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata comment = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "comment";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Change)entity).getComment();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            parent
+            ,user
+            ,dateAndTime
+            ,key
+            ,oldValue
+            ,newValue
+            ,comment
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("parent".equals(fieldName)) return parent;
+            if ("parentId".equals(fieldName)) return parent;
+            if ("user".equals(fieldName)) return user;
+            if ("userId".equals(fieldName)) return user;
+            if ("dateAndTime".equals(fieldName)) return dateAndTime;
+            if ("key".equals(fieldName)) return key;
+            if ("oldValue".equals(fieldName)) return oldValue;
+            if ("newValue".equals(fieldName)) return newValue;
+            if ("comment".equals(fieldName)) return comment;
+            return null;
+        }
+
+    }
+
+    public static transient final ChangeMetadata metadata = new ChangeMetadata();
+
+    @Override
+    public ChangeMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(Change.class);
 
     // --- AEntity ---
@@ -81,7 +222,6 @@ public abstract class GChange
     private static final ilarkesto.core.logging.Log LOG = ilarkesto.core.logging.Log.get(GChange.class);
 
     public static final String TYPE = "Change";
-
     // -----------------------------------------------------------
     // - parent
     // -----------------------------------------------------------
@@ -140,7 +280,6 @@ public abstract class GChange
     protected final void updateParent(Object value) {
         setParent(value == null ? null : (ilarkesto.persistence.AEntity)getDaoService().getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - user
     // -----------------------------------------------------------
@@ -199,7 +338,6 @@ public abstract class GChange
     protected final void updateUser(Object value) {
         setUser(value == null ? null : (scrum.server.admin.User)userDao.getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - dateAndTime
     // -----------------------------------------------------------
@@ -244,7 +382,6 @@ public abstract class GChange
         value = value == null ? null : new ilarkesto.core.time.DateAndTime((String)value);
         setDateAndTime((ilarkesto.core.time.DateAndTime)value);
     }
-
     // -----------------------------------------------------------
     // - key
     // -----------------------------------------------------------
@@ -287,7 +424,6 @@ public abstract class GChange
     protected final void updateKey(Object value) {
         setKey((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - oldValue
     // -----------------------------------------------------------
@@ -330,7 +466,6 @@ public abstract class GChange
     protected final void updateOldValue(Object value) {
         setOldValue((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - newValue
     // -----------------------------------------------------------
@@ -373,7 +508,6 @@ public abstract class GChange
     protected final void updateNewValue(Object value) {
         setNewValue((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - comment
     // -----------------------------------------------------------

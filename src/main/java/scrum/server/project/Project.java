@@ -1023,4 +1023,13 @@ public class Project extends GProject {
 		return Str.concat(User.getNames(getTeamMembers()), ", ");
 	}
 
+	public List<Sprint> getCompletedSprintsInReverseOrder() {
+		ArrayList<Sprint> ret = new ArrayList<Sprint>();
+		for (Sprint sprint : getSprints()) {
+			if (sprint.isCompleted()) ret.add(sprint);
+		}
+		Collections.sort(ret, Sprint.END_DATE_REVERSE_COMPARATOR);
+		return ret;
+	}
+
 }

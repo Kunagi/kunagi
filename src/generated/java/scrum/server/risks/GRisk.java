@@ -26,6 +26,163 @@ public abstract class GRisk
             extends ilarkesto.persistence.AEntity
             implements ilarkesto.auth.ViewProtected<scrum.server.admin.User>, java.lang.Comparable<Risk>, ilarkesto.core.search.Searchable {
 
+    public static class RiskMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata project = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "project";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Risk)entity).getProject();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata number = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "number";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Risk)entity).getNumber();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata label = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "label";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Risk)entity).getLabel();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata description = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "description";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Risk)entity).getDescription();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata probabilityMitigation = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "probabilityMitigation";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Risk)entity).getProbabilityMitigation();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata impactMitigation = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "impactMitigation";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Risk)entity).getImpactMitigation();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata probability = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "probability";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Risk)entity).getProbability();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata impact = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "impact";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Risk)entity).getImpact();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            project
+            ,number
+            ,label
+            ,description
+            ,probabilityMitigation
+            ,impactMitigation
+            ,probability
+            ,impact
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("project".equals(fieldName)) return project;
+            if ("projectId".equals(fieldName)) return project;
+            if ("number".equals(fieldName)) return number;
+            if ("label".equals(fieldName)) return label;
+            if ("description".equals(fieldName)) return description;
+            if ("probabilityMitigation".equals(fieldName)) return probabilityMitigation;
+            if ("impactMitigation".equals(fieldName)) return impactMitigation;
+            if ("probability".equals(fieldName)) return probability;
+            if ("impact".equals(fieldName)) return impact;
+            return null;
+        }
+
+    }
+
+    public static transient final RiskMetadata metadata = new RiskMetadata();
+
+    @Override
+    public RiskMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(Risk.class);
 
     // --- AEntity ---
@@ -91,7 +248,6 @@ public abstract class GRisk
     public boolean matches(ilarkesto.core.search.SearchText search) {
          return search.matches(getLabel(), getDescription(), getProbabilityMitigation(), getImpactMitigation());
     }
-
     // -----------------------------------------------------------
     // - project
     // -----------------------------------------------------------
@@ -150,7 +306,6 @@ public abstract class GRisk
     protected final void updateProject(Object value) {
         setProject(value == null ? null : (scrum.server.project.Project)projectDao.getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - number
     // -----------------------------------------------------------
@@ -187,7 +342,6 @@ public abstract class GRisk
     protected final void updateNumber(Object value) {
         setNumber((Integer)value);
     }
-
     // -----------------------------------------------------------
     // - label
     // -----------------------------------------------------------
@@ -230,7 +384,6 @@ public abstract class GRisk
     protected final void updateLabel(Object value) {
         setLabel((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - description
     // -----------------------------------------------------------
@@ -273,7 +426,6 @@ public abstract class GRisk
     protected final void updateDescription(Object value) {
         setDescription((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - probabilityMitigation
     // -----------------------------------------------------------
@@ -316,7 +468,6 @@ public abstract class GRisk
     protected final void updateProbabilityMitigation(Object value) {
         setProbabilityMitigation((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - impactMitigation
     // -----------------------------------------------------------
@@ -359,7 +510,6 @@ public abstract class GRisk
     protected final void updateImpactMitigation(Object value) {
         setImpactMitigation((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - probability
     // -----------------------------------------------------------
@@ -398,7 +548,6 @@ public abstract class GRisk
     protected final void updateProbability(Object value) {
         setProbability((Integer)value);
     }
-
     // -----------------------------------------------------------
     // - impact
     // -----------------------------------------------------------

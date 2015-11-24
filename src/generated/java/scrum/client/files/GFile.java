@@ -24,6 +24,129 @@ public abstract class GFile
             extends scrum.client.common.AScrumGwtEntity
             implements java.lang.Comparable<File> {
 
+    public static class FileMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata project = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "project";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((File)entity).getProject();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata filename = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "filename";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((File)entity).getFilename();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata uploadTime = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "uploadTime";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((File)entity).getUploadTime();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata label = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "label";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((File)entity).getLabel();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata number = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "number";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((File)entity).getNumber();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata note = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "note";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((File)entity).getNote();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            project
+            ,filename
+            ,uploadTime
+            ,label
+            ,number
+            ,note
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("project".equals(fieldName)) return project;
+            if ("projectId".equals(fieldName)) return project;
+            if ("filename".equals(fieldName)) return filename;
+            if ("uploadTime".equals(fieldName)) return uploadTime;
+            if ("label".equals(fieldName)) return label;
+            if ("number".equals(fieldName)) return number;
+            if ("note".equals(fieldName)) return note;
+            return null;
+        }
+
+    }
+
+    public static transient final FileMetadata metadata = new FileMetadata();
+
+    @Override
+    public FileMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(File.class);
 
     private static transient ilarkesto.core.persistance.AEntitySetBackReferenceHelper<File> projectBackReferencesCache = new ilarkesto.core.persistance.AEntitySetBackReferenceHelper<File>() {
@@ -170,7 +293,6 @@ public abstract class GFile
     public boolean matches(ilarkesto.core.search.SearchText search) {
          return search.matches(getFilename(), getLabel(), getNote());
     }
-
     // -----------------------------------------------------------
     // - project
     // -----------------------------------------------------------
@@ -232,7 +354,6 @@ public abstract class GFile
         return project != null && project.getId().equals(this.projectId);
     }
 
-
     // -----------------------------------------------------------
     // - filename
     // -----------------------------------------------------------
@@ -277,7 +398,6 @@ public abstract class GFile
     protected final void updateFilename(Object value) {
         setFilename((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - uploadTime
     // -----------------------------------------------------------
@@ -322,7 +442,6 @@ public abstract class GFile
         value = value == null ? null : new ilarkesto.core.time.DateAndTime((String)value);
         setUploadTime((ilarkesto.core.time.DateAndTime)value);
     }
-
     // -----------------------------------------------------------
     // - label
     // -----------------------------------------------------------
@@ -367,7 +486,6 @@ public abstract class GFile
     protected final void updateLabel(Object value) {
         setLabel((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - number
     // -----------------------------------------------------------
@@ -404,7 +522,6 @@ public abstract class GFile
     protected final void updateNumber(Object value) {
         setNumber((Integer)value);
     }
-
     // -----------------------------------------------------------
     // - note
     // -----------------------------------------------------------

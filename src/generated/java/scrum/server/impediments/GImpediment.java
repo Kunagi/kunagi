@@ -26,6 +26,146 @@ public abstract class GImpediment
             extends ilarkesto.persistence.AEntity
             implements ilarkesto.auth.ViewProtected<scrum.server.admin.User>, java.lang.Comparable<Impediment>, ilarkesto.core.search.Searchable {
 
+    public static class ImpedimentMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata project = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "project";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Impediment)entity).getProject();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata number = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "number";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Impediment)entity).getNumber();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata label = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "label";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Impediment)entity).getLabel();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata date = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "date";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Impediment)entity).getDate();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata description = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "description";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Impediment)entity).getDescription();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata solution = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "solution";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Impediment)entity).getSolution();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata closed = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "closed";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Impediment)entity).isClosed();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            project
+            ,number
+            ,label
+            ,date
+            ,description
+            ,solution
+            ,closed
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("project".equals(fieldName)) return project;
+            if ("projectId".equals(fieldName)) return project;
+            if ("number".equals(fieldName)) return number;
+            if ("label".equals(fieldName)) return label;
+            if ("date".equals(fieldName)) return date;
+            if ("description".equals(fieldName)) return description;
+            if ("solution".equals(fieldName)) return solution;
+            if ("closed".equals(fieldName)) return closed;
+            return null;
+        }
+
+    }
+
+    public static transient final ImpedimentMetadata metadata = new ImpedimentMetadata();
+
+    @Override
+    public ImpedimentMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(Impediment.class);
 
     // --- AEntity ---
@@ -96,7 +236,6 @@ public abstract class GImpediment
     public boolean matches(ilarkesto.core.search.SearchText search) {
          return search.matches(getLabel(), getDescription(), getSolution());
     }
-
     // -----------------------------------------------------------
     // - project
     // -----------------------------------------------------------
@@ -155,7 +294,6 @@ public abstract class GImpediment
     protected final void updateProject(Object value) {
         setProject(value == null ? null : (scrum.server.project.Project)projectDao.getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - number
     // -----------------------------------------------------------
@@ -192,7 +330,6 @@ public abstract class GImpediment
     protected final void updateNumber(Object value) {
         setNumber((Integer)value);
     }
-
     // -----------------------------------------------------------
     // - label
     // -----------------------------------------------------------
@@ -235,7 +372,6 @@ public abstract class GImpediment
     protected final void updateLabel(Object value) {
         setLabel((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - date
     // -----------------------------------------------------------
@@ -280,7 +416,6 @@ public abstract class GImpediment
         value = value == null ? null : new ilarkesto.core.time.Date((String)value);
         setDate((ilarkesto.core.time.Date)value);
     }
-
     // -----------------------------------------------------------
     // - description
     // -----------------------------------------------------------
@@ -323,7 +458,6 @@ public abstract class GImpediment
     protected final void updateDescription(Object value) {
         setDescription((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - solution
     // -----------------------------------------------------------
@@ -366,7 +500,6 @@ public abstract class GImpediment
     protected final void updateSolution(Object value) {
         setSolution((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - closed
     // -----------------------------------------------------------

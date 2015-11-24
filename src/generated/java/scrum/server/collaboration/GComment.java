@@ -26,6 +26,164 @@ public abstract class GComment
             extends ilarkesto.persistence.AEntity
             implements ilarkesto.auth.ViewProtected<scrum.server.admin.User>, java.lang.Comparable<Comment>, ilarkesto.core.search.Searchable {
 
+    public static class CommentMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata parent = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "parent";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Comment)entity).getParent();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata author = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "author";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Comment)entity).getAuthor();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata published = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "published";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Comment)entity).isPublished();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata authorName = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "authorName";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Comment)entity).getAuthorName();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata authorEmail = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "authorEmail";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Comment)entity).getAuthorEmail();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata authorNameVisible = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "authorNameVisible";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Comment)entity).isAuthorNameVisible();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata text = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "text";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Comment)entity).getText();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata dateAndTime = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "dateAndTime";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Comment)entity).getDateAndTime();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            parent
+            ,author
+            ,published
+            ,authorName
+            ,authorEmail
+            ,authorNameVisible
+            ,text
+            ,dateAndTime
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("parent".equals(fieldName)) return parent;
+            if ("parentId".equals(fieldName)) return parent;
+            if ("author".equals(fieldName)) return author;
+            if ("authorId".equals(fieldName)) return author;
+            if ("published".equals(fieldName)) return published;
+            if ("authorName".equals(fieldName)) return authorName;
+            if ("authorEmail".equals(fieldName)) return authorEmail;
+            if ("authorNameVisible".equals(fieldName)) return authorNameVisible;
+            if ("text".equals(fieldName)) return text;
+            if ("dateAndTime".equals(fieldName)) return dateAndTime;
+            return null;
+        }
+
+    }
+
+    public static transient final CommentMetadata metadata = new CommentMetadata();
+
+    @Override
+    public CommentMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(Comment.class);
 
     // --- AEntity ---
@@ -92,7 +250,6 @@ public abstract class GComment
     public boolean matches(ilarkesto.core.search.SearchText search) {
          return search.matches(getText());
     }
-
     // -----------------------------------------------------------
     // - parent
     // -----------------------------------------------------------
@@ -151,7 +308,6 @@ public abstract class GComment
     protected final void updateParent(Object value) {
         setParent(value == null ? null : (ilarkesto.persistence.AEntity)getDaoService().getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - author
     // -----------------------------------------------------------
@@ -210,7 +366,6 @@ public abstract class GComment
     protected final void updateAuthor(Object value) {
         setAuthor(value == null ? null : (scrum.server.admin.User)userDao.getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - published
     // -----------------------------------------------------------
@@ -247,7 +402,6 @@ public abstract class GComment
     protected final void updatePublished(Object value) {
         setPublished((Boolean)value);
     }
-
     // -----------------------------------------------------------
     // - authorName
     // -----------------------------------------------------------
@@ -290,7 +444,6 @@ public abstract class GComment
     protected final void updateAuthorName(Object value) {
         setAuthorName((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - authorEmail
     // -----------------------------------------------------------
@@ -333,7 +486,6 @@ public abstract class GComment
     protected final void updateAuthorEmail(Object value) {
         setAuthorEmail((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - authorNameVisible
     // -----------------------------------------------------------
@@ -370,7 +522,6 @@ public abstract class GComment
     protected final void updateAuthorNameVisible(Object value) {
         setAuthorNameVisible((Boolean)value);
     }
-
     // -----------------------------------------------------------
     // - text
     // -----------------------------------------------------------
@@ -415,7 +566,6 @@ public abstract class GComment
     protected final void updateText(Object value) {
         setText((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - dateAndTime
     // -----------------------------------------------------------

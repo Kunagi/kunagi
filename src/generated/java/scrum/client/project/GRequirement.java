@@ -24,6 +24,354 @@ public abstract class GRequirement
             extends scrum.client.common.AScrumGwtEntity
             implements java.lang.Comparable<Requirement> {
 
+    public static class RequirementMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata project = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "project";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).getProject();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata sprint = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "sprint";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).getSprint();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata issue = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "issue";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).getIssue();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata number = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "number";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).getNumber();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata qualitys = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "qualitys";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).getQualitys();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata label = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "label";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).getLabel();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata description = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "description";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).getDescription();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata testDescription = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "testDescription";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).getTestDescription();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata estimatedWork = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "estimatedWork";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).getEstimatedWork();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata rejectDate = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "rejectDate";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).getRejectDate();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata closed = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "closed";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).isClosed();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata deleted = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "deleted";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).isDeleted();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata dirty = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "dirty";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).isDirty();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata workEstimationVotingActive = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "workEstimationVotingActive";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).isWorkEstimationVotingActive();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata workEstimationVotingShowoff = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "workEstimationVotingShowoff";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).isWorkEstimationVotingShowoff();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata tasksOrderIds = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "tasksOrderIds";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).getTasksOrderIds();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata themes = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "themes";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).getThemes();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata epic = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "epic";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).getEpic();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata externalTrackerId = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "externalTrackerId";
+            public static final String label = "External ID";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Requirement)entity).getExternalTrackerId();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            project
+            ,sprint
+            ,issue
+            ,number
+            ,qualitys
+            ,label
+            ,description
+            ,testDescription
+            ,estimatedWork
+            ,rejectDate
+            ,closed
+            ,deleted
+            ,dirty
+            ,workEstimationVotingActive
+            ,workEstimationVotingShowoff
+            ,tasksOrderIds
+            ,themes
+            ,epic
+            ,externalTrackerId
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("project".equals(fieldName)) return project;
+            if ("projectId".equals(fieldName)) return project;
+            if ("sprint".equals(fieldName)) return sprint;
+            if ("sprintId".equals(fieldName)) return sprint;
+            if ("issue".equals(fieldName)) return issue;
+            if ("issueId".equals(fieldName)) return issue;
+            if ("number".equals(fieldName)) return number;
+            if ("qualitys".equals(fieldName)) return qualitys;
+            if ("qualitysIds".equals(fieldName)) return qualitys;
+            if ("label".equals(fieldName)) return label;
+            if ("description".equals(fieldName)) return description;
+            if ("testDescription".equals(fieldName)) return testDescription;
+            if ("estimatedWork".equals(fieldName)) return estimatedWork;
+            if ("rejectDate".equals(fieldName)) return rejectDate;
+            if ("closed".equals(fieldName)) return closed;
+            if ("deleted".equals(fieldName)) return deleted;
+            if ("dirty".equals(fieldName)) return dirty;
+            if ("workEstimationVotingActive".equals(fieldName)) return workEstimationVotingActive;
+            if ("workEstimationVotingShowoff".equals(fieldName)) return workEstimationVotingShowoff;
+            if ("tasksOrderIds".equals(fieldName)) return tasksOrderIds;
+            if ("themes".equals(fieldName)) return themes;
+            if ("epic".equals(fieldName)) return epic;
+            if ("epicId".equals(fieldName)) return epic;
+            if ("externalTrackerId".equals(fieldName)) return externalTrackerId;
+            return null;
+        }
+
+    }
+
+    public static transient final RequirementMetadata metadata = new RequirementMetadata();
+
+    @Override
+    public RequirementMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(Requirement.class);
 
     private static transient ilarkesto.core.persistance.AEntitySetBackReferenceHelper<Requirement> projectBackReferencesCache = new ilarkesto.core.persistance.AEntitySetBackReferenceHelper<Requirement>() {
@@ -457,7 +805,6 @@ public abstract class GRequirement
     public boolean matches(ilarkesto.core.search.SearchText search) {
          return search.matches(getLabel(), getDescription(), getTestDescription());
     }
-
     // -----------------------------------------------------------
     // - project
     // -----------------------------------------------------------
@@ -518,7 +865,6 @@ public abstract class GRequirement
         if (this.projectId == null && project == null) return true;
         return project != null && project.getId().equals(this.projectId);
     }
-
 
     // -----------------------------------------------------------
     // - sprint
@@ -581,7 +927,6 @@ public abstract class GRequirement
         return sprint != null && sprint.getId().equals(this.sprintId);
     }
 
-
     // -----------------------------------------------------------
     // - issue
     // -----------------------------------------------------------
@@ -643,7 +988,6 @@ public abstract class GRequirement
         return issue != null && issue.getId().equals(this.issueId);
     }
 
-
     // -----------------------------------------------------------
     // - number
     // -----------------------------------------------------------
@@ -680,7 +1024,6 @@ public abstract class GRequirement
     protected final void updateNumber(Object value) {
         setNumber((Integer)value);
     }
-
     // -----------------------------------------------------------
     // - qualitys
     // -----------------------------------------------------------
@@ -816,7 +1159,6 @@ public abstract class GRequirement
             fireModified("qualitysIds", ilarkesto.core.persistance.Persistence.propertyAsString(this.qualitysIds));
         return true;
     }
-
     // -----------------------------------------------------------
     // - label
     // -----------------------------------------------------------
@@ -859,7 +1201,6 @@ public abstract class GRequirement
     protected final void updateLabel(Object value) {
         setLabel((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - description
     // -----------------------------------------------------------
@@ -902,7 +1243,6 @@ public abstract class GRequirement
     protected final void updateDescription(Object value) {
         setDescription((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - testDescription
     // -----------------------------------------------------------
@@ -945,7 +1285,6 @@ public abstract class GRequirement
     protected final void updateTestDescription(Object value) {
         setTestDescription((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - estimatedWork
     // -----------------------------------------------------------
@@ -987,7 +1326,6 @@ public abstract class GRequirement
     protected final void updateEstimatedWork(Object value) {
         setEstimatedWork((java.lang.Float)value);
     }
-
     // -----------------------------------------------------------
     // - rejectDate
     // -----------------------------------------------------------
@@ -1030,7 +1368,6 @@ public abstract class GRequirement
         value = value == null ? null : new ilarkesto.core.time.Date((String)value);
         setRejectDate((ilarkesto.core.time.Date)value);
     }
-
     // -----------------------------------------------------------
     // - closed
     // -----------------------------------------------------------
@@ -1067,7 +1404,6 @@ public abstract class GRequirement
     protected final void updateClosed(Object value) {
         setClosed((Boolean)value);
     }
-
     // -----------------------------------------------------------
     // - deleted
     // -----------------------------------------------------------
@@ -1104,7 +1440,6 @@ public abstract class GRequirement
     protected final void updateDeleted(Object value) {
         setDeleted((Boolean)value);
     }
-
     // -----------------------------------------------------------
     // - dirty
     // -----------------------------------------------------------
@@ -1141,7 +1476,6 @@ public abstract class GRequirement
     protected final void updateDirty(Object value) {
         setDirty((Boolean)value);
     }
-
     // -----------------------------------------------------------
     // - workEstimationVotingActive
     // -----------------------------------------------------------
@@ -1178,7 +1512,6 @@ public abstract class GRequirement
     protected final void updateWorkEstimationVotingActive(Object value) {
         setWorkEstimationVotingActive((Boolean)value);
     }
-
     // -----------------------------------------------------------
     // - workEstimationVotingShowoff
     // -----------------------------------------------------------
@@ -1215,7 +1548,6 @@ public abstract class GRequirement
     protected final void updateWorkEstimationVotingShowoff(Object value) {
         setWorkEstimationVotingShowoff((Boolean)value);
     }
-
     // -----------------------------------------------------------
     // - tasksOrderIds
     // -----------------------------------------------------------
@@ -1332,7 +1664,6 @@ public abstract class GRequirement
     public final void setTasksOrderIdsAsCommaSeparatedString(String tasksOrderIds) {
         setTasksOrderIds(Str.parseCommaSeparatedString(tasksOrderIds));
     }
-
     // -----------------------------------------------------------
     // - themes
     // -----------------------------------------------------------
@@ -1449,7 +1780,6 @@ public abstract class GRequirement
     public final void setThemesAsCommaSeparatedString(String themes) {
         setThemes(Str.parseCommaSeparatedString(themes));
     }
-
     // -----------------------------------------------------------
     // - epic
     // -----------------------------------------------------------
@@ -1510,7 +1840,6 @@ public abstract class GRequirement
         if (this.epicId == null && epic == null) return true;
         return epic != null && epic.getId().equals(this.epicId);
     }
-
 
     // -----------------------------------------------------------
     // - externalTrackerId

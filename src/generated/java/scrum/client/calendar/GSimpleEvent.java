@@ -24,6 +24,180 @@ public abstract class GSimpleEvent
             extends scrum.client.common.AScrumGwtEntity
             implements java.lang.Comparable<SimpleEvent> {
 
+    public static class SimpleEventMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata project = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "project";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SimpleEvent)entity).getProject();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata label = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "label";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SimpleEvent)entity).getLabel();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata number = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "number";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SimpleEvent)entity).getNumber();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata date = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "date";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SimpleEvent)entity).getDate();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata time = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "time";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SimpleEvent)entity).getTime();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata location = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "location";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SimpleEvent)entity).getLocation();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata duration = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "duration";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SimpleEvent)entity).getDuration();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata agenda = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "agenda";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SimpleEvent)entity).getAgenda();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata note = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "note";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SimpleEvent)entity).getNote();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            project
+            ,label
+            ,number
+            ,date
+            ,time
+            ,location
+            ,duration
+            ,agenda
+            ,note
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("project".equals(fieldName)) return project;
+            if ("projectId".equals(fieldName)) return project;
+            if ("label".equals(fieldName)) return label;
+            if ("number".equals(fieldName)) return number;
+            if ("date".equals(fieldName)) return date;
+            if ("time".equals(fieldName)) return time;
+            if ("location".equals(fieldName)) return location;
+            if ("duration".equals(fieldName)) return duration;
+            if ("agenda".equals(fieldName)) return agenda;
+            if ("note".equals(fieldName)) return note;
+            return null;
+        }
+
+    }
+
+    public static transient final SimpleEventMetadata metadata = new SimpleEventMetadata();
+
+    @Override
+    public SimpleEventMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(SimpleEvent.class);
 
     private static transient ilarkesto.core.persistance.AEntitySetBackReferenceHelper<SimpleEvent> projectBackReferencesCache = new ilarkesto.core.persistance.AEntitySetBackReferenceHelper<SimpleEvent>() {
@@ -212,7 +386,6 @@ public abstract class GSimpleEvent
     public boolean matches(ilarkesto.core.search.SearchText search) {
          return search.matches(getLabel(), getLocation(), getAgenda(), getNote());
     }
-
     // -----------------------------------------------------------
     // - project
     // -----------------------------------------------------------
@@ -274,7 +447,6 @@ public abstract class GSimpleEvent
         return project != null && project.getId().equals(this.projectId);
     }
 
-
     // -----------------------------------------------------------
     // - label
     // -----------------------------------------------------------
@@ -319,7 +491,6 @@ public abstract class GSimpleEvent
     protected final void updateLabel(Object value) {
         setLabel((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - number
     // -----------------------------------------------------------
@@ -356,7 +527,6 @@ public abstract class GSimpleEvent
     protected final void updateNumber(Object value) {
         setNumber((Integer)value);
     }
-
     // -----------------------------------------------------------
     // - date
     // -----------------------------------------------------------
@@ -399,7 +569,6 @@ public abstract class GSimpleEvent
         value = value == null ? null : new ilarkesto.core.time.Date((String)value);
         setDate((ilarkesto.core.time.Date)value);
     }
-
     // -----------------------------------------------------------
     // - time
     // -----------------------------------------------------------
@@ -442,7 +611,6 @@ public abstract class GSimpleEvent
         value = value == null ? null : new ilarkesto.core.time.Time((String)value);
         setTime((ilarkesto.core.time.Time)value);
     }
-
     // -----------------------------------------------------------
     // - location
     // -----------------------------------------------------------
@@ -485,7 +653,6 @@ public abstract class GSimpleEvent
     protected final void updateLocation(Object value) {
         setLocation((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - duration
     // -----------------------------------------------------------
@@ -527,7 +694,6 @@ public abstract class GSimpleEvent
     protected final void updateDuration(Object value) {
         setDuration((java.lang.Integer)value);
     }
-
     // -----------------------------------------------------------
     // - agenda
     // -----------------------------------------------------------
@@ -570,7 +736,6 @@ public abstract class GSimpleEvent
     protected final void updateAgenda(Object value) {
         setAgenda((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - note
     // -----------------------------------------------------------

@@ -26,6 +26,96 @@ public abstract class GChatMessage
             extends ilarkesto.persistence.AEntity
             implements ilarkesto.auth.ViewProtected<scrum.server.admin.User>, java.lang.Comparable<ChatMessage> {
 
+    public static class ChatMessageMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata project = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "project";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ChatMessage)entity).getProject();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata author = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "author";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ChatMessage)entity).getAuthor();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata text = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "text";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ChatMessage)entity).getText();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata dateAndTime = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "dateAndTime";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ChatMessage)entity).getDateAndTime();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            project
+            ,author
+            ,text
+            ,dateAndTime
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("project".equals(fieldName)) return project;
+            if ("projectId".equals(fieldName)) return project;
+            if ("author".equals(fieldName)) return author;
+            if ("authorId".equals(fieldName)) return author;
+            if ("text".equals(fieldName)) return text;
+            if ("dateAndTime".equals(fieldName)) return dateAndTime;
+            return null;
+        }
+
+    }
+
+    public static transient final ChatMessageMetadata metadata = new ChatMessageMetadata();
+
+    @Override
+    public ChatMessageMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(ChatMessage.class);
 
     // --- AEntity ---
@@ -78,7 +168,6 @@ public abstract class GChatMessage
     private static final ilarkesto.core.logging.Log LOG = ilarkesto.core.logging.Log.get(GChatMessage.class);
 
     public static final String TYPE = "ChatMessage";
-
     // -----------------------------------------------------------
     // - project
     // -----------------------------------------------------------
@@ -137,7 +226,6 @@ public abstract class GChatMessage
     protected final void updateProject(Object value) {
         setProject(value == null ? null : (scrum.server.project.Project)projectDao.getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - author
     // -----------------------------------------------------------
@@ -196,7 +284,6 @@ public abstract class GChatMessage
     protected final void updateAuthor(Object value) {
         setAuthor(value == null ? null : (scrum.server.admin.User)userDao.getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - text
     // -----------------------------------------------------------
@@ -241,7 +328,6 @@ public abstract class GChatMessage
     protected final void updateText(Object value) {
         setText((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - dateAndTime
     // -----------------------------------------------------------

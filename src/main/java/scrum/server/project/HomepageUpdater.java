@@ -86,6 +86,7 @@ public class HomepageUpdater {
 		processStoryTemplates();
 		processReleaseTemplates();
 		processBlogEntryTemplates();
+		processSprintTemplates();
 		createSprintBurndownChart(700, 200);
 		executeScript("post-update");
 	}
@@ -204,6 +205,18 @@ public class HomepageUpdater {
 		ContextBuilder context = new ContextBuilder();
 		fillIssue(context.putSubContext("issue"), issue);
 		processEntityTemplate(context, issue.getReference());
+	}
+
+	private void processSprintTemplates() {
+		for (Sprint sprint : project.getCompletedSprintsInReverseOrder()) {
+			processSprintTemplate(sprint);
+		}
+	}
+
+	private void processSprintTemplate(Sprint sprint) {
+		ContextBuilder context = new ContextBuilder();
+		fillSprint(context.putSubContext("sprint"), sprint);
+		processEntityTemplate(context, sprint.getReference());
 	}
 
 	private void processStoryTemplates() {
@@ -355,6 +368,11 @@ public class HomepageUpdater {
 		context.put("reference", sprint.getReference());
 		context.put("label", toHtml(sprint.getLabel()));
 		context.put("goal", wikiToHtml(sprint.getGoal()));
+
+		for (Requirement requirement : Utl.sort(sprint.getRequirements(), sprint.getRequirementsOrderComparator())) {
+			fillStory(context.addSubContext("stories"), requirement);
+		}
+
 		fillComments(context, sprint);
 	}
 
@@ -450,6 +468,9 @@ public class HomepageUpdater {
 		context.put("description", wikiToHtml(project.getDescription()));
 		context.put("longDescription", wikiToHtml(project.getLongDescription()));
 		context.put("homepageUrl", project.getHomepageUrl());
+		for (Sprint sprint : project.getCompletedSprintsInReverseOrder()) {
+			fillSprint(context.addSubContext("completedSprints"), sprint);
+		}
 		for (User user : project.getProductOwners()) {
 			fillProjectParticipant(context.addSubContext("productOwners"), user);
 		}

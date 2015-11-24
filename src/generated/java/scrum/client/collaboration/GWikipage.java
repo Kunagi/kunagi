@@ -24,6 +24,78 @@ public abstract class GWikipage
             extends scrum.client.common.AScrumGwtEntity
             implements java.lang.Comparable<Wikipage> {
 
+    public static class WikipageMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata project = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "project";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Wikipage)entity).getProject();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata name = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "name";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Wikipage)entity).getName();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata text = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "text";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Wikipage)entity).getText();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            project
+            ,name
+            ,text
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("project".equals(fieldName)) return project;
+            if ("projectId".equals(fieldName)) return project;
+            if ("name".equals(fieldName)) return name;
+            if ("text".equals(fieldName)) return text;
+            return null;
+        }
+
+    }
+
+    public static transient final WikipageMetadata metadata = new WikipageMetadata();
+
+    @Override
+    public WikipageMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(Wikipage.class);
 
     private static transient ilarkesto.core.persistance.AEntitySetBackReferenceHelper<Wikipage> projectBackReferencesCache = new ilarkesto.core.persistance.AEntitySetBackReferenceHelper<Wikipage>() {
@@ -128,7 +200,6 @@ public abstract class GWikipage
     public boolean matches(ilarkesto.core.search.SearchText search) {
          return search.matches(getName(), getText());
     }
-
     // -----------------------------------------------------------
     // - project
     // -----------------------------------------------------------
@@ -190,7 +261,6 @@ public abstract class GWikipage
         return project != null && project.getId().equals(this.projectId);
     }
 
-
     // -----------------------------------------------------------
     // - name
     // -----------------------------------------------------------
@@ -235,7 +305,6 @@ public abstract class GWikipage
     protected final void updateName(Object value) {
         setName((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - text
     // -----------------------------------------------------------

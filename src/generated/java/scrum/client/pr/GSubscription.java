@@ -24,6 +24,61 @@ public abstract class GSubscription
             extends scrum.client.common.AScrumGwtEntity
             implements java.lang.Comparable<Subscription> {
 
+    public static class SubscriptionMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata subject = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "subject";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Subscription)entity).getSubject();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata subscribersEmails = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "subscribersEmails";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Subscription)entity).getSubscribersEmails();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            subject
+            ,subscribersEmails
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("subject".equals(fieldName)) return subject;
+            if ("subjectId".equals(fieldName)) return subject;
+            if ("subscribersEmails".equals(fieldName)) return subscribersEmails;
+            return null;
+        }
+
+    }
+
+    public static transient final SubscriptionMetadata metadata = new SubscriptionMetadata();
+
+    @Override
+    public SubscriptionMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(Subscription.class);
 
     private static transient ilarkesto.core.persistance.AEntityBackReferenceHelper<Subscription> subjectBackReferencesCache = new ilarkesto.core.persistance.AEntityBackReferenceHelper<Subscription>() {
@@ -104,7 +159,6 @@ public abstract class GSubscription
     private static final ilarkesto.core.logging.Log LOG = ilarkesto.core.logging.Log.get(GSubscription.class);
 
     public static final String TYPE = "Subscription";
-
     // -----------------------------------------------------------
     // - subject
     // -----------------------------------------------------------
@@ -165,7 +219,6 @@ public abstract class GSubscription
         if (this.subjectId == null && subject == null) return true;
         return subject != null && subject.getId().equals(this.subjectId);
     }
-
 
     // -----------------------------------------------------------
     // - subscribersEmails

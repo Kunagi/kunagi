@@ -24,6 +24,318 @@ public abstract class GProjectUserConfig
             extends scrum.client.common.AScrumGwtEntity
             implements java.lang.Comparable<ProjectUserConfig> {
 
+    public static class ProjectUserConfigMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata project = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "project";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).getProject();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata user = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "user";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).getUser();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata color = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "color";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).getColor();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata receiveEmailsOnProjectEvents = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "receiveEmailsOnProjectEvents";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).isReceiveEmailsOnProjectEvents();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata misconducts = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "misconducts";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).getMisconducts();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata richtextAutosaveText = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "richtextAutosaveText";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).getRichtextAutosaveText();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata richtextAutosaveField = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "richtextAutosaveField";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).getRichtextAutosaveField();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata selectedEntitysIds = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "selectedEntitysIds";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).getSelectedEntitysIds();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata online = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "online";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).isOnline();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata lastActivityDateAndTime = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "lastActivityDateAndTime";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).getLastActivityDateAndTime();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata pblFilterThemes = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "pblFilterThemes";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).getPblFilterThemes();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata pblFilterQualitys = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "pblFilterQualitys";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).getPblFilterQualitys();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata pblFilterDateFrom = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "pblFilterDateFrom";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).getPblFilterDateFrom();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata pblFilterDateTo = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "pblFilterDateTo";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).getPblFilterDateTo();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata pblFilterEstimationFrom = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "pblFilterEstimationFrom";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).getPblFilterEstimationFrom();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata pblFilterEstimationTo = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "pblFilterEstimationTo";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).getPblFilterEstimationTo();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata pblFilterText = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "pblFilterText";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectUserConfig)entity).getPblFilterText();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            project
+            ,user
+            ,color
+            ,receiveEmailsOnProjectEvents
+            ,misconducts
+            ,richtextAutosaveText
+            ,richtextAutosaveField
+            ,selectedEntitysIds
+            ,online
+            ,lastActivityDateAndTime
+            ,pblFilterThemes
+            ,pblFilterQualitys
+            ,pblFilterDateFrom
+            ,pblFilterDateTo
+            ,pblFilterEstimationFrom
+            ,pblFilterEstimationTo
+            ,pblFilterText
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("project".equals(fieldName)) return project;
+            if ("projectId".equals(fieldName)) return project;
+            if ("user".equals(fieldName)) return user;
+            if ("userId".equals(fieldName)) return user;
+            if ("color".equals(fieldName)) return color;
+            if ("receiveEmailsOnProjectEvents".equals(fieldName)) return receiveEmailsOnProjectEvents;
+            if ("misconducts".equals(fieldName)) return misconducts;
+            if ("richtextAutosaveText".equals(fieldName)) return richtextAutosaveText;
+            if ("richtextAutosaveField".equals(fieldName)) return richtextAutosaveField;
+            if ("selectedEntitysIds".equals(fieldName)) return selectedEntitysIds;
+            if ("online".equals(fieldName)) return online;
+            if ("lastActivityDateAndTime".equals(fieldName)) return lastActivityDateAndTime;
+            if ("pblFilterThemes".equals(fieldName)) return pblFilterThemes;
+            if ("pblFilterQualitys".equals(fieldName)) return pblFilterQualitys;
+            if ("pblFilterQualitysIds".equals(fieldName)) return pblFilterQualitys;
+            if ("pblFilterDateFrom".equals(fieldName)) return pblFilterDateFrom;
+            if ("pblFilterDateTo".equals(fieldName)) return pblFilterDateTo;
+            if ("pblFilterEstimationFrom".equals(fieldName)) return pblFilterEstimationFrom;
+            if ("pblFilterEstimationTo".equals(fieldName)) return pblFilterEstimationTo;
+            if ("pblFilterText".equals(fieldName)) return pblFilterText;
+            return null;
+        }
+
+    }
+
+    public static transient final ProjectUserConfigMetadata metadata = new ProjectUserConfigMetadata();
+
+    @Override
+    public ProjectUserConfigMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(ProjectUserConfig.class);
 
     private static transient ilarkesto.core.persistance.AEntitySetBackReferenceHelper<ProjectUserConfig> projectBackReferencesCache = new ilarkesto.core.persistance.AEntitySetBackReferenceHelper<ProjectUserConfig>() {
@@ -368,7 +680,6 @@ public abstract class GProjectUserConfig
     private static final ilarkesto.core.logging.Log LOG = ilarkesto.core.logging.Log.get(GProjectUserConfig.class);
 
     public static final String TYPE = "ProjectUserConfig";
-
     // -----------------------------------------------------------
     // - project
     // -----------------------------------------------------------
@@ -429,7 +740,6 @@ public abstract class GProjectUserConfig
         if (this.projectId == null && project == null) return true;
         return project != null && project.getId().equals(this.projectId);
     }
-
 
     // -----------------------------------------------------------
     // - user
@@ -492,7 +802,6 @@ public abstract class GProjectUserConfig
         return user != null && user.getId().equals(this.userId);
     }
 
-
     // -----------------------------------------------------------
     // - color
     // -----------------------------------------------------------
@@ -535,7 +844,6 @@ public abstract class GProjectUserConfig
     protected final void updateColor(Object value) {
         setColor((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - receiveEmailsOnProjectEvents
     // -----------------------------------------------------------
@@ -572,7 +880,6 @@ public abstract class GProjectUserConfig
     protected final void updateReceiveEmailsOnProjectEvents(Object value) {
         setReceiveEmailsOnProjectEvents((Boolean)value);
     }
-
     // -----------------------------------------------------------
     // - misconducts
     // -----------------------------------------------------------
@@ -609,7 +916,6 @@ public abstract class GProjectUserConfig
     protected final void updateMisconducts(Object value) {
         setMisconducts((Integer)value);
     }
-
     // -----------------------------------------------------------
     // - richtextAutosaveText
     // -----------------------------------------------------------
@@ -652,7 +958,6 @@ public abstract class GProjectUserConfig
     protected final void updateRichtextAutosaveText(Object value) {
         setRichtextAutosaveText((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - richtextAutosaveField
     // -----------------------------------------------------------
@@ -695,7 +1000,6 @@ public abstract class GProjectUserConfig
     protected final void updateRichtextAutosaveField(Object value) {
         setRichtextAutosaveField((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - selectedEntitysIds
     // -----------------------------------------------------------
@@ -793,7 +1097,6 @@ public abstract class GProjectUserConfig
     public final void setSelectedEntitysIdsAsCommaSeparatedString(String selectedEntitysIds) {
         setSelectedEntitysIds(Str.parseCommaSeparatedString(selectedEntitysIds));
     }
-
     // -----------------------------------------------------------
     // - online
     // -----------------------------------------------------------
@@ -828,7 +1131,6 @@ public abstract class GProjectUserConfig
     protected final void updateOnline(Object value) {
         setOnline((Boolean)value);
     }
-
     // -----------------------------------------------------------
     // - lastActivityDateAndTime
     // -----------------------------------------------------------
@@ -869,7 +1171,6 @@ public abstract class GProjectUserConfig
         value = value == null ? null : new ilarkesto.core.time.DateAndTime((String)value);
         setLastActivityDateAndTime((ilarkesto.core.time.DateAndTime)value);
     }
-
     // -----------------------------------------------------------
     // - pblFilterThemes
     // -----------------------------------------------------------
@@ -986,7 +1287,6 @@ public abstract class GProjectUserConfig
     public final void setPblFilterThemesAsCommaSeparatedString(String pblFilterThemes) {
         setPblFilterThemes(Str.parseCommaSeparatedString(pblFilterThemes));
     }
-
     // -----------------------------------------------------------
     // - pblFilterQualitys
     // -----------------------------------------------------------
@@ -1122,7 +1422,6 @@ public abstract class GProjectUserConfig
             fireModified("pblFilterQualitysIds", ilarkesto.core.persistance.Persistence.propertyAsString(this.pblFilterQualitysIds));
         return true;
     }
-
     // -----------------------------------------------------------
     // - pblFilterDateFrom
     // -----------------------------------------------------------
@@ -1165,7 +1464,6 @@ public abstract class GProjectUserConfig
         value = value == null ? null : new ilarkesto.core.time.Date((String)value);
         setPblFilterDateFrom((ilarkesto.core.time.Date)value);
     }
-
     // -----------------------------------------------------------
     // - pblFilterDateTo
     // -----------------------------------------------------------
@@ -1208,7 +1506,6 @@ public abstract class GProjectUserConfig
         value = value == null ? null : new ilarkesto.core.time.Date((String)value);
         setPblFilterDateTo((ilarkesto.core.time.Date)value);
     }
-
     // -----------------------------------------------------------
     // - pblFilterEstimationFrom
     // -----------------------------------------------------------
@@ -1250,7 +1547,6 @@ public abstract class GProjectUserConfig
     protected final void updatePblFilterEstimationFrom(Object value) {
         setPblFilterEstimationFrom((java.lang.Float)value);
     }
-
     // -----------------------------------------------------------
     // - pblFilterEstimationTo
     // -----------------------------------------------------------
@@ -1292,7 +1588,6 @@ public abstract class GProjectUserConfig
     protected final void updatePblFilterEstimationTo(Object value) {
         setPblFilterEstimationTo((java.lang.Float)value);
     }
-
     // -----------------------------------------------------------
     // - pblFilterText
     // -----------------------------------------------------------

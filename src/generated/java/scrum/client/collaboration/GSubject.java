@@ -24,6 +24,95 @@ public abstract class GSubject
             extends scrum.client.common.AScrumGwtEntity
             implements java.lang.Comparable<Subject> {
 
+    public static class SubjectMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata project = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "project";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Subject)entity).getProject();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata label = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "label";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Subject)entity).getLabel();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata text = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "text";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Subject)entity).getText();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata number = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "number";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Subject)entity).getNumber();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            project
+            ,label
+            ,text
+            ,number
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("project".equals(fieldName)) return project;
+            if ("projectId".equals(fieldName)) return project;
+            if ("label".equals(fieldName)) return label;
+            if ("text".equals(fieldName)) return text;
+            if ("number".equals(fieldName)) return number;
+            return null;
+        }
+
+    }
+
+    public static transient final SubjectMetadata metadata = new SubjectMetadata();
+
+    @Override
+    public SubjectMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(Subject.class);
 
     private static transient ilarkesto.core.persistance.AEntitySetBackReferenceHelper<Subject> projectBackReferencesCache = new ilarkesto.core.persistance.AEntitySetBackReferenceHelper<Subject>() {
@@ -142,7 +231,6 @@ public abstract class GSubject
     public boolean matches(ilarkesto.core.search.SearchText search) {
          return search.matches(getLabel(), getText());
     }
-
     // -----------------------------------------------------------
     // - project
     // -----------------------------------------------------------
@@ -204,7 +292,6 @@ public abstract class GSubject
         return project != null && project.getId().equals(this.projectId);
     }
 
-
     // -----------------------------------------------------------
     // - label
     // -----------------------------------------------------------
@@ -249,7 +336,6 @@ public abstract class GSubject
     protected final void updateLabel(Object value) {
         setLabel((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - text
     // -----------------------------------------------------------
@@ -292,7 +378,6 @@ public abstract class GSubject
     protected final void updateText(Object value) {
         setText((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - number
     // -----------------------------------------------------------

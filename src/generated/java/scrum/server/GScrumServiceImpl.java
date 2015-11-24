@@ -51,7 +51,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "updateEntities", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("updateEntities")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "updateEntities" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("updateEntities")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"updateEntities", modified, deleted, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"updateEntities", modified, deleted);
@@ -92,7 +94,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "exception", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("exception")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "exception" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("exception")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"exception", "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"exception");
@@ -133,7 +137,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "changePassword", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("changePassword")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "changePassword" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("changePassword")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"changePassword", newPassword, oldPassword, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"changePassword", newPassword, oldPassword);
@@ -174,7 +180,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "logout", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("logout")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "logout" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("logout")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"logout", "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"logout");
@@ -215,7 +223,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "resetPassword", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("resetPassword")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "resetPassword" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("resetPassword")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"resetPassword", userId, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"resetPassword", userId);
@@ -253,7 +263,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "sendTestEmail", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("sendTestEmail")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "sendTestEmail" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("sendTestEmail")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"sendTestEmail", "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"sendTestEmail");
@@ -290,7 +302,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "testLdap", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("testLdap")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "testLdap" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("testLdap")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"testLdap", "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"testLdap");
@@ -330,7 +344,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "updateSystemMessage", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("updateSystemMessage")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "updateSystemMessage" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("updateSystemMessage")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"updateSystemMessage", systemMessage, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"updateSystemMessage", systemMessage);
@@ -368,7 +384,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "requestComments", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("requestComments")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "requestComments" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("requestComments")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"requestComments", parentId, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"requestComments", parentId);
@@ -405,7 +423,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "requestForum", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("requestForum")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "requestForum" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("requestForum")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"requestForum", all, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"requestForum", all);
@@ -475,7 +495,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "startConversation", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("startConversation")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "startConversation" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("startConversation")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"startConversation", "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"startConversation");
@@ -516,7 +538,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "touchLastActivity", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("touchLastActivity")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "touchLastActivity" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("touchLastActivity")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"touchLastActivity", "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"touchLastActivity");
@@ -554,7 +578,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "requestEntity", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("requestEntity")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "requestEntity" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("requestEntity")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"requestEntity", entityId, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"requestEntity", entityId);
@@ -591,7 +617,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "requestEntityByReference", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("requestEntityByReference")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "requestEntityByReference" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("requestEntityByReference")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"requestEntityByReference", reference, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"requestEntityByReference", reference);
@@ -628,7 +656,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "sleep", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("sleep")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "sleep" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("sleep")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"sleep", millis, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"sleep", millis);
@@ -668,7 +698,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "activateRequirementEstimationVoting", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("activateRequirementEstimationVoting")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "activateRequirementEstimationVoting" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("activateRequirementEstimationVoting")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"activateRequirementEstimationVoting", requirementId, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"activateRequirementEstimationVoting", requirementId);
@@ -706,7 +738,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "requestRequirementEstimationVotes", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("requestRequirementEstimationVotes")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "requestRequirementEstimationVotes" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("requestRequirementEstimationVotes")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"requestRequirementEstimationVotes", requirementId, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"requestRequirementEstimationVotes", requirementId);
@@ -743,7 +777,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "requestImpediments", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("requestImpediments")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "requestImpediments" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("requestImpediments")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"requestImpediments", "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"requestImpediments");
@@ -783,7 +819,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "convertIssueToStory", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("convertIssueToStory")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "convertIssueToStory" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("convertIssueToStory")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"convertIssueToStory", issueId, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"convertIssueToStory", issueId);
@@ -821,7 +859,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "requestAcceptedIssues", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("requestAcceptedIssues")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "requestAcceptedIssues" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("requestAcceptedIssues")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"requestAcceptedIssues", "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"requestAcceptedIssues");
@@ -858,7 +898,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "requestClosedIssues", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("requestClosedIssues")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "requestClosedIssues" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("requestClosedIssues")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"requestClosedIssues", "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"requestClosedIssues");
@@ -895,7 +937,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "requestReleaseIssues", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("requestReleaseIssues")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "requestReleaseIssues" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("requestReleaseIssues")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"requestReleaseIssues", releaseId, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"requestReleaseIssues", releaseId);
@@ -935,7 +979,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "sendIssueReplyEmail", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("sendIssueReplyEmail")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "sendIssueReplyEmail" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("sendIssueReplyEmail")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"sendIssueReplyEmail", issueId, from, to, subject, text, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"sendIssueReplyEmail", issueId, from, to, subject, text);
@@ -973,7 +1019,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "requestChanges", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("requestChanges")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "requestChanges" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("requestChanges")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"requestChanges", parentId, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"requestChanges", parentId);
@@ -1010,7 +1058,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "requestProjectEvents", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("requestProjectEvents")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "requestProjectEvents" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("requestProjectEvents")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"requestProjectEvents", "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"requestProjectEvents");
@@ -1050,7 +1100,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "closeProject", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("closeProject")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "closeProject" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("closeProject")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"closeProject", "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"closeProject");
@@ -1091,7 +1143,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "createExampleProject", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("createExampleProject")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "createExampleProject" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("createExampleProject")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"createExampleProject", "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"createExampleProject");
@@ -1132,7 +1186,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "deleteStory", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("deleteStory")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "deleteStory" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("deleteStory")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"deleteStory", storyId, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"deleteStory", storyId);
@@ -1173,7 +1229,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "moveRequirementToProject", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("moveRequirementToProject")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "moveRequirementToProject" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("moveRequirementToProject")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"moveRequirementToProject", destinationProjectId, requirementId, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"moveRequirementToProject", destinationProjectId, requirementId);
@@ -1214,7 +1272,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "selectProject", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("selectProject")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "selectProject" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("selectProject")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"selectProject", projectId, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"selectProject", projectId);
@@ -1252,7 +1312,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "updateProjectHomepage", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("updateProjectHomepage")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "updateProjectHomepage" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("updateProjectHomepage")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"updateProjectHomepage", "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"updateProjectHomepage");
@@ -1292,7 +1354,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "publishRelease", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("publishRelease")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "publishRelease" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("publishRelease")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"publishRelease", releaseId, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"publishRelease", releaseId);
@@ -1330,7 +1394,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "requestRisks", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("requestRisks")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "requestRisks" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("requestRisks")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"requestRisks", "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"requestRisks");
@@ -1367,7 +1433,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "search", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("search")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "search" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("search")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"search", text, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"search", text);
@@ -1407,7 +1475,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "createIssueFromTask", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("createIssueFromTask")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "createIssueFromTask" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("createIssueFromTask")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"createIssueFromTask", taskId, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"createIssueFromTask", taskId);
@@ -1448,7 +1518,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "kickStoryFromSprint", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("kickStoryFromSprint")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "kickStoryFromSprint" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("kickStoryFromSprint")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"kickStoryFromSprint", storyId, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"kickStoryFromSprint", storyId);
@@ -1489,7 +1561,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "pullStoryToSprint", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("pullStoryToSprint")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "pullStoryToSprint" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("pullStoryToSprint")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"pullStoryToSprint", storyId, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"pullStoryToSprint", storyId);
@@ -1527,7 +1601,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "requestHistory", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("requestHistory")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "requestHistory" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("requestHistory")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"requestHistory", "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"requestHistory");
@@ -1564,7 +1640,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "requestHistorySprint", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("requestHistorySprint")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "requestHistorySprint" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("requestHistorySprint")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"requestHistorySprint", sprintId, "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"requestHistorySprint", sprintId);
@@ -1604,7 +1682,9 @@ public abstract class GScrumServiceImpl
             } catch (Exception ex) {
                 handleServiceMethodException(conversationNumber, "switchToNextSprint", ex, context);
             }
-            if (rt.getRuntime() > getMaxServiceCallExecutionTime("switchToNextSprint")) {
+            long runtime = rt.getRuntime();
+            logRuntime(conversation, "switchToNextSprint" ,runtime);
+            if (runtime > getMaxServiceCallExecutionTime("switchToNextSprint")) {
                 log.warn("ServiceCall served in", rt.getRuntimeFormated(),"switchToNextSprint", "Threads:\n", ilarkesto.base.Threads.getAllThreadsInfo());
             } else {
                 log.info("ServiceCall served in", rt.getRuntimeFormated(),"switchToNextSprint");

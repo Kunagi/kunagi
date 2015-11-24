@@ -26,6 +26,79 @@ public abstract class GEmoticon
             extends ilarkesto.persistence.AEntity
             implements ilarkesto.auth.ViewProtected<scrum.server.admin.User>, java.lang.Comparable<Emoticon> {
 
+    public static class EmoticonMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata parent = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "parent";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Emoticon)entity).getParent();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata owner = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "owner";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Emoticon)entity).getOwner();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata emotion = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "emotion";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Emoticon)entity).getEmotion();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            parent
+            ,owner
+            ,emotion
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("parent".equals(fieldName)) return parent;
+            if ("parentId".equals(fieldName)) return parent;
+            if ("owner".equals(fieldName)) return owner;
+            if ("ownerId".equals(fieldName)) return owner;
+            if ("emotion".equals(fieldName)) return emotion;
+            return null;
+        }
+
+    }
+
+    public static transient final EmoticonMetadata metadata = new EmoticonMetadata();
+
+    @Override
+    public EmoticonMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(Emoticon.class);
 
     // --- AEntity ---
@@ -77,7 +150,6 @@ public abstract class GEmoticon
     private static final ilarkesto.core.logging.Log LOG = ilarkesto.core.logging.Log.get(GEmoticon.class);
 
     public static final String TYPE = "Emoticon";
-
     // -----------------------------------------------------------
     // - parent
     // -----------------------------------------------------------
@@ -136,7 +208,6 @@ public abstract class GEmoticon
     protected final void updateParent(Object value) {
         setParent(value == null ? null : (ilarkesto.persistence.AEntity)getDaoService().getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - owner
     // -----------------------------------------------------------
@@ -195,7 +266,6 @@ public abstract class GEmoticon
     protected final void updateOwner(Object value) {
         setOwner(value == null ? null : (scrum.server.admin.User)userDao.getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - emotion
     // -----------------------------------------------------------

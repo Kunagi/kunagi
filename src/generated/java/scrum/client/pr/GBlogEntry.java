@@ -24,6 +24,165 @@ public abstract class GBlogEntry
             extends scrum.client.common.AScrumGwtEntity
             implements java.lang.Comparable<BlogEntry> {
 
+    public static class BlogEntryMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata project = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "project";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((BlogEntry)entity).getProject();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata number = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "number";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((BlogEntry)entity).getNumber();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata authors = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "authors";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((BlogEntry)entity).getAuthors();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata title = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "title";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((BlogEntry)entity).getTitle();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata text = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "text";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((BlogEntry)entity).getText();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata dateAndTime = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "dateAndTime";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((BlogEntry)entity).getDateAndTime();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata releases = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "releases";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((BlogEntry)entity).getReleases();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata published = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "published";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((BlogEntry)entity).isPublished();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            project
+            ,number
+            ,authors
+            ,title
+            ,text
+            ,dateAndTime
+            ,releases
+            ,published
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("project".equals(fieldName)) return project;
+            if ("projectId".equals(fieldName)) return project;
+            if ("number".equals(fieldName)) return number;
+            if ("authors".equals(fieldName)) return authors;
+            if ("authorsIds".equals(fieldName)) return authors;
+            if ("title".equals(fieldName)) return title;
+            if ("text".equals(fieldName)) return text;
+            if ("dateAndTime".equals(fieldName)) return dateAndTime;
+            if ("releases".equals(fieldName)) return releases;
+            if ("releasesIds".equals(fieldName)) return releases;
+            if ("published".equals(fieldName)) return published;
+            return null;
+        }
+
+    }
+
+    public static transient final BlogEntryMetadata metadata = new BlogEntryMetadata();
+
+    @Override
+    public BlogEntryMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(BlogEntry.class);
 
     private static transient ilarkesto.core.persistance.AEntitySetBackReferenceHelper<BlogEntry> projectBackReferencesCache = new ilarkesto.core.persistance.AEntitySetBackReferenceHelper<BlogEntry>() {
@@ -222,7 +381,6 @@ public abstract class GBlogEntry
     public boolean matches(ilarkesto.core.search.SearchText search) {
          return search.matches(getTitle(), getText());
     }
-
     // -----------------------------------------------------------
     // - project
     // -----------------------------------------------------------
@@ -284,7 +442,6 @@ public abstract class GBlogEntry
         return project != null && project.getId().equals(this.projectId);
     }
 
-
     // -----------------------------------------------------------
     // - number
     // -----------------------------------------------------------
@@ -321,7 +478,6 @@ public abstract class GBlogEntry
     protected final void updateNumber(Object value) {
         setNumber((Integer)value);
     }
-
     // -----------------------------------------------------------
     // - authors
     // -----------------------------------------------------------
@@ -457,7 +613,6 @@ public abstract class GBlogEntry
             fireModified("authorsIds", ilarkesto.core.persistance.Persistence.propertyAsString(this.authorsIds));
         return true;
     }
-
     // -----------------------------------------------------------
     // - title
     // -----------------------------------------------------------
@@ -502,7 +657,6 @@ public abstract class GBlogEntry
     protected final void updateTitle(Object value) {
         setTitle((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - text
     // -----------------------------------------------------------
@@ -545,7 +699,6 @@ public abstract class GBlogEntry
     protected final void updateText(Object value) {
         setText((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - dateAndTime
     // -----------------------------------------------------------
@@ -588,7 +741,6 @@ public abstract class GBlogEntry
         value = value == null ? null : new ilarkesto.core.time.DateAndTime((String)value);
         setDateAndTime((ilarkesto.core.time.DateAndTime)value);
     }
-
     // -----------------------------------------------------------
     // - releases
     // -----------------------------------------------------------
@@ -724,7 +876,6 @@ public abstract class GBlogEntry
             fireModified("releasesIds", ilarkesto.core.persistance.Persistence.propertyAsString(this.releasesIds));
         return true;
     }
-
     // -----------------------------------------------------------
     // - published
     // -----------------------------------------------------------

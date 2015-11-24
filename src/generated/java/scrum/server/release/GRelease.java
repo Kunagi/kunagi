@@ -26,6 +26,250 @@ public abstract class GRelease
             extends ilarkesto.persistence.AEntity
             implements ilarkesto.auth.ViewProtected<scrum.server.admin.User>, java.lang.Comparable<Release>, ilarkesto.core.search.Searchable {
 
+    public static class ReleaseMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata project = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "project";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Release)entity).getProject();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata parentRelease = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "parentRelease";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Release)entity).getParentRelease();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata sprints = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "sprints";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Release)entity).getSprints();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata number = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "number";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Release)entity).getNumber();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata label = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "label";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Release)entity).getLabel();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata note = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "note";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Release)entity).getNote();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata releaseDate = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "releaseDate";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Release)entity).getReleaseDate();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata releaseTime = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "releaseTime";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Release)entity).getReleaseTime();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata released = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "released";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Release)entity).isReleased();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata releaseNotes = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "releaseNotes";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Release)entity).getReleaseNotes();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata scmTag = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "scmTag";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Release)entity).getScmTag();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata scriptRunning = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "scriptRunning";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Release)entity).isScriptRunning();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata scriptOutput = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "scriptOutput";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Release)entity).getScriptOutput();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            project
+            ,parentRelease
+            ,sprints
+            ,number
+            ,label
+            ,note
+            ,releaseDate
+            ,releaseTime
+            ,released
+            ,releaseNotes
+            ,scmTag
+            ,scriptRunning
+            ,scriptOutput
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("project".equals(fieldName)) return project;
+            if ("projectId".equals(fieldName)) return project;
+            if ("parentRelease".equals(fieldName)) return parentRelease;
+            if ("parentReleaseId".equals(fieldName)) return parentRelease;
+            if ("sprints".equals(fieldName)) return sprints;
+            if ("sprintsIds".equals(fieldName)) return sprints;
+            if ("number".equals(fieldName)) return number;
+            if ("label".equals(fieldName)) return label;
+            if ("note".equals(fieldName)) return note;
+            if ("releaseDate".equals(fieldName)) return releaseDate;
+            if ("releaseTime".equals(fieldName)) return releaseTime;
+            if ("released".equals(fieldName)) return released;
+            if ("releaseNotes".equals(fieldName)) return releaseNotes;
+            if ("scmTag".equals(fieldName)) return scmTag;
+            if ("scriptRunning".equals(fieldName)) return scriptRunning;
+            if ("scriptOutput".equals(fieldName)) return scriptOutput;
+            return null;
+        }
+
+    }
+
+    public static transient final ReleaseMetadata metadata = new ReleaseMetadata();
+
+    @Override
+    public ReleaseMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(Release.class);
 
     // --- AEntity ---
@@ -121,7 +365,6 @@ public abstract class GRelease
     public boolean matches(ilarkesto.core.search.SearchText search) {
          return search.matches(getLabel(), getNote(), getReleaseNotes(), getScmTag());
     }
-
     // -----------------------------------------------------------
     // - project
     // -----------------------------------------------------------
@@ -180,7 +423,6 @@ public abstract class GRelease
     protected final void updateProject(Object value) {
         setProject(value == null ? null : (scrum.server.project.Project)projectDao.getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - parentRelease
     // -----------------------------------------------------------
@@ -239,7 +481,6 @@ public abstract class GRelease
     protected final void updateParentRelease(Object value) {
         setParentRelease(value == null ? null : (scrum.server.release.Release)releaseDao.getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - sprints
     // -----------------------------------------------------------
@@ -364,7 +605,6 @@ public abstract class GRelease
             fireModified("sprintsIds", ilarkesto.core.persistance.Persistence.propertyAsString(this.sprintsIds));
         return true;
     }
-
     // -----------------------------------------------------------
     // - number
     // -----------------------------------------------------------
@@ -401,7 +641,6 @@ public abstract class GRelease
     protected final void updateNumber(Object value) {
         setNumber((Integer)value);
     }
-
     // -----------------------------------------------------------
     // - label
     // -----------------------------------------------------------
@@ -446,7 +685,6 @@ public abstract class GRelease
     protected final void updateLabel(Object value) {
         setLabel((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - note
     // -----------------------------------------------------------
@@ -489,7 +727,6 @@ public abstract class GRelease
     protected final void updateNote(Object value) {
         setNote((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - releaseDate
     // -----------------------------------------------------------
@@ -532,7 +769,6 @@ public abstract class GRelease
         value = value == null ? null : new ilarkesto.core.time.Date((String)value);
         setReleaseDate((ilarkesto.core.time.Date)value);
     }
-
     // -----------------------------------------------------------
     // - releaseTime
     // -----------------------------------------------------------
@@ -575,7 +811,6 @@ public abstract class GRelease
         value = value == null ? null : new ilarkesto.core.time.Time((String)value);
         setReleaseTime((ilarkesto.core.time.Time)value);
     }
-
     // -----------------------------------------------------------
     // - released
     // -----------------------------------------------------------
@@ -612,7 +847,6 @@ public abstract class GRelease
     protected final void updateReleased(Object value) {
         setReleased((Boolean)value);
     }
-
     // -----------------------------------------------------------
     // - releaseNotes
     // -----------------------------------------------------------
@@ -655,7 +889,6 @@ public abstract class GRelease
     protected final void updateReleaseNotes(Object value) {
         setReleaseNotes((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - scmTag
     // -----------------------------------------------------------
@@ -698,7 +931,6 @@ public abstract class GRelease
     protected final void updateScmTag(Object value) {
         setScmTag((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - scriptRunning
     // -----------------------------------------------------------
@@ -735,7 +967,6 @@ public abstract class GRelease
     protected final void updateScriptRunning(Object value) {
         setScriptRunning((Boolean)value);
     }
-
     // -----------------------------------------------------------
     // - scriptOutput
     // -----------------------------------------------------------

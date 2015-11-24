@@ -26,6 +26,96 @@ public abstract class GProjectEvent
             extends ilarkesto.persistence.AEntity
             implements ilarkesto.auth.ViewProtected<scrum.server.admin.User>, java.lang.Comparable<ProjectEvent>, ilarkesto.core.search.Searchable {
 
+    public static class ProjectEventMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata project = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "project";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectEvent)entity).getProject();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata label = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "label";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectEvent)entity).getLabel();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata subject = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "subject";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectEvent)entity).getSubject();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata dateAndTime = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "dateAndTime";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((ProjectEvent)entity).getDateAndTime();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            project
+            ,label
+            ,subject
+            ,dateAndTime
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("project".equals(fieldName)) return project;
+            if ("projectId".equals(fieldName)) return project;
+            if ("label".equals(fieldName)) return label;
+            if ("subject".equals(fieldName)) return subject;
+            if ("subjectId".equals(fieldName)) return subject;
+            if ("dateAndTime".equals(fieldName)) return dateAndTime;
+            return null;
+        }
+
+    }
+
+    public static transient final ProjectEventMetadata metadata = new ProjectEventMetadata();
+
+    @Override
+    public ProjectEventMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(ProjectEvent.class);
 
     // --- AEntity ---
@@ -88,7 +178,6 @@ public abstract class GProjectEvent
     public boolean matches(ilarkesto.core.search.SearchText search) {
          return search.matches(getLabel());
     }
-
     // -----------------------------------------------------------
     // - project
     // -----------------------------------------------------------
@@ -147,7 +236,6 @@ public abstract class GProjectEvent
     protected final void updateProject(Object value) {
         setProject(value == null ? null : (scrum.server.project.Project)projectDao.getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - label
     // -----------------------------------------------------------
@@ -192,7 +280,6 @@ public abstract class GProjectEvent
     protected final void updateLabel(Object value) {
         setLabel((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - subject
     // -----------------------------------------------------------
@@ -251,7 +338,6 @@ public abstract class GProjectEvent
     protected final void updateSubject(Object value) {
         setSubject(value == null ? null : (ilarkesto.persistence.AEntity)getDaoService().getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - dateAndTime
     // -----------------------------------------------------------

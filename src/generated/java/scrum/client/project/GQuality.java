@@ -24,6 +24,129 @@ public abstract class GQuality
             extends scrum.client.common.AScrumGwtEntity
             implements java.lang.Comparable<Quality> {
 
+    public static class QualityMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata project = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "project";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Quality)entity).getProject();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata number = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "number";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Quality)entity).getNumber();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata label = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "label";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Quality)entity).getLabel();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata description = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "description";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Quality)entity).getDescription();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata testDescription = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "testDescription";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Quality)entity).getTestDescription();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata autoAdd = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "autoAdd";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Quality)entity).isAutoAdd();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            project
+            ,number
+            ,label
+            ,description
+            ,testDescription
+            ,autoAdd
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("project".equals(fieldName)) return project;
+            if ("projectId".equals(fieldName)) return project;
+            if ("number".equals(fieldName)) return number;
+            if ("label".equals(fieldName)) return label;
+            if ("description".equals(fieldName)) return description;
+            if ("testDescription".equals(fieldName)) return testDescription;
+            if ("autoAdd".equals(fieldName)) return autoAdd;
+            return null;
+        }
+
+    }
+
+    public static transient final QualityMetadata metadata = new QualityMetadata();
+
+    @Override
+    public QualityMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(Quality.class);
 
     private static transient ilarkesto.core.persistance.AEntitySetBackReferenceHelper<Quality> projectBackReferencesCache = new ilarkesto.core.persistance.AEntitySetBackReferenceHelper<Quality>() {
@@ -213,7 +336,6 @@ public abstract class GQuality
     public boolean matches(ilarkesto.core.search.SearchText search) {
          return search.matches(getLabel(), getDescription(), getTestDescription());
     }
-
     // -----------------------------------------------------------
     // - project
     // -----------------------------------------------------------
@@ -275,7 +397,6 @@ public abstract class GQuality
         return project != null && project.getId().equals(this.projectId);
     }
 
-
     // -----------------------------------------------------------
     // - number
     // -----------------------------------------------------------
@@ -312,7 +433,6 @@ public abstract class GQuality
     protected final void updateNumber(Object value) {
         setNumber((Integer)value);
     }
-
     // -----------------------------------------------------------
     // - label
     // -----------------------------------------------------------
@@ -355,7 +475,6 @@ public abstract class GQuality
     protected final void updateLabel(Object value) {
         setLabel((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - description
     // -----------------------------------------------------------
@@ -398,7 +517,6 @@ public abstract class GQuality
     protected final void updateDescription(Object value) {
         setDescription((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - testDescription
     // -----------------------------------------------------------
@@ -441,7 +559,6 @@ public abstract class GQuality
     protected final void updateTestDescription(Object value) {
         setTestDescription((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - autoAdd
     // -----------------------------------------------------------

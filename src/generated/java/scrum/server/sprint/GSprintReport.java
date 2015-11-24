@@ -26,6 +26,150 @@ public abstract class GSprintReport
             extends ilarkesto.persistence.AEntity
             implements ilarkesto.auth.ViewProtected<scrum.server.admin.User>, java.lang.Comparable<SprintReport> {
 
+    public static class SprintReportMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata sprint = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "sprint";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SprintReport)entity).getSprint();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata completedRequirements = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "completedRequirements";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SprintReport)entity).getCompletedRequirements();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata rejectedRequirements = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "rejectedRequirements";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SprintReport)entity).getRejectedRequirements();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata requirementsOrderIds = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "requirementsOrderIds";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SprintReport)entity).getRequirementsOrderIds();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata closedTasks = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "closedTasks";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SprintReport)entity).getClosedTasks();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata openTasks = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "openTasks";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SprintReport)entity).getOpenTasks();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata burnedWork = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "burnedWork";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SprintReport)entity).getBurnedWork();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            sprint
+            ,completedRequirements
+            ,rejectedRequirements
+            ,requirementsOrderIds
+            ,closedTasks
+            ,openTasks
+            ,burnedWork
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("sprint".equals(fieldName)) return sprint;
+            if ("sprintId".equals(fieldName)) return sprint;
+            if ("completedRequirements".equals(fieldName)) return completedRequirements;
+            if ("completedRequirementsIds".equals(fieldName)) return completedRequirements;
+            if ("rejectedRequirements".equals(fieldName)) return rejectedRequirements;
+            if ("rejectedRequirementsIds".equals(fieldName)) return rejectedRequirements;
+            if ("requirementsOrderIds".equals(fieldName)) return requirementsOrderIds;
+            if ("closedTasks".equals(fieldName)) return closedTasks;
+            if ("closedTasksIds".equals(fieldName)) return closedTasks;
+            if ("openTasks".equals(fieldName)) return openTasks;
+            if ("openTasksIds".equals(fieldName)) return openTasks;
+            if ("burnedWork".equals(fieldName)) return burnedWork;
+            return null;
+        }
+
+    }
+
+    public static transient final SprintReportMetadata metadata = new SprintReportMetadata();
+
+    @Override
+    public SprintReportMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(SprintReport.class);
 
     // --- AEntity ---
@@ -92,7 +236,6 @@ public abstract class GSprintReport
     private static final ilarkesto.core.logging.Log LOG = ilarkesto.core.logging.Log.get(GSprintReport.class);
 
     public static final String TYPE = "SprintReport";
-
     // -----------------------------------------------------------
     // - sprint
     // -----------------------------------------------------------
@@ -151,7 +294,6 @@ public abstract class GSprintReport
     protected final void updateSprint(Object value) {
         setSprint(value == null ? null : (scrum.server.sprint.Sprint)sprintDao.getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - completedRequirements
     // -----------------------------------------------------------
@@ -276,7 +418,6 @@ public abstract class GSprintReport
             fireModified("completedRequirementsIds", ilarkesto.core.persistance.Persistence.propertyAsString(this.completedRequirementsIds));
         return true;
     }
-
     // -----------------------------------------------------------
     // - rejectedRequirements
     // -----------------------------------------------------------
@@ -401,7 +542,6 @@ public abstract class GSprintReport
             fireModified("rejectedRequirementsIds", ilarkesto.core.persistance.Persistence.propertyAsString(this.rejectedRequirementsIds));
         return true;
     }
-
     // -----------------------------------------------------------
     // - requirementsOrderIds
     // -----------------------------------------------------------
@@ -518,7 +658,6 @@ public abstract class GSprintReport
     public final void setRequirementsOrderIdsAsCommaSeparatedString(String requirementsOrderIds) {
         setRequirementsOrderIds(Str.parseCommaSeparatedString(requirementsOrderIds));
     }
-
     // -----------------------------------------------------------
     // - closedTasks
     // -----------------------------------------------------------
@@ -643,7 +782,6 @@ public abstract class GSprintReport
             fireModified("closedTasksIds", ilarkesto.core.persistance.Persistence.propertyAsString(this.closedTasksIds));
         return true;
     }
-
     // -----------------------------------------------------------
     // - openTasks
     // -----------------------------------------------------------
@@ -768,7 +906,6 @@ public abstract class GSprintReport
             fireModified("openTasksIds", ilarkesto.core.persistance.Persistence.propertyAsString(this.openTasksIds));
         return true;
     }
-
     // -----------------------------------------------------------
     // - burnedWork
     // -----------------------------------------------------------

@@ -26,6 +26,112 @@ public abstract class GSprintDaySnapshot
             extends ilarkesto.persistence.AEntity
             implements ilarkesto.auth.ViewProtected<scrum.server.admin.User>, java.lang.Comparable<SprintDaySnapshot> {
 
+    public static class SprintDaySnapshotMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata sprint = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "sprint";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SprintDaySnapshot)entity).getSprint();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata date = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "date";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SprintDaySnapshot)entity).getDate();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata remainingWork = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "remainingWork";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SprintDaySnapshot)entity).getRemainingWork();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata burnedWork = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "burnedWork";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SprintDaySnapshot)entity).getBurnedWork();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata burnedWorkFromDeleted = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "burnedWorkFromDeleted";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((SprintDaySnapshot)entity).getBurnedWorkFromDeleted();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            sprint
+            ,date
+            ,remainingWork
+            ,burnedWork
+            ,burnedWorkFromDeleted
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("sprint".equals(fieldName)) return sprint;
+            if ("sprintId".equals(fieldName)) return sprint;
+            if ("date".equals(fieldName)) return date;
+            if ("remainingWork".equals(fieldName)) return remainingWork;
+            if ("burnedWork".equals(fieldName)) return burnedWork;
+            if ("burnedWorkFromDeleted".equals(fieldName)) return burnedWorkFromDeleted;
+            return null;
+        }
+
+    }
+
+    public static transient final SprintDaySnapshotMetadata metadata = new SprintDaySnapshotMetadata();
+
+    @Override
+    public SprintDaySnapshotMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(SprintDaySnapshot.class);
 
     // --- AEntity ---
@@ -78,7 +184,6 @@ public abstract class GSprintDaySnapshot
     private static final ilarkesto.core.logging.Log LOG = ilarkesto.core.logging.Log.get(GSprintDaySnapshot.class);
 
     public static final String TYPE = "SprintDaySnapshot";
-
     // -----------------------------------------------------------
     // - sprint
     // -----------------------------------------------------------
@@ -137,7 +242,6 @@ public abstract class GSprintDaySnapshot
     protected final void updateSprint(Object value) {
         setSprint(value == null ? null : (scrum.server.sprint.Sprint)sprintDao.getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - date
     // -----------------------------------------------------------
@@ -180,7 +284,6 @@ public abstract class GSprintDaySnapshot
         value = value == null ? null : new ilarkesto.core.time.Date((String)value);
         setDate((ilarkesto.core.time.Date)value);
     }
-
     // -----------------------------------------------------------
     // - remainingWork
     // -----------------------------------------------------------
@@ -217,7 +320,6 @@ public abstract class GSprintDaySnapshot
     protected final void updateRemainingWork(Object value) {
         setRemainingWork((Integer)value);
     }
-
     // -----------------------------------------------------------
     // - burnedWork
     // -----------------------------------------------------------
@@ -254,7 +356,6 @@ public abstract class GSprintDaySnapshot
     protected final void updateBurnedWork(Object value) {
         setBurnedWork((Integer)value);
     }
-
     // -----------------------------------------------------------
     // - burnedWorkFromDeleted
     // -----------------------------------------------------------

@@ -26,6 +26,319 @@ public abstract class GSprint
             extends ilarkesto.persistence.AEntity
             implements ilarkesto.auth.ViewProtected<scrum.server.admin.User>, java.lang.Comparable<Sprint>, ilarkesto.core.search.Searchable {
 
+    public static class SprintMetadata implements ilarkesto.core.persistance.meta.EntityMetadata {
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata number = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "number";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getNumber();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata project = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "project";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getProject();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata label = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "label";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getLabel();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata goal = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "goal";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getGoal();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata begin = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "begin";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getBegin();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata end = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "end";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getEnd();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata originallyEnd = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "originallyEnd";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getOriginallyEnd();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata velocity = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "velocity";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getVelocity();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata completedRequirementsData = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "completedRequirementsData";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getCompletedRequirementsData();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata incompletedRequirementsData = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "incompletedRequirementsData";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getIncompletedRequirementsData();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata planningNote = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "planningNote";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getPlanningNote();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata reviewNote = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "reviewNote";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getReviewNote();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata retrospectiveNote = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "retrospectiveNote";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getRetrospectiveNote();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata requirementsOrderIds = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "requirementsOrderIds";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getRequirementsOrderIds();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata productOwners = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "productOwners";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getProductOwners();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata scrumMasters = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "scrumMasters";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getScrumMasters();
+            }
+
+        };
+
+        public static transient final ilarkesto.core.persistance.meta.EntityFieldMetadata teamMembers = new ilarkesto.core.persistance.meta.EntityFieldMetadata() {
+
+            public static final String name = "teamMembers";
+            public static final String label = "null";
+
+            public String getName() { return name; };
+
+            public String getLabel() { return label; };
+
+            public Object getValue(ilarkesto.core.persistance.Entity entity) {
+                return ((Sprint)entity).getTeamMembers();
+            }
+
+        };
+
+        public static transient ilarkesto.core.persistance.meta.EntityFieldMetadata[] fields = new ilarkesto.core.persistance.meta.EntityFieldMetadata[] {
+            number
+            ,project
+            ,label
+            ,goal
+            ,begin
+            ,end
+            ,originallyEnd
+            ,velocity
+            ,completedRequirementsData
+            ,incompletedRequirementsData
+            ,planningNote
+            ,reviewNote
+            ,retrospectiveNote
+            ,requirementsOrderIds
+            ,productOwners
+            ,scrumMasters
+            ,teamMembers
+        };
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata[] getFields() {
+            return fields;
+        }
+
+        public ilarkesto.core.persistance.meta.EntityFieldMetadata getField(String fieldName) {
+            if ("number".equals(fieldName)) return number;
+            if ("project".equals(fieldName)) return project;
+            if ("projectId".equals(fieldName)) return project;
+            if ("label".equals(fieldName)) return label;
+            if ("goal".equals(fieldName)) return goal;
+            if ("begin".equals(fieldName)) return begin;
+            if ("end".equals(fieldName)) return end;
+            if ("originallyEnd".equals(fieldName)) return originallyEnd;
+            if ("velocity".equals(fieldName)) return velocity;
+            if ("completedRequirementsData".equals(fieldName)) return completedRequirementsData;
+            if ("incompletedRequirementsData".equals(fieldName)) return incompletedRequirementsData;
+            if ("planningNote".equals(fieldName)) return planningNote;
+            if ("reviewNote".equals(fieldName)) return reviewNote;
+            if ("retrospectiveNote".equals(fieldName)) return retrospectiveNote;
+            if ("requirementsOrderIds".equals(fieldName)) return requirementsOrderIds;
+            if ("productOwners".equals(fieldName)) return productOwners;
+            if ("productOwnersIds".equals(fieldName)) return productOwners;
+            if ("scrumMasters".equals(fieldName)) return scrumMasters;
+            if ("scrumMastersIds".equals(fieldName)) return scrumMasters;
+            if ("teamMembers".equals(fieldName)) return teamMembers;
+            if ("teamMembersIds".equals(fieldName)) return teamMembers;
+            return null;
+        }
+
+    }
+
+    public static transient final SprintMetadata metadata = new SprintMetadata();
+
+    @Override
+    public SprintMetadata getMetadata() { return metadata; };
+
     protected static final ilarkesto.core.logging.Log log = ilarkesto.core.logging.Log.get(Sprint.class);
 
     // --- AEntity ---
@@ -150,7 +463,6 @@ public abstract class GSprint
     public boolean matches(ilarkesto.core.search.SearchText search) {
          return search.matches(getLabel(), getGoal(), getPlanningNote(), getReviewNote(), getRetrospectiveNote());
     }
-
     // -----------------------------------------------------------
     // - number
     // -----------------------------------------------------------
@@ -187,7 +499,6 @@ public abstract class GSprint
     protected final void updateNumber(Object value) {
         setNumber((Integer)value);
     }
-
     // -----------------------------------------------------------
     // - project
     // -----------------------------------------------------------
@@ -246,7 +557,6 @@ public abstract class GSprint
     protected final void updateProject(Object value) {
         setProject(value == null ? null : (scrum.server.project.Project)projectDao.getById((String)value));
     }
-
     // -----------------------------------------------------------
     // - label
     // -----------------------------------------------------------
@@ -289,7 +599,6 @@ public abstract class GSprint
     protected final void updateLabel(Object value) {
         setLabel((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - goal
     // -----------------------------------------------------------
@@ -334,7 +643,6 @@ public abstract class GSprint
     protected final void updateGoal(Object value) {
         setGoal((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - begin
     // -----------------------------------------------------------
@@ -377,7 +685,6 @@ public abstract class GSprint
         value = value == null ? null : new ilarkesto.core.time.Date((String)value);
         setBegin((ilarkesto.core.time.Date)value);
     }
-
     // -----------------------------------------------------------
     // - end
     // -----------------------------------------------------------
@@ -420,7 +727,6 @@ public abstract class GSprint
         value = value == null ? null : new ilarkesto.core.time.Date((String)value);
         setEnd((ilarkesto.core.time.Date)value);
     }
-
     // -----------------------------------------------------------
     // - originallyEnd
     // -----------------------------------------------------------
@@ -463,7 +769,6 @@ public abstract class GSprint
         value = value == null ? null : new ilarkesto.core.time.Date((String)value);
         setOriginallyEnd((ilarkesto.core.time.Date)value);
     }
-
     // -----------------------------------------------------------
     // - velocity
     // -----------------------------------------------------------
@@ -505,7 +810,6 @@ public abstract class GSprint
     protected final void updateVelocity(Object value) {
         setVelocity((java.lang.Float)value);
     }
-
     // -----------------------------------------------------------
     // - completedRequirementsData
     // -----------------------------------------------------------
@@ -548,7 +852,6 @@ public abstract class GSprint
     protected final void updateCompletedRequirementsData(Object value) {
         setCompletedRequirementsData((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - incompletedRequirementsData
     // -----------------------------------------------------------
@@ -591,7 +894,6 @@ public abstract class GSprint
     protected final void updateIncompletedRequirementsData(Object value) {
         setIncompletedRequirementsData((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - planningNote
     // -----------------------------------------------------------
@@ -636,7 +938,6 @@ public abstract class GSprint
     protected final void updatePlanningNote(Object value) {
         setPlanningNote((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - reviewNote
     // -----------------------------------------------------------
@@ -681,7 +982,6 @@ public abstract class GSprint
     protected final void updateReviewNote(Object value) {
         setReviewNote((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - retrospectiveNote
     // -----------------------------------------------------------
@@ -726,7 +1026,6 @@ public abstract class GSprint
     protected final void updateRetrospectiveNote(Object value) {
         setRetrospectiveNote((java.lang.String)value);
     }
-
     // -----------------------------------------------------------
     // - requirementsOrderIds
     // -----------------------------------------------------------
@@ -843,7 +1142,6 @@ public abstract class GSprint
     public final void setRequirementsOrderIdsAsCommaSeparatedString(String requirementsOrderIds) {
         setRequirementsOrderIds(Str.parseCommaSeparatedString(requirementsOrderIds));
     }
-
     // -----------------------------------------------------------
     // - productOwners
     // -----------------------------------------------------------
@@ -968,7 +1266,6 @@ public abstract class GSprint
             fireModified("productOwnersIds", ilarkesto.core.persistance.Persistence.propertyAsString(this.productOwnersIds));
         return true;
     }
-
     // -----------------------------------------------------------
     // - scrumMasters
     // -----------------------------------------------------------
@@ -1093,7 +1390,6 @@ public abstract class GSprint
             fireModified("scrumMastersIds", ilarkesto.core.persistance.Persistence.propertyAsString(this.scrumMastersIds));
         return true;
     }
-
     // -----------------------------------------------------------
     // - teamMembers
     // -----------------------------------------------------------
