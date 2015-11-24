@@ -57,9 +57,6 @@
         <dependent-module archiveName="commons-logging-1.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/ilarkesto/lib/commons-logging-1.2.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="httpclient-4.5.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/ilarkesto/lib/httpclient-4.5.jar">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="velocity-1.7.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/ilarkesto/lib/velocity-1.7.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>

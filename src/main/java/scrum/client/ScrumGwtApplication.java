@@ -1,14 +1,14 @@
 /*
  * Copyright 2011 Witoslaw Koczewsi <wi@koczewski.de>, Artjom Kochtchi
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero
  * General Public License as published by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
  * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public
  * License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
@@ -22,6 +22,7 @@ import ilarkesto.core.scope.Scope;
 import ilarkesto.gwt.client.AGwtApplication;
 import ilarkesto.gwt.client.AGwtEntity;
 import ilarkesto.gwt.client.ErrorWrapper;
+import ilarkesto.gwt.client.desktop.AActivityCatalog;
 import ilarkesto.gwt.client.persistence.AGwtEntityFactory;
 
 import java.util.ArrayList;
@@ -68,9 +69,9 @@ public class ScrumGwtApplication extends AGwtApplication<DataTransferObject> {
 	public static final String LOGIN_TOKEN_COOKIE = "kunagiLoginToken";
 
 	public static final String[] REFERENCE_PREFIXES = new String[] { Requirement.REFERENCE_PREFIX,
-			Task.REFERENCE_PREFIX, Quality.REFERENCE_PREFIX, Issue.REFERENCE_PREFIX, Impediment.REFERENCE_PREFIX,
-			Risk.REFERENCE_PREFIX, File.REFERENCE_PREFIX, Subject.REFERENCE_PREFIX, SimpleEvent.REFERENCE_PREFIX,
-			Release.REFERENCE_PREFIX, BlogEntry.REFERENCE_PREFIX, Sprint.REFERENCE_PREFIX };
+		Task.REFERENCE_PREFIX, Quality.REFERENCE_PREFIX, Issue.REFERENCE_PREFIX, Impediment.REFERENCE_PREFIX,
+		Risk.REFERENCE_PREFIX, File.REFERENCE_PREFIX, Subject.REFERENCE_PREFIX, SimpleEvent.REFERENCE_PREFIX,
+		Release.REFERENCE_PREFIX, BlogEntry.REFERENCE_PREFIX, Sprint.REFERENCE_PREFIX };
 
 	private final Log log = Log.get(getClass());
 
@@ -113,6 +114,11 @@ public class ScrumGwtApplication extends AGwtApplication<DataTransferObject> {
 	@Override
 	public String getTokenForEntityActivity(Entity entity) {
 		return Navigator.getEntityHistoryToken((AGwtEntity) entity);
+	}
+
+	@Override
+	public AActivityCatalog createActivityCatalog() {
+		return null;
 	}
 
 	@Override
