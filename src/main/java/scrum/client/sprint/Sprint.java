@@ -240,8 +240,10 @@ public class Sprint extends GSprint implements ForumSupport, ReferenceSupport, L
 
 	@Override
 	public boolean isEditable() {
-		if (isCompleted()) return false;
-		if (!getProject().isProductOwner(Scope.get().getComponent(Auth.class).getUser())) return false;
+		Project project = getProject();
+		User currentUser = Scope.get().getComponent(Auth.class).getUser();
+		if (isCompleted() && !project.isAdmin(currentUser)) return false;
+		if (!project.isProductOwner(currentUser)) return false;
 		return true;
 	}
 
