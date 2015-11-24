@@ -1,14 +1,14 @@
 /*
  * Copyright 2011 Witoslaw Koczewsi <wi@koczewski.de>, Artjom Kochtchi
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero
  * General Public License as published by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
  * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public
  * License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
@@ -51,6 +51,7 @@ import scrum.server.issues.Issue;
 import scrum.server.pr.BlogEntry;
 import scrum.server.release.Release;
 import scrum.server.sprint.Sprint;
+import scrum.server.sprint.SprintReport;
 
 public class HomepageUpdater {
 
@@ -329,7 +330,7 @@ public class HomepageUpdater {
 		}
 		context.put("date", Tm.FORMAT_WEEKDAY_LONGMONTH_DAY_YEAR_HOUR_MINUTE.format(comment.getDateAndTime()));
 		context.put("dateDe", new SimpleDateFormat("EEE, d. MMMMM yyyy, HH:mm", Locale.GERMANY).format(comment
-				.getDateAndTime().toJavaDate()));
+			.getDateAndTime().toJavaDate()));
 	}
 
 	private void fillRelease(ContextBuilder context, Release release) {
@@ -379,8 +380,20 @@ public class HomepageUpdater {
 			context.put("endDe", sprint.getEnd().formatDayMonthYear());
 		}
 
-		for (Requirement requirement : Utl.sort(sprint.getRequirements(), sprint.getRequirementsOrderComparator())) {
-			fillStory(context.addSubContext("stories"), requirement);
+		SprintReport report = sprint.getSprintReport();
+		if (sprint.isCompleted() && report != null) {
+			for (Requirement requirement : Utl.sort(report.getCompletedRequirements(),
+				sprint.getRequirementsOrderComparator())) {
+				fillStory(context.addSubContext("completedStories"), requirement);
+			}
+			for (Requirement requirement : Utl.sort(report.getRejectedRequirements(),
+				sprint.getRequirementsOrderComparator())) {
+				fillStory(context.addSubContext("rejectedStories"), requirement);
+			}
+		} else {
+			for (Requirement requirement : Utl.sort(sprint.getRequirements(), sprint.getRequirementsOrderComparator())) {
+				fillStory(context.addSubContext("stories"), requirement);
+			}
 		}
 
 		fillComments(context, sprint);
