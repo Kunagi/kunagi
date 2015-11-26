@@ -17,6 +17,7 @@ package scrum.server;
 import ilarkesto.auth.Auth;
 import ilarkesto.core.logging.Log;
 import ilarkesto.core.persistance.Entity;
+import ilarkesto.core.persistance.TransferBus;
 import ilarkesto.core.time.TimePeriod;
 import ilarkesto.gwt.server.AGwtConversation;
 import ilarkesto.persistence.AEntity;
@@ -26,7 +27,6 @@ import scrum.client.communication.Pinger;
 import scrum.server.admin.ProjectUserConfig;
 import scrum.server.admin.SystemConfig;
 import scrum.server.admin.User;
-import scrum.server.collaboration.Emoticon;
 import scrum.server.collaboration.EmoticonDao;
 import scrum.server.project.Project;
 
@@ -85,11 +85,9 @@ public class GwtConversation extends AGwtConversation<WebSession> {
 	}
 
 	@Override
-	public synchronized void sendToClient(Entity entity) {
-		super.sendToClient(entity);
-		for (Emoticon emoticon : emoticonDao.getEmoticonsByParent((AEntity) entity)) {
-			super.sendToClient(emoticon);
-		}
+	protected void loadTransferBus(Entity entity, TransferBus transferBus) {
+		super.loadTransferBus(entity, transferBus);
+		transferBus.add(emoticonDao.getEmoticonsByParent((AEntity) entity));
 	}
 
 	@Override
