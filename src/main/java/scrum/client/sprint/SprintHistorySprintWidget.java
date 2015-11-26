@@ -35,6 +35,7 @@ public class SprintHistorySprintWidget extends AScrumWidget {
 	private BlockListWidget<Requirement> requirementList;
 	private ChangeIndicator changeIndicator = new ChangeIndicator();
 	private SimplePanel wrapper;
+	private boolean uiCreated;
 
 	public SprintHistorySprintWidget(Sprint sprint) {
 		super();
@@ -58,17 +59,21 @@ public class SprintHistorySprintWidget extends AScrumWidget {
 	protected void onUpdate() {
 		if (!sprint.historyLoaded) return;
 
-		SprintReport report = sprint.getSprintReport();
-		if (report != null) {
-			requirementList.setAutoSorter(report.getRequirementsOrderComparator());
-			Set<Requirement> allRequirements = report.getAllRequirements();
-			if (changeIndicator.update(allRequirements)) {
-				requirementList.setObjects(allRequirements);
+		if (!uiCreated) {
+			SprintReport report = sprint.getSprintReport();
+			if (report != null) {
+				requirementList.setAutoSorter(report.getRequirementsOrderComparator());
+				Set<Requirement> allRequirements = report.getAllRequirements();
+				if (changeIndicator.update(allRequirements)) {
+					requirementList.setObjects(allRequirements);
+				}
 			}
-		}
 
-		HTML pdfLink = ScrumGwt.createPdfLink("Download Report as PDF", "sprintReport", sprint);
-		wrapper.setWidget(Gwt.createFlowPanel(new SprintWidget(sprint), requirementList, pdfLink));
+			HTML pdfLink = ScrumGwt.createPdfLink("Download Report as PDF", "sprintReport", sprint);
+			wrapper.setWidget(Gwt.createFlowPanel(new SprintWidget(sprint), requirementList, pdfLink));
+
+			uiCreated = true;
+		}
 
 		super.onUpdate();
 	}
