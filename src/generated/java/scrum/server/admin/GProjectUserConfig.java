@@ -548,7 +548,7 @@ public abstract class GProjectUserConfig
     }
 
     protected java.lang.String prepareColor(java.lang.String color) {
-        // color = Str.removeUnreadableChars(color);
+         color = Str.removeControlChars(color);
         return color;
     }
 
@@ -662,7 +662,7 @@ public abstract class GProjectUserConfig
     }
 
     protected java.lang.String prepareRichtextAutosaveText(java.lang.String richtextAutosaveText) {
-        // richtextAutosaveText = Str.removeUnreadableChars(richtextAutosaveText);
+         richtextAutosaveText = Str.removeControlChars(richtextAutosaveText);
         return richtextAutosaveText;
     }
 
@@ -704,7 +704,7 @@ public abstract class GProjectUserConfig
     }
 
     protected java.lang.String prepareRichtextAutosaveField(java.lang.String richtextAutosaveField) {
-        // richtextAutosaveField = Str.removeUnreadableChars(richtextAutosaveField);
+         richtextAutosaveField = Str.removeControlChars(richtextAutosaveField);
         return richtextAutosaveField;
     }
 
@@ -1323,7 +1323,7 @@ public abstract class GProjectUserConfig
     }
 
     protected java.lang.String preparePblFilterText(java.lang.String pblFilterText) {
-        // pblFilterText = Str.removeUnreadableChars(pblFilterText);
+         pblFilterText = Str.removeControlChars(pblFilterText);
         return pblFilterText;
     }
 

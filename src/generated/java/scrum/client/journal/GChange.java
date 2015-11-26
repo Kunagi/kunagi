@@ -517,7 +517,7 @@ public abstract class GChange
     }
 
     protected java.lang.String prepareKey(java.lang.String key) {
-        // key = Str.removeUnreadableChars(key);
+         key = Str.removeControlChars(key);
         return key;
     }
 
@@ -559,7 +559,7 @@ public abstract class GChange
     }
 
     protected java.lang.String prepareOldValue(java.lang.String oldValue) {
-        // oldValue = Str.removeUnreadableChars(oldValue);
+         oldValue = Str.removeControlChars(oldValue);
         return oldValue;
     }
 
@@ -601,7 +601,7 @@ public abstract class GChange
     }
 
     protected java.lang.String prepareNewValue(java.lang.String newValue) {
-        // newValue = Str.removeUnreadableChars(newValue);
+         newValue = Str.removeControlChars(newValue);
         return newValue;
     }
 
@@ -643,7 +643,7 @@ public abstract class GChange
     }
 
     protected java.lang.String prepareComment(java.lang.String comment) {
-        // comment = Str.removeUnreadableChars(comment);
+         comment = Str.removeControlChars(comment);
         return comment;
     }
 

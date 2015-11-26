@@ -997,7 +997,7 @@ public abstract class GSprint
     }
 
     protected java.lang.String prepareLabel(java.lang.String label) {
-        // label = Str.removeUnreadableChars(label);
+         label = Str.removeControlChars(label);
         return label;
     }
 
@@ -1041,7 +1041,7 @@ public abstract class GSprint
     }
 
     protected java.lang.String prepareGoal(java.lang.String goal) {
-        // goal = Str.removeUnreadableChars(goal);
+         goal = Str.removeControlChars(goal);
         return goal;
     }
 
@@ -1250,7 +1250,7 @@ public abstract class GSprint
     }
 
     protected java.lang.String prepareCompletedRequirementsData(java.lang.String completedRequirementsData) {
-        // completedRequirementsData = Str.removeUnreadableChars(completedRequirementsData);
+         completedRequirementsData = Str.removeControlChars(completedRequirementsData);
         return completedRequirementsData;
     }
 
@@ -1292,7 +1292,7 @@ public abstract class GSprint
     }
 
     protected java.lang.String prepareIncompletedRequirementsData(java.lang.String incompletedRequirementsData) {
-        // incompletedRequirementsData = Str.removeUnreadableChars(incompletedRequirementsData);
+         incompletedRequirementsData = Str.removeControlChars(incompletedRequirementsData);
         return incompletedRequirementsData;
     }
 
@@ -1336,7 +1336,7 @@ public abstract class GSprint
     }
 
     protected java.lang.String preparePlanningNote(java.lang.String planningNote) {
-        // planningNote = Str.removeUnreadableChars(planningNote);
+         planningNote = Str.removeControlChars(planningNote);
         return planningNote;
     }
 
@@ -1380,7 +1380,7 @@ public abstract class GSprint
     }
 
     protected java.lang.String prepareReviewNote(java.lang.String reviewNote) {
-        // reviewNote = Str.removeUnreadableChars(reviewNote);
+         reviewNote = Str.removeControlChars(reviewNote);
         return reviewNote;
     }
 
@@ -1424,7 +1424,7 @@ public abstract class GSprint
     }
 
     protected java.lang.String prepareRetrospectiveNote(java.lang.String retrospectiveNote) {
-        // retrospectiveNote = Str.removeUnreadableChars(retrospectiveNote);
+         retrospectiveNote = Str.removeControlChars(retrospectiveNote);
         return retrospectiveNote;
     }
 

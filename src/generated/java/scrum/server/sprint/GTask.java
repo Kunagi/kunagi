@@ -407,7 +407,7 @@ public abstract class GTask
     }
 
     protected java.lang.String prepareLabel(java.lang.String label) {
-        // label = Str.removeUnreadableChars(label);
+         label = Str.removeControlChars(label);
         return label;
     }
 
@@ -449,7 +449,7 @@ public abstract class GTask
     }
 
     protected java.lang.String prepareDescription(java.lang.String description) {
-        // description = Str.removeUnreadableChars(description);
+         description = Str.removeControlChars(description);
         return description;
     }
 

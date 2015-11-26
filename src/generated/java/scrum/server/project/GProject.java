@@ -1043,7 +1043,7 @@ public abstract class GProject
     }
 
     protected java.lang.String prepareLabel(java.lang.String label) {
-        // label = Str.removeUnreadableChars(label);
+         label = Str.removeControlChars(label);
         return label;
     }
 
@@ -1085,7 +1085,7 @@ public abstract class GProject
     }
 
     protected java.lang.String prepareVision(java.lang.String vision) {
-        // vision = Str.removeUnreadableChars(vision);
+         vision = Str.removeControlChars(vision);
         return vision;
     }
 
@@ -1127,7 +1127,7 @@ public abstract class GProject
     }
 
     protected java.lang.String prepareProductLabel(java.lang.String productLabel) {
-        // productLabel = Str.removeUnreadableChars(productLabel);
+         productLabel = Str.removeControlChars(productLabel);
         return productLabel;
     }
 
@@ -1169,7 +1169,7 @@ public abstract class GProject
     }
 
     protected java.lang.String prepareShortDescription(java.lang.String shortDescription) {
-        // shortDescription = Str.removeUnreadableChars(shortDescription);
+         shortDescription = Str.removeControlChars(shortDescription);
         return shortDescription;
     }
 
@@ -1211,7 +1211,7 @@ public abstract class GProject
     }
 
     protected java.lang.String prepareDescription(java.lang.String description) {
-        // description = Str.removeUnreadableChars(description);
+         description = Str.removeControlChars(description);
         return description;
     }
 
@@ -1253,7 +1253,7 @@ public abstract class GProject
     }
 
     protected java.lang.String prepareLongDescription(java.lang.String longDescription) {
-        // longDescription = Str.removeUnreadableChars(longDescription);
+         longDescription = Str.removeControlChars(longDescription);
         return longDescription;
     }
 
@@ -2820,7 +2820,7 @@ public abstract class GProject
     }
 
     protected java.lang.String preparePunishmentUnit(java.lang.String punishmentUnit) {
-        // punishmentUnit = Str.removeUnreadableChars(punishmentUnit);
+         punishmentUnit = Str.removeControlChars(punishmentUnit);
         return punishmentUnit;
     }
 
@@ -2898,7 +2898,7 @@ public abstract class GProject
     }
 
     protected java.lang.String prepareHomepageDir(java.lang.String homepageDir) {
-        // homepageDir = Str.removeUnreadableChars(homepageDir);
+         homepageDir = Str.removeControlChars(homepageDir);
         return homepageDir;
     }
 
@@ -2940,7 +2940,7 @@ public abstract class GProject
     }
 
     protected java.lang.String prepareHomepageUrl(java.lang.String homepageUrl) {
-        // homepageUrl = Str.removeUnreadableChars(homepageUrl);
+         homepageUrl = Str.removeControlChars(homepageUrl);
         return homepageUrl;
     }
 
@@ -3018,7 +3018,7 @@ public abstract class GProject
     }
 
     protected java.lang.String prepareReleaseScriptPath(java.lang.String releaseScriptPath) {
-        // releaseScriptPath = Str.removeUnreadableChars(releaseScriptPath);
+         releaseScriptPath = Str.removeControlChars(releaseScriptPath);
         return releaseScriptPath;
     }
 
@@ -3060,7 +3060,7 @@ public abstract class GProject
     }
 
     protected java.lang.String prepareSupportEmail(java.lang.String supportEmail) {
-        // supportEmail = Str.removeUnreadableChars(supportEmail);
+         supportEmail = Str.removeControlChars(supportEmail);
         return supportEmail;
     }
 
@@ -3102,7 +3102,7 @@ public abstract class GProject
     }
 
     protected java.lang.String prepareIssueReplyTemplate(java.lang.String issueReplyTemplate) {
-        // issueReplyTemplate = Str.removeUnreadableChars(issueReplyTemplate);
+         issueReplyTemplate = Str.removeControlChars(issueReplyTemplate);
         return issueReplyTemplate;
     }
 
@@ -3144,7 +3144,7 @@ public abstract class GProject
     }
 
     protected java.lang.String prepareSubscriberNotificationTemplate(java.lang.String subscriberNotificationTemplate) {
-        // subscriberNotificationTemplate = Str.removeUnreadableChars(subscriberNotificationTemplate);
+         subscriberNotificationTemplate = Str.removeControlChars(subscriberNotificationTemplate);
         return subscriberNotificationTemplate;
     }
 
@@ -3300,7 +3300,7 @@ public abstract class GProject
     }
 
     protected java.lang.String prepareReleasingInfo(java.lang.String releasingInfo) {
-        // releasingInfo = Str.removeUnreadableChars(releasingInfo);
+         releasingInfo = Str.removeControlChars(releasingInfo);
         return releasingInfo;
     }
 
@@ -3342,7 +3342,7 @@ public abstract class GProject
     }
 
     protected java.lang.String prepareExternalTrackerUrlTemplate(java.lang.String externalTrackerUrlTemplate) {
-        // externalTrackerUrlTemplate = Str.removeUnreadableChars(externalTrackerUrlTemplate);
+         externalTrackerUrlTemplate = Str.removeControlChars(externalTrackerUrlTemplate);
         return externalTrackerUrlTemplate;
     }
 
@@ -3384,7 +3384,7 @@ public abstract class GProject
     }
 
     protected java.lang.String prepareExternalTrackerLabel(java.lang.String externalTrackerLabel) {
-        // externalTrackerLabel = Str.removeUnreadableChars(externalTrackerLabel);
+         externalTrackerLabel = Str.removeControlChars(externalTrackerLabel);
         return externalTrackerLabel;
     }
 

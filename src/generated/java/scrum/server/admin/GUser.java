@@ -774,7 +774,7 @@ public abstract class GUser
     }
 
     protected java.lang.String prepareName(java.lang.String name) {
-        // name = Str.removeUnreadableChars(name);
+         name = Str.removeControlChars(name);
         return name;
     }
 
@@ -816,7 +816,7 @@ public abstract class GUser
     }
 
     protected java.lang.String preparePassword(java.lang.String password) {
-        // password = Str.removeUnreadableChars(password);
+         password = Str.removeControlChars(password);
         return password;
     }
 
@@ -858,7 +858,7 @@ public abstract class GUser
     }
 
     protected java.lang.String preparePasswordSalt(java.lang.String passwordSalt) {
-        // passwordSalt = Str.removeUnreadableChars(passwordSalt);
+         passwordSalt = Str.removeControlChars(passwordSalt);
         return passwordSalt;
     }
 
@@ -900,7 +900,7 @@ public abstract class GUser
     }
 
     protected java.lang.String preparePublicName(java.lang.String publicName) {
-        // publicName = Str.removeUnreadableChars(publicName);
+         publicName = Str.removeControlChars(publicName);
         return publicName;
     }
 
@@ -942,7 +942,7 @@ public abstract class GUser
     }
 
     protected java.lang.String prepareFullName(java.lang.String fullName) {
-        // fullName = Str.removeUnreadableChars(fullName);
+         fullName = Str.removeControlChars(fullName);
         return fullName;
     }
 
@@ -1064,7 +1064,7 @@ public abstract class GUser
     }
 
     protected java.lang.String prepareEmail(java.lang.String email) {
-        // email = Str.removeUnreadableChars(email);
+         email = Str.removeControlChars(email);
         return email;
     }
 
@@ -1164,7 +1164,7 @@ public abstract class GUser
     }
 
     protected java.lang.String prepareColor(java.lang.String color) {
-        // color = Str.removeUnreadableChars(color);
+         color = Str.removeControlChars(color);
         return color;
     }
 
@@ -1874,7 +1874,7 @@ public abstract class GUser
     }
 
     protected java.lang.String prepareLoginToken(java.lang.String loginToken) {
-        // loginToken = Str.removeUnreadableChars(loginToken);
+         loginToken = Str.removeControlChars(loginToken);
         return loginToken;
     }
 
@@ -1924,7 +1924,7 @@ public abstract class GUser
     }
 
     protected java.lang.String prepareOpenId(java.lang.String openId) {
-        // openId = Str.removeUnreadableChars(openId);
+         openId = Str.removeControlChars(openId);
         return openId;
     }
 

@@ -382,7 +382,7 @@ public abstract class GFile
     }
 
     protected java.lang.String prepareFilename(java.lang.String filename) {
-        // filename = Str.removeUnreadableChars(filename);
+         filename = Str.removeControlChars(filename);
         return filename;
     }
 
@@ -470,7 +470,7 @@ public abstract class GFile
     }
 
     protected java.lang.String prepareLabel(java.lang.String label) {
-        // label = Str.removeUnreadableChars(label);
+         label = Str.removeControlChars(label);
         return label;
     }
 
@@ -548,7 +548,7 @@ public abstract class GFile
     }
 
     protected java.lang.String prepareNote(java.lang.String note) {
-        // note = Str.removeUnreadableChars(note);
+         note = Str.removeControlChars(note);
         return note;
     }
 

@@ -1102,7 +1102,7 @@ public abstract class GIssue
     }
 
     protected java.lang.String prepareType(java.lang.String type) {
-        // type = Str.removeUnreadableChars(type);
+         type = Str.removeControlChars(type);
         return type;
     }
 
@@ -1249,7 +1249,7 @@ public abstract class GIssue
     }
 
     protected java.lang.String prepareLabel(java.lang.String label) {
-        // label = Str.removeUnreadableChars(label);
+         label = Str.removeControlChars(label);
         return label;
     }
 
@@ -1291,7 +1291,7 @@ public abstract class GIssue
     }
 
     protected java.lang.String prepareDescription(java.lang.String description) {
-        // description = Str.removeUnreadableChars(description);
+         description = Str.removeControlChars(description);
         return description;
     }
 
@@ -1333,7 +1333,7 @@ public abstract class GIssue
     }
 
     protected java.lang.String prepareAdditionalInfo(java.lang.String additionalInfo) {
-        // additionalInfo = Str.removeUnreadableChars(additionalInfo);
+         additionalInfo = Str.removeControlChars(additionalInfo);
         return additionalInfo;
     }
 
@@ -1375,7 +1375,7 @@ public abstract class GIssue
     }
 
     protected java.lang.String prepareStatement(java.lang.String statement) {
-        // statement = Str.removeUnreadableChars(statement);
+         statement = Str.removeControlChars(statement);
         return statement;
     }
 
@@ -1417,7 +1417,7 @@ public abstract class GIssue
     }
 
     protected java.lang.String prepareIssuerName(java.lang.String issuerName) {
-        // issuerName = Str.removeUnreadableChars(issuerName);
+         issuerName = Str.removeControlChars(issuerName);
         return issuerName;
     }
 
@@ -1459,7 +1459,7 @@ public abstract class GIssue
     }
 
     protected java.lang.String prepareIssuerEmail(java.lang.String issuerEmail) {
-        // issuerEmail = Str.removeUnreadableChars(issuerEmail);
+         issuerEmail = Str.removeControlChars(issuerEmail);
         return issuerEmail;
     }
 
@@ -2226,7 +2226,7 @@ public abstract class GIssue
     }
 
     protected java.lang.String prepareExternalTrackerId(java.lang.String externalTrackerId) {
-        // externalTrackerId = Str.removeUnreadableChars(externalTrackerId);
+         externalTrackerId = Str.removeControlChars(externalTrackerId);
         return externalTrackerId;
     }
 

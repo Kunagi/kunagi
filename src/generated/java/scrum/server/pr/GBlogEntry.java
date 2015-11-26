@@ -502,7 +502,7 @@ public abstract class GBlogEntry
     }
 
     protected java.lang.String prepareTitle(java.lang.String title) {
-        // title = Str.removeUnreadableChars(title);
+         title = Str.removeControlChars(title);
         return title;
     }
 
@@ -544,7 +544,7 @@ public abstract class GBlogEntry
     }
 
     protected java.lang.String prepareText(java.lang.String text) {
-        // text = Str.removeUnreadableChars(text);
+         text = Str.removeControlChars(text);
         return text;
     }
 

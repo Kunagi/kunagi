@@ -453,7 +453,7 @@ public abstract class GImpediment
     }
 
     protected java.lang.String prepareLabel(java.lang.String label) {
-        // label = Str.removeUnreadableChars(label);
+         label = Str.removeControlChars(label);
         return label;
     }
 
@@ -539,7 +539,7 @@ public abstract class GImpediment
     }
 
     protected java.lang.String prepareDescription(java.lang.String description) {
-        // description = Str.removeUnreadableChars(description);
+         description = Str.removeControlChars(description);
         return description;
     }
 
@@ -581,7 +581,7 @@ public abstract class GImpediment
     }
 
     protected java.lang.String prepareSolution(java.lang.String solution) {
-        // solution = Str.removeUnreadableChars(solution);
+         solution = Str.removeControlChars(solution);
         return solution;
     }
 

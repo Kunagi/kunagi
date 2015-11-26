@@ -349,7 +349,7 @@ public abstract class GEmoticon
     }
 
     protected java.lang.String prepareEmotion(java.lang.String emotion) {
-        // emotion = Str.removeUnreadableChars(emotion);
+         emotion = Str.removeControlChars(emotion);
         return emotion;
     }
 

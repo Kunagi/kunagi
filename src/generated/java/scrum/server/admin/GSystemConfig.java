@@ -646,7 +646,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareUrl(java.lang.String url) {
-        // url = Str.removeUnreadableChars(url);
+         url = Str.removeControlChars(url);
         return url;
     }
 
@@ -688,7 +688,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareAdminEmail(java.lang.String adminEmail) {
-        // adminEmail = Str.removeUnreadableChars(adminEmail);
+         adminEmail = Str.removeControlChars(adminEmail);
         return adminEmail;
     }
 
@@ -730,7 +730,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareGoogleAnalyticsId(java.lang.String googleAnalyticsId) {
-        // googleAnalyticsId = Str.removeUnreadableChars(googleAnalyticsId);
+         googleAnalyticsId = Str.removeControlChars(googleAnalyticsId);
         return googleAnalyticsId;
     }
 
@@ -772,7 +772,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareSmtpServer(java.lang.String smtpServer) {
-        // smtpServer = Str.removeUnreadableChars(smtpServer);
+         smtpServer = Str.removeControlChars(smtpServer);
         return smtpServer;
     }
 
@@ -891,7 +891,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareSmtpUser(java.lang.String smtpUser) {
-        // smtpUser = Str.removeUnreadableChars(smtpUser);
+         smtpUser = Str.removeControlChars(smtpUser);
         return smtpUser;
     }
 
@@ -933,7 +933,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareSmtpPassword(java.lang.String smtpPassword) {
-        // smtpPassword = Str.removeUnreadableChars(smtpPassword);
+         smtpPassword = Str.removeControlChars(smtpPassword);
         return smtpPassword;
     }
 
@@ -975,7 +975,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareSmtpFrom(java.lang.String smtpFrom) {
-        // smtpFrom = Str.removeUnreadableChars(smtpFrom);
+         smtpFrom = Str.removeControlChars(smtpFrom);
         return smtpFrom;
     }
 
@@ -1017,7 +1017,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareInstanceName(java.lang.String instanceName) {
-        // instanceName = Str.removeUnreadableChars(instanceName);
+         instanceName = Str.removeControlChars(instanceName);
         return instanceName;
     }
 
@@ -1059,7 +1059,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareLoginPageLogoUrl(java.lang.String loginPageLogoUrl) {
-        // loginPageLogoUrl = Str.removeUnreadableChars(loginPageLogoUrl);
+         loginPageLogoUrl = Str.removeControlChars(loginPageLogoUrl);
         return loginPageLogoUrl;
     }
 
@@ -1101,7 +1101,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareLoginPageMessage(java.lang.String loginPageMessage) {
-        // loginPageMessage = Str.removeUnreadableChars(loginPageMessage);
+         loginPageMessage = Str.removeControlChars(loginPageMessage);
         return loginPageMessage;
     }
 
@@ -1143,7 +1143,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareRegisterPageMessage(java.lang.String registerPageMessage) {
-        // registerPageMessage = Str.removeUnreadableChars(registerPageMessage);
+         registerPageMessage = Str.removeControlChars(registerPageMessage);
         return registerPageMessage;
     }
 
@@ -1185,7 +1185,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareAboutPageMessage(java.lang.String aboutPageMessage) {
-        // aboutPageMessage = Str.removeUnreadableChars(aboutPageMessage);
+         aboutPageMessage = Str.removeControlChars(aboutPageMessage);
         return aboutPageMessage;
     }
 
@@ -1335,7 +1335,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareDefaultUserPassword(java.lang.String defaultUserPassword) {
-        // defaultUserPassword = Str.removeUnreadableChars(defaultUserPassword);
+         defaultUserPassword = Str.removeControlChars(defaultUserPassword);
         return defaultUserPassword;
     }
 
@@ -1413,7 +1413,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareOpenIdDomains(java.lang.String openIdDomains) {
-        // openIdDomains = Str.removeUnreadableChars(openIdDomains);
+         openIdDomains = Str.removeControlChars(openIdDomains);
         return openIdDomains;
     }
 
@@ -1527,7 +1527,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareLdapUrl(java.lang.String ldapUrl) {
-        // ldapUrl = Str.removeUnreadableChars(ldapUrl);
+         ldapUrl = Str.removeControlChars(ldapUrl);
         return ldapUrl;
     }
 
@@ -1569,7 +1569,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareLdapUser(java.lang.String ldapUser) {
-        // ldapUser = Str.removeUnreadableChars(ldapUser);
+         ldapUser = Str.removeControlChars(ldapUser);
         return ldapUser;
     }
 
@@ -1611,7 +1611,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareLdapPassword(java.lang.String ldapPassword) {
-        // ldapPassword = Str.removeUnreadableChars(ldapPassword);
+         ldapPassword = Str.removeControlChars(ldapPassword);
         return ldapPassword;
     }
 
@@ -1653,7 +1653,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareLdapBaseDn(java.lang.String ldapBaseDn) {
-        // ldapBaseDn = Str.removeUnreadableChars(ldapBaseDn);
+         ldapBaseDn = Str.removeControlChars(ldapBaseDn);
         return ldapBaseDn;
     }
 
@@ -1695,7 +1695,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareLdapUserFilterRegex(java.lang.String ldapUserFilterRegex) {
-        // ldapUserFilterRegex = Str.removeUnreadableChars(ldapUserFilterRegex);
+         ldapUserFilterRegex = Str.removeControlChars(ldapUserFilterRegex);
         return ldapUserFilterRegex;
     }
 
@@ -1778,7 +1778,7 @@ public abstract class GSystemConfig
     }
 
     protected java.lang.String prepareSubscriptionKeySeed(java.lang.String subscriptionKeySeed) {
-        // subscriptionKeySeed = Str.removeUnreadableChars(subscriptionKeySeed);
+         subscriptionKeySeed = Str.removeControlChars(subscriptionKeySeed);
         return subscriptionKeySeed;
     }
 

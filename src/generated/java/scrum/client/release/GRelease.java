@@ -876,7 +876,7 @@ public abstract class GRelease
     }
 
     protected java.lang.String prepareLabel(java.lang.String label) {
-        // label = Str.removeUnreadableChars(label);
+         label = Str.removeControlChars(label);
         return label;
     }
 
@@ -918,7 +918,7 @@ public abstract class GRelease
     }
 
     protected java.lang.String prepareNote(java.lang.String note) {
-        // note = Str.removeUnreadableChars(note);
+         note = Str.removeControlChars(note);
         return note;
     }
 
@@ -1080,7 +1080,7 @@ public abstract class GRelease
     }
 
     protected java.lang.String prepareReleaseNotes(java.lang.String releaseNotes) {
-        // releaseNotes = Str.removeUnreadableChars(releaseNotes);
+         releaseNotes = Str.removeControlChars(releaseNotes);
         return releaseNotes;
     }
 
@@ -1122,7 +1122,7 @@ public abstract class GRelease
     }
 
     protected java.lang.String prepareScmTag(java.lang.String scmTag) {
-        // scmTag = Str.removeUnreadableChars(scmTag);
+         scmTag = Str.removeControlChars(scmTag);
         return scmTag;
     }
 
@@ -1200,7 +1200,7 @@ public abstract class GRelease
     }
 
     protected java.lang.String prepareScriptOutput(java.lang.String scriptOutput) {
-        // scriptOutput = Str.removeUnreadableChars(scriptOutput);
+         scriptOutput = Str.removeControlChars(scriptOutput);
         return scriptOutput;
     }
 
