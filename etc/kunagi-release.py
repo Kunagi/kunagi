@@ -44,7 +44,7 @@ print 'Releasing Kunagi ' + releaseLabel
 # configuration
 os.chdir('/home/kunagi/')
 workDir = os.path.abspath('kunagi-release-workdir')
-artifactsDestinationHomeDir = '/var/www/kunagi.org/releases'
+artifactsDestinationHomeDir = '/var/www/kunagi.org/website/releases'
 githubUser = 'git://github.com/Kunagi'
 buildDir = workDir + '/kunagi/build'
 packageDir = buildDir + '/package-content/kunagi'
@@ -71,7 +71,7 @@ execute('git checkout kunagi-' + branchName, workDir + '/ilarkesto')
 
 #download dependencies
 print '  Downloading dependencies'
-mkdir(wirkDir + '/ilarkesto/lib')
+os.mkdir(workDir + '/ilarkesto/lib')
 execute('./download-dependencies.bsh', workDir + '/ilarkesto')
 
 
@@ -135,17 +135,6 @@ if not os.path.exists(packageExe64):
 # update homepage
 print '  Update homepage'
 execute('ant releaseHomepage', workDir + '/kunagi')
-
-
-# upload to sourceforge
-#print '  Upload artifacts to SourceForge'
-#sourceForgePath = 'koczewski,kunagi@frs.sourceforge.net:/home/frs/project/k/ku/kunagi/' + releaseLabel
-#execute('scp ' + packageWar + ' ' + sourceForgePath + '/kunagi.war')
-#execute('scp ' + packageExe32 + ' ' + sourceForgePath + '/kunagi32.exe')
-#execute('scp ' + packageExe64 + ' ' + sourceForgePath + '/kunagi64.exe')
-#execute('scp ' + packageDeb + ' ' + sourceForgePath + '/kunagi_' + releaseLabel + '.deb')
-#execute('scp ' + packageTar + ' ' + sourceForgePath + '/kunagi-' + releaseLabel + '.tar.gz')
-#execute('scp ' + packageZip + ' ' + sourceForgePath + '/kunagi-' + releaseLabel + '.zip')
 
 
 # copy artifacts
