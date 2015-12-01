@@ -1,14 +1,14 @@
 /*
  * Copyright 2011 Witoslaw Koczewsi <wi@koczewski.de>, Artjom Kochtchi
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero
  * General Public License as published by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
  * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public
  * License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
@@ -57,16 +57,15 @@ public class WhiteboardWidget extends AScrumWidget implements TaskBlockContainer
 
 	private ElementPredicate<Task> predicate;
 
-	private List<Requirement> knownRequirements = Collections.emptyList();
+	private List<Requirement> knownRequirements;
 	private UserGuideWidget userGuide;
 
-	private Sprint sprint;
 	private ButtonWidget pullNextButton;
 
 	@Override
 	protected Widget onInitialization() {
-		sprint = getCurrentSprint();
 		predicate = null;
+		knownRequirements = Collections.emptyList();
 
 		requirementLists = new HashMap<Requirement, BlockListWidget<Requirement>>();
 
@@ -96,7 +95,7 @@ public class WhiteboardWidget extends AScrumWidget implements TaskBlockContainer
 		page.addHeader("Whiteboard", pullNextButton);
 		page.addSection(grid);
 		userGuide = new UserGuideWidget(getLocalizer().views().whiteboard(), getCurrentProject().getCurrentSprint()
-				.getRequirements().size() < 3, getCurrentUser().getHideUserGuideWhiteboardModel());
+			.getRequirements().size() < 3, getCurrentUser().getHideUserGuideWhiteboardModel());
 		page.addSection(userGuide);
 		return page;
 	}
@@ -106,14 +105,15 @@ public class WhiteboardWidget extends AScrumWidget implements TaskBlockContainer
 		Sprint sprint = getCurrentProject().getCurrentSprint();
 
 		openLabel.setHTML("<strong>Free Tasks</strong> (" + hours(sprint.getRemainingWorkInUnclaimedTasks())
-				+ " to do)");
+			+ " to do)");
 		ownedLabel.setHTML("<strong>Claimed Tasks</strong> (" + hours(sprint.getRemainingWorkInClaimedTasks())
-				+ " to do, " + hours(sprint.getBurnedWorkInClaimedTasks()) + " done)");
+			+ " to do, " + hours(sprint.getBurnedWorkInClaimedTasks()) + " done)");
 		doneLabel.setHTML("<strong>Completed Tasks</strong> (" + hours(sprint.getBurnedWorkInClosedTasks()) + " done)");
 
 		List<Requirement> requirements = Utl.sort(sprint.getRequirements(), sprint.getRequirementsOrderComparator());
 
 		if (requirements.equals(knownRequirements)) {
+			log.debug("quick update");
 			// quick update without recreating whole gui
 			for (Requirement requirement : requirements) {
 				updateTaskLists(requirement);
@@ -129,11 +129,11 @@ public class WhiteboardWidget extends AScrumWidget implements TaskBlockContainer
 
 		for (Requirement requirement : requirements) {
 			openTasks.put(requirement, new TaskListWidget(requirement, this, new UnclaimTaskDropAction(requirement),
-					true, "#f99"));
+				true, "#f99"));
 			ownedTasks.put(requirement, new TaskListWidget(requirement, this, new ClaimTaskDropAction(requirement),
-					false, "#ff9"));
+				false, "#ff9"));
 			closedTasks.put(requirement, new TaskListWidget(requirement, this, new CloseTaskDropAction(requirement),
-				false, "#9e9"));
+					false, "#9e9"));
 		}
 
 		setWidget(0, 0, openLabel, "33%", "WhiteboardWidget-header");
@@ -189,14 +189,15 @@ public class WhiteboardWidget extends AScrumWidget implements TaskBlockContainer
 
 	private void updateTaskLists(Requirement requirement) {
 		if (requirement == null) return;
+		log.debug("updateTAskLists()", requirement);
 
-		TaskListWidget openTasksList = openTasks.get(requirement);
-		TaskListWidget ownedTasksList = ownedTasks.get(requirement);
-		TaskListWidget closedTasksList = closedTasks.get(requirement);
+		TaskListWidget openTasksWidget = openTasks.get(requirement);
+		TaskListWidget ownedTasksWidget = ownedTasks.get(requirement);
+		TaskListWidget closedTasksWidget = closedTasks.get(requirement);
 
-		Task selectedTaskInOpen = openTasksList.getSelectedTask();
-		Task selectedTaskInOwned = ownedTasksList.getSelectedTask();
-		Task selectedTaskInClosed = closedTasksList.getSelectedTask();
+		Task selectedTaskInOpen = openTasksWidget.getSelectedTask();
+		Task selectedTaskInOwned = ownedTasksWidget.getSelectedTask();
+		Task selectedTaskInClosed = closedTasksWidget.getSelectedTask();
 
 		List<Task> openTaskList = new ArrayList<Task>();
 		List<Task> ownedTaskList = new ArrayList<Task>();
@@ -211,9 +212,9 @@ public class WhiteboardWidget extends AScrumWidget implements TaskBlockContainer
 			}
 		}
 
-		openTasksList.setTasks(openTaskList);
-		ownedTasksList.setTasks(ownedTaskList);
-		closedTasksList.setTasks(closedTaskList);
+		openTasksWidget.setTasks(openTaskList);
+		ownedTasksWidget.setTasks(ownedTaskList);
+		closedTasksWidget.setTasks(closedTaskList);
 
 		if (selectedTaskInOpen != null && !openTaskList.contains(selectedTaskInOpen))
 			selectionManager.select(selectedTaskInOpen);
@@ -277,8 +278,8 @@ public class WhiteboardWidget extends AScrumWidget implements TaskBlockContainer
 	}
 
 	@Override
-	protected boolean isResetRequired() {
-		return sprint != getCurrentSprint();
+	protected String getResetSignature() {
+		return getCurrentSprint().getId();
 	}
 
 	@Override

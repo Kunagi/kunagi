@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -158,13 +157,13 @@ public class Requirement extends GRequirement implements ReferenceSupport, Label
 	}
 
 	public Set<Task> getTasksInSprint(Sprint sprint) {
-		Set<Task> tasks = getTasks();
-		Iterator<Task> iterator = tasks.iterator();
-		while (iterator.hasNext()) {
-			Task task = iterator.next();
-			if (task.isClosedInPastSprintSet() || !sprint.equals(task.getSprint())) iterator.remove();
+		HashSet<Task> ret = new HashSet<Task>();
+		for (Task task : getTasks()) {
+			if (task.isClosedInPastSprintSet()) continue;
+			if (!task.isSprint(sprint)) continue;
+			ret.add(task);
 		}
-		return tasks;
+		return ret;
 	}
 
 	public boolean isDecidable() {

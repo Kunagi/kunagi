@@ -1052,7 +1052,6 @@ public class ScrumServiceImpl extends GScrumServiceImpl {
 		for (Requirement requirement : oldSprint.getRequirements()) {
 			if (!requirement.isClosed()) {
 				requirement.setDirty(true);
-				sendToClients(conversation, requirement);
 			}
 		}
 		Sprint newSprint = project.switchToNextSprint();
@@ -1066,6 +1065,11 @@ public class ScrumServiceImpl extends GScrumServiceImpl {
 			sendToClients(conversation, sprint.getSprintReport());
 			sendToClients(conversation, sprint.getRequirements());
 			sendToClients(conversation, sprint.getTasks());
+		}
+
+		for (Requirement requirement : project.getRequirements()) {
+			sendToClients(conversation, requirement);
+			sendToClients(conversation, requirement.getTasks());
 		}
 
 		sendToClients(conversation, oldSprint.getReleases());
