@@ -3,7 +3,9 @@ package scrum.server.common;
 import ilarkesto.base.Utl;
 import ilarkesto.core.base.Str;
 import ilarkesto.core.logging.Log;
+import ilarkesto.integration.kunagi.KunagiConnector;
 import ilarkesto.webapp.RequestWrapper;
+
 import scrum.server.WebSession;
 
 public class SpamChecker {
@@ -11,8 +13,8 @@ public class SpamChecker {
 	private static final Log log = Log.get(SpamChecker.class);
 
 	private static int score(String text, String name, String email, RequestWrapper<WebSession> req) {
-		String spamPreventionCode = req.get("spamPreventionCode");
-		if (!"no-spam".equals(spamPreventionCode)) return 100;
+		String spamPreventionCode = req.get(KunagiConnector.PARAM_SPAM_PREVENTION_CODE);
+		if (!KunagiConnector.SPAM_PREVENTION_CODE.equals(spamPreventionCode)) return 100;
 
 		int spamScore = 0;
 

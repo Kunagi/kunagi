@@ -1,14 +1,14 @@
 /*
  * Copyright 2011 Witoslaw Koczewsi <wi@koczewski.de>, Artjom Kochtchi
- *
+ * 
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero
  * General Public License as published by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
  * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public
  * License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
@@ -17,6 +17,7 @@ package scrum.server.issues;
 import ilarkesto.base.Str;
 import ilarkesto.core.base.Utl;
 import ilarkesto.core.logging.Log;
+import ilarkesto.integration.kunagi.KunagiConnector;
 import ilarkesto.webapp.RequestWrapper;
 import ilarkesto.webapp.Servlet;
 
@@ -75,14 +76,20 @@ public class IssueServlet extends AKunagiServlet {
 		log.info(Servlet.toString(req.getHttpRequest(), "        "));
 
 		String message;
-		try {
-			SpamChecker.check(text, name, email, req);
+		if (text != null && text.contains(KunagiConnector.SPAM_PREVENTION_TEXT)) {
+			text = text.replace(KunagiConnector.SPAM_PREVENTION_TEXT, "");
 			message = submitIssue(projectId, subject, text, additionalInfo, externalTrackerId, name, email, wiki,
 				publish, req.getRemoteHost());
-		} catch (Throwable ex) {
-			log.error("Submitting issue failed.", "\n" + Servlet.toString(req.getHttpRequest(), "  "), ex);
-			message = "<h2>Failure</h2><p>Submitting your feedback failed: <strong>" + Utl.getRootCauseMessage(ex)
-					+ "</strong></p><p>We are sorry, please try again later.</p>";
+		} else {
+			try {
+				SpamChecker.check(text, name, email, req);
+				message = submitIssue(projectId, subject, text, additionalInfo, externalTrackerId, name, email, wiki,
+					publish, req.getRemoteHost());
+			} catch (Exception ex) {
+				log.error("Submitting issue failed.", "\n" + Servlet.toString(req.getHttpRequest(), "  "), ex);
+				message = "<h2>Failure</h2><p>Submitting your feedback failed: <strong>" + Utl.getRootCauseMessage(ex)
+						+ "</strong></p><p>We are sorry, please try again later.</p>";
+			}
 		}
 
 		String returnUrl = req.get("returnUrl");
@@ -123,7 +130,7 @@ public class IssueServlet extends AKunagiServlet {
 		String issueLink = publish ? KunagiUtl.createExternalRelativeHtmlAnchor(issue) : "<code>"
 				+ issue.getReference() + "</code>";
 		return "<h2>Feedback submitted</h2><p>Thank you for your feedback!</p><p>Your issue is now known as "
-		+ issueLink + " and will be reviewed by our Product Owner.</p>";
+				+ issueLink + " and will be reviewed by our Product Owner.</p>";
 	}
 
 	@Override
