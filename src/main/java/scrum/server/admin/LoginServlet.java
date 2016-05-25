@@ -86,7 +86,7 @@ public class LoginServlet extends AKunagiServlet {
 		}
 
 		renderLoginPage(req, null, null, historyToken, null, req.get("showPasswordRequest") != null,
-				req.get("showCreateAccount") != null);
+			req.get("showCreateAccount") != null);
 	}
 
 	private void passwordRequest(String login, String historyToken, RequestWrapper<WebSession> req)
@@ -115,8 +115,9 @@ public class LoginServlet extends AKunagiServlet {
 		}
 
 		if (!user.isEmailVerified()) {
-			renderLoginPage(req, login, login, historyToken, "User '" + login
-				+ "' has no verified email. Please contact the admin: " + systemConfig.getAdminEmail(), true, false);
+			renderLoginPage(req, login, login, historyToken,
+				"User '" + login + "' has no verified email. Please contact the admin: " + systemConfig.getAdminEmail(),
+				true, false);
 			return;
 		}
 
@@ -155,7 +156,8 @@ public class LoginServlet extends AKunagiServlet {
 
 		if (Str.containsNonLetterOrDigit(username)) {
 			renderLoginPage(req, username, email, historyToken, "Creating account failed. Name '" + username
-				+ "' contains an illegal character. Only letters and digits allowed.", false, true);
+					+ "' contains an illegal character. Only letters and digits allowed.",
+				false, true);
 			return;
 		}
 
@@ -166,15 +168,15 @@ public class LoginServlet extends AKunagiServlet {
 		}
 
 		if (userDao.getUserByName(username) != null) {
-			renderLoginPage(req, username, email, historyToken, "Creating account failed. Name '" + username
-				+ "' is already used.", false, true);
+			renderLoginPage(req, username, email, historyToken,
+				"Creating account failed. Name '" + username + "' is already used.", false, true);
 			log.warn("Registration failed. User name already exists:", username);
 			return;
 		}
 
 		if (email != null && userDao.getUserByEmail(email) != null) {
-			renderLoginPage(req, username, email, historyToken, "Creating account failed. Email '" + email
-				+ "' is already used.", false, true);
+			renderLoginPage(req, username, email, historyToken,
+				"Creating account failed. Email '" + email + "' is already used.", false, true);
 			log.warn("Registration failed. User email already exists:", email);
 			return;
 		}
@@ -231,23 +233,25 @@ public class LoginServlet extends AKunagiServlet {
 
 		if (user == null) {
 			if (webApplication.getSystemConfig().isRegistrationDisabled()) {
-				renderLoginPage(req, null, null, historyToken, "There is no user with the OpenID " + openId
-					+ " and creating new users is disabled.", false, false);
+				renderLoginPage(req, null, null, historyToken,
+					"There is no user with the OpenID " + openId + " and creating new users is disabled.", false,
+					false);
 				return;
 			}
 
 			if (!webApplication.getSystemConfig().isOpenIdDomainAllowed(openId)) {
 				renderLoginPage(req, null, null, historyToken, "Registration failed. OpenID domains are limited to: "
-						+ webApplication.getSystemConfig().getOpenIdDomains(), false, false);
-				log.warn("Registration failed. OpenID domains are limited to:", webApplication.getSystemConfig()
-					.getOpenIdDomains());
+						+ webApplication.getSystemConfig().getOpenIdDomains(),
+					false, false);
+				log.warn("Registration failed. OpenID domains are limited to:",
+					webApplication.getSystemConfig().getOpenIdDomains());
 				return;
 			}
 
 			if (email != null) {
 				if (userDao.getUserByEmail(email) != null) {
-					renderLoginPage(req, null, null, historyToken, "Creating account failed. Email '" + email
-						+ "' is already used.", false, false);
+					renderLoginPage(req, null, null, historyToken,
+						"Creating account failed. Email '" + email + "' is already used.", false, false);
 					log.warn("Registration failed. Email already exists:", email);
 					return;
 				}
@@ -325,8 +329,8 @@ public class LoginServlet extends AKunagiServlet {
 			String email = null;
 			try {
 				email = Ldap.authenticateUserGetEmail(systemConfig.getLdapUrl(), systemConfig.getLdapUser(),
-					systemConfig.getLdapPassword(), systemConfig.getLdapBaseDn(),
-					systemConfig.getLdapUserFilterRegex(), username, password);
+					systemConfig.getLdapPassword(), systemConfig.getLdapBaseDn(), systemConfig.getLdapUserFilterRegex(),
+					username, password);
 				authenticated = true;
 			} catch (AuthenticationFailedException ex) {
 				authenticated = false;
@@ -339,14 +343,14 @@ public class LoginServlet extends AKunagiServlet {
 
 			if (authenticated && user == null) {
 				if (webApplication.getSystemConfig().isRegistrationDisabled()) {
-					renderLoginPage(req, null, null, historyToken, "There is no user " + username
-						+ " and creating new users is disabled.", false, false);
+					renderLoginPage(req, null, null, historyToken,
+						"There is no user " + username + " and creating new users is disabled.", false, false);
 					return;
 				}
 
 				if (userDao.getUserByEmail(email) != null) {
-					renderLoginPage(req, null, null, historyToken, "User with email " + email + " already exists: "
-							+ email, false, false);
+					renderLoginPage(req, null, null, historyToken,
+						"User with email " + email + " already exists: " + email, false, false);
 					return;
 				}
 
@@ -355,7 +359,8 @@ public class LoginServlet extends AKunagiServlet {
 				} catch (Exception ex) {
 					log.warn(ex);
 					renderLoginPage(req, username, null, historyToken, "Creating a new user <" + username
-						+ "> with email <" + email + "> failed: " + Utl.getRootCauseMessage(ex), false, false);
+							+ "> with email <" + email + "> failed: " + Utl.getRootCauseMessage(ex),
+						false, false);
 					return;
 				}
 				if (Str.isEmail(email)) user.setEmail(email);
@@ -386,8 +391,8 @@ public class LoginServlet extends AKunagiServlet {
 	}
 
 	private void renderLoginPage(RequestWrapper<WebSession> req, String username, String email, String historyToken,
-			String message, boolean passwordRequest, boolean createAccount) throws UnsupportedEncodingException,
-			IOException {
+			String message, boolean passwordRequest, boolean createAccount)
+			throws UnsupportedEncodingException, IOException {
 		if (webApplication.getSystemConfig().isRegistrationDisabled()) createAccount = false;
 
 		String charset = IO.UTF_8;
@@ -489,13 +494,13 @@ public class LoginServlet extends AKunagiServlet {
 		html.INPUTtext("username", "username", username, 80);
 		html.endTD();
 		html.startTD();
-		html.INPUTpassword("password", "password", 80, "");
+		html.INPUTpassword("password", "password", null, 80, "");
 		html.endTD();
 		html.endTR();
 
 		html.startTR();
 		html.startTD();
-		html.INPUTcheckbox("keepmeloggedin", "keepmeloggedin", true);
+		html.INPUTcheckbox("keepmeloggedin", "keepmeloggedin", true, null);
 		html.LABEL("keepmeloggedin", "Keep me logged in");
 		html.endTD();
 		html.startTD().setAlignRight();
@@ -540,7 +545,7 @@ public class LoginServlet extends AKunagiServlet {
 
 		html.startTR();
 		html.startTD();
-		html.INPUTcheckbox("keepmeloggedinOpenId", "keepmeloggedin", true);
+		html.INPUTcheckbox("keepmeloggedinOpenId", "keepmeloggedin", true, null);
 		html.LABEL("keepmeloggedinOpenId", "Keep me logged in");
 		html.endTD();
 		html.startTD().setAlignRight();
@@ -627,7 +632,7 @@ public class LoginServlet extends AKunagiServlet {
 		html.LABEL("password", "Password");
 		html.endTD();
 		html.startTD();
-		html.INPUTpassword("password", "password", 80, "");
+		html.INPUTpassword("password", "password", null, 80, "");
 		html.endTD();
 		html.endTR();
 
