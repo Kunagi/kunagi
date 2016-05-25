@@ -1,14 +1,14 @@
 /*
  * Copyright 2011 Witoslaw Koczewsi <wi@koczewski.de>, Artjom Kochtchi
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero
  * General Public License as published by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
  * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public
  * License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
@@ -44,6 +44,7 @@ import scrum.server.risks.RiskListPdfCreator;
 import scrum.server.sprint.Sprint;
 import scrum.server.sprint.SprintBacklogPdfCreator;
 import scrum.server.sprint.SprintReportPdfCreator;
+import scrum.server.sprint.SprintStorysCardsPdfCreator;
 import scrum.server.sprint.Task;
 
 public class PdfTest extends ATest {
@@ -92,7 +93,7 @@ public class PdfTest extends ATest {
 		createPdf(new ImpedimentListPdfCreator(project));
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void sprintBacklog() {
 		Project project = TestUtil.createProject();
 
@@ -113,6 +114,29 @@ public class PdfTest extends ATest {
 		req2.setSprint(sprint);
 
 		createPdf(new SprintBacklogPdfCreator(project));
+	}
+
+	@Test
+	public void sprintStorysCards() {
+		Project project = TestUtil.createProject();
+
+		Sprint sprint = TestUtil.createSprint(project, Date.today());
+		project.setCurrentSprint(sprint);
+
+		Requirement req1 = TestUtil.createRequirement(project, 1);
+		req1.setEstimatedWork(3f);
+		req1.setDirty(false);
+		TestUtil.createTasks(req1, Utl.randomInt(1, 10));
+		req1.setSprint(sprint);
+
+		Requirement req2 = TestUtil.createRequirement(project, 2);
+		req2.setEstimatedWork(0.5f);
+		req2.setDirty(false);
+		TestUtil.createTasks(req1, Utl.randomInt(0, 2));
+		TestUtil.createTask(req2, 666, 1, 0).addImpediment(TestUtil.createImpediment(project, 666));
+		req2.setSprint(sprint);
+
+		createPdf(new SprintStorysCardsPdfCreator(project));
 	}
 
 	@Test
@@ -221,7 +245,8 @@ public class PdfTest extends ATest {
 	public void wikipage() {
 		Wikipage wikipage = new Wikipage();
 		wikipage.setName("wikipage");
-		wikipage.setText("= Test Wiki Page =\n\nTest wiki page.\nTest wiki page. Test wiki page. Test wiki page. Test wiki page. Test wiki page. Test wiki page. Test wiki page. Test wiki page. Test wiki page. ");
+		wikipage.setText(
+			"= Test Wiki Page =\n\nTest wiki page.\nTest wiki page. Test wiki page. Test wiki page. Test wiki page. Test wiki page. Test wiki page. Test wiki page. Test wiki page. Test wiki page. ");
 		createPdf(new WikipagePdfCreator(wikipage));
 	}
 

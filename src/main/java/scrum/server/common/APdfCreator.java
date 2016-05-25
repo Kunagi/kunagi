@@ -84,7 +84,7 @@ public abstract class APdfCreator {
 		pdf.paragraph().setDefaultFontStyle(headerFonts[0]).text(projectLabel);
 		pdf.nl(spacerFont);
 		pdf.paragraph().setDefaultFontStyle(miniLabelFont).text(title + ", ")
-		.text(Tm.FORMAT_LONGMONTH_DAY_YEAR.format(Date.today()));
+				.text(Tm.FORMAT_LONGMONTH_DAY_YEAR.format(Date.today()));
 	}
 
 	protected void sectionHeader(APdfContainerElement pdf, String label) {
@@ -94,6 +94,10 @@ public abstract class APdfCreator {
 
 	protected void wiki(APdfContainerElement parent, String wikiCode) {
 		WikiToPdfConverter.buildPdf(parent, wikiCode, new ScrumPdfContext(project));
+	}
+
+	protected void card(APdfContainerElement pdf, String text) {
+		pdf.paragraph().setDefaultFontStyle(headerFonts[0]).text(text).nl().nl();
 	}
 
 	protected void requirement(APdfContainerElement pdf, Requirement req, Collection<Task> openTasks,
