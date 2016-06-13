@@ -58,7 +58,6 @@ public class StartServlet extends AKunagiServlet {
 		if (config.isShowRelease()) title += " " + applicationInfo.getRelease();
 		if (systemConfig.isInstanceNameSet()) title += " @ " + systemConfig.getInstanceName();
 		html.startHEAD(title);
-		html.META("X-UA-Compatible", "IE=edge");
 		html.LINKfavicon();
 		html.startSTYLEcss();
 		html.html(getCss());
