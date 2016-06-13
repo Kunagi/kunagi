@@ -1,6 +1,7 @@
 {
   "name": "Kunagi",
   "dependencies": {
-    "bootstrap": "4.0.0-alpha.2"
+    "bootstrap": "4.0.0-alpha.2",
+    "jquery": "2.1.4"
   }
 }
