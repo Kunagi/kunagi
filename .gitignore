@@ -7,4 +7,4 @@ temp-testng*
 tomcat
 *.log
 velocity.log*
-
+src/main/webapp/node_modules
