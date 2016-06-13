@@ -399,13 +399,12 @@ public class LoginServlet extends AKunagiServlet {
 		req.setContentTypeHtml();
 
 		HtmlBuilder html = new HtmlBuilder(req.getWriter(), charset);
-		html.startHTMLstandard();
+		html.startHTML("en");
 
 		String title = "Kunagi Login";
 		if (webApplication.getConfig().isShowRelease()) title += " " + applicationInfo.getRelease();
 		if (systemConfig.isInstanceNameSet()) title += " @ " + systemConfig.getInstanceName();
-		html.startHEAD(title, "EN");
-		html.META("X-UA-Compatible", "IE=edge");
+		html.startHEAD(title);
 		html.LINKfavicon();
 		html.startSTYLEcss();
 		html.html(getCss());

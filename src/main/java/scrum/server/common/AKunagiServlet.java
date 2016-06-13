@@ -101,12 +101,12 @@ public abstract class AKunagiServlet extends AServlet<ScrumWebApplication, WebSe
 		String charset = IO.UTF_8;
 		req.setContentTypeHtml();
 		HtmlBuilder html = new HtmlBuilder(req.getWriter(), charset);
-		html.startHTMLstandard();
+		html.startHTML("en");
 		String title = "Kunagi";
 		if (config.isShowRelease()) title += " " + applicationInfo.getRelease();
 		title += " " + subtitle;
 		if (systemConfig.isInstanceNameSet()) title += " @ " + systemConfig.getInstanceName();
-		html.startHEAD(title, "EN");
+		html.startHEAD(title);
 		html.META("X-UA-Compatible", "IE=edge");
 		if (!Str.isBlank(refreshUrl)) html.METArefresh(refreshSeconds, refreshUrl);
 		html.LINKfavicon();
