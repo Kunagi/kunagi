@@ -26,6 +26,11 @@ import ilarkesto.gwt.client.animation.AnimatingFlowPanel;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.Widget;
+
 import scrum.client.ScrumGwt;
 import scrum.client.ScrumGwtApplication;
 import scrum.client.base.ExceptionServiceCall;
@@ -39,10 +44,7 @@ import scrum.client.project.Requirement;
 import scrum.client.sprint.Task;
 import scrum.client.workspace.PagePanel;
 import scrum.client.workspace.Ui;
-
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.Widget;
+import scrum.client.workspace.WorkspaceWidget;
 
 public class ScrumStatusWidget extends AScrumWidget {
 
@@ -75,6 +77,7 @@ public class ScrumStatusWidget extends AScrumWidget {
 		TableBuilder tb = new TableBuilder();
 		tb.setWidth(null);
 		tb.setCellPadding(5);
+		tb.addRow(new ButtonWidget(new LockScreenAction()));
 		tb.addRow(new ButtonWidget(new TogglePingerAction()));
 		tb.addRow(new ButtonWidget(new ToggleListAnimationsAction()));
 		tb.addRow(new ButtonWidget(new ThrowExceptionAction()));
@@ -106,6 +109,31 @@ public class ScrumStatusWidget extends AScrumWidget {
 			new Label(String.valueOf(Str.concat(AServiceCall.getActiveServiceCalls(), ", "))));
 		tb.addFieldRow("conversationNumber", new Label(String.valueOf(AGwtApplication.get().getConversationNumber())));
 		return tb.createTable();
+	}
+
+	class LockScreenAction extends AScrumAction {
+
+		@Override
+		public String getLabel() {
+			return "Lock screen";
+		}
+
+		@Override
+		protected void updateTooltip(TooltipBuilder tb) {}
+
+		@Override
+		protected void onExecute() {
+			final WorkspaceWidget workspace = Scope.get().getComponent(Ui.class).getWorkspace();
+			workspace.lock("Test lock. Please wait a few seconds...");
+			new Timer() {
+
+				@Override
+				public void run() {
+					workspace.unlock();
+				}
+			}.schedule(5000);
+		}
+
 	}
 
 	class TogglePingerAction extends AScrumAction {
@@ -240,8 +268,8 @@ public class ScrumStatusWidget extends AScrumWidget {
 		@Override
 		protected void onExecute() {
 			DateAndTime time = DateAndTime.now();
-			List<Requirement> requirements = new ArrayList<Requirement>(getCurrentProject().getCurrentSprint()
-					.getRequirements());
+			List<Requirement> requirements = new ArrayList<Requirement>(
+					getCurrentProject().getCurrentSprint().getRequirements());
 			if (requirements.isEmpty()) return;
 			int reqIdx = 0;
 			for (int i = 0; i < COUNT; i++) {
@@ -322,7 +350,8 @@ public class ScrumStatusWidget extends AScrumWidget {
 	private static String text(int lines) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < lines; i++) {
-			sb.append("This is stupid text. You should not waste your time to read it. There is nothing valuable to find.\n");
+			sb.append(
+				"This is stupid text. You should not waste your time to read it. There is nothing valuable to find.\n");
 		}
 		return sb.toString();
 	}

@@ -395,8 +395,6 @@ public class KunagiCssBuilder implements ICssBuilder {
 		css.style("#body .HeaderWidget .ToolbarWidget .FloatingFlowPanel-element").floatRight();
 		css.style("#body .HeaderWidget a").color(cHeaderLink);
 
-		css.style("#body .StatusWidget").width(10).height(6).marginTop(8).borderRadius(1);
-
 		css.style("#body .SearchInputWidget input").fontSize(fontSizeSmall).lineHeight(lineHeightSmall)
 				.margin(0, 10, 0, 10).padding(1);
 	}

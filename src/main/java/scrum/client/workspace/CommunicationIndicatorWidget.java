@@ -1,14 +1,14 @@
 /*
  * Copyright 2011 Witoslaw Koczewsi <wi@koczewski.de>, Artjom Kochtchi
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero
  * General Public License as published by the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
  * implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public
  * License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
@@ -20,24 +20,22 @@ import ilarkesto.gwt.client.AServiceCall;
 
 import java.util.List;
 
-import scrum.client.common.AScrumWidget;
-import scrum.client.communication.Pinger;
-import scrum.client.test.ScrumStatusWidget;
-
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.FocusPanel;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
+
+import scrum.client.common.AScrumWidget;
+import scrum.client.communication.Pinger;
+import scrum.client.test.ScrumStatusWidget;
 
 public class CommunicationIndicatorWidget extends AScrumWidget implements Runnable {
 
 	private Pinger pinger;
 
 	private FocusPanel focusPanel;
-	private Label status;
 	private Style statusStyle;
 
 	private long onTime;
@@ -47,11 +45,11 @@ public class CommunicationIndicatorWidget extends AScrumWidget implements Runnab
 		AServiceCall.listener = this;
 		pinger = Scope.get().getComponent(Pinger.class);
 
-		status = new Label();
-		status.setStyleName("StatusWidget");
-		statusStyle = status.getElement().getStyle();
-
-		focusPanel = new FocusPanel(status);
+		focusPanel = new FocusPanel();
+		focusPanel.setSize("12px", "12px");
+		statusStyle = focusPanel.getElement().getStyle();
+		statusStyle.setBackgroundColor("#999");
+		statusStyle.setProperty("borderRadius", "4px");
 		focusPanel.addClickHandler(new StatusClickHandler());
 
 		new Timer() {
@@ -62,11 +60,11 @@ public class CommunicationIndicatorWidget extends AScrumWidget implements Runnab
 					long onDuration = Tm.getCurrentTimeMillis() - onTime;
 					if (onDuration > 3000) {
 						statusStyle.setBackgroundColor("#f00");
-						status.setTitle("Waiting for server response since " + (onDuration / 1000) + " seconds...");
+						focusPanel.setTitle("Waiting for server response since " + (onDuration / 1000) + " seconds...");
 						return;
 					}
 				}
-				status.setTitle(pinger.getAvaragePingTimeMessage());
+				focusPanel.setTitle(pinger.getAvaragePingTimeMessage());
 			}
 		}.scheduleRepeating(1000);
 
