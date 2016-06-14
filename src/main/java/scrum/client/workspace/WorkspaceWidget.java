@@ -17,6 +17,8 @@ package scrum.client.workspace;
 import ilarkesto.core.logging.Log;
 import ilarkesto.gwt.client.Gwt;
 import ilarkesto.gwt.client.SwitcherWidget;
+import ilarkesto.gwt.client.bootstrap.AlertWidget;
+import ilarkesto.gwt.client.bootstrap.ContextualType;
 import ilarkesto.gwt.client.bootstrap.ModalWidget;
 import ilarkesto.gwt.client.bootstrap.NavbarWidget;
 
@@ -24,11 +26,14 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
+import scrum.client.ScrumGwt;
 import scrum.client.common.AScrumWidget;
 
 public class WorkspaceWidget extends AScrumWidget {
@@ -37,7 +42,6 @@ public class WorkspaceWidget extends AScrumWidget {
 
 	public static final int HEADER_HEIGHT = 25;
 
-	private LockInfoWidget lockInfo;
 	private SwitcherWidget sidebar;
 	private SwitcherWidget workarea = new SwitcherWidget(false);
 
@@ -45,9 +49,6 @@ public class WorkspaceWidget extends AScrumWidget {
 
 	@Override
 	protected Widget onInitialization() {
-
-		lockInfo = new LockInfoWidget();
-		lockingModal.getModalContent().add(lockInfo);
 
 		HeaderWidget header = new HeaderWidget();
 		SimplePanel workspaceHeader = Gwt.createDiv("Workspace-header", header);
@@ -60,20 +61,27 @@ public class WorkspaceWidget extends AScrumWidget {
 		HorizontalPanel workspaceBody = Gwt.createHorizontalPanel(10, sidebar, workarea);
 		workspaceBody.setCellWidth(sidebar, "200px");
 
-		FlowPanel workspace = Gwt.createFlowPanel(new NavbarWidget(), workspaceHeader, workspaceBody, lockingModal);
+		FlowPanel workspace = Gwt.createFlowPanel(new NavbarWidget(), Gwt.createSpacer(1, 100), workspaceHeader,
+			workspaceBody, lockingModal);
 		workspace.setStyleName("Workspace");
 
 		return workspace;
 	}
 
 	public void abort(String messageHtml) {
-		lockInfo.showBug(messageHtml);
+		messageHtml += "<br><a href=\"" + ScrumGwt.getLoginUrl() + "\">Reload</a>";
+		FlowPanel modalContent = lockingModal.getModalContent();
+		modalContent.clear();
+		modalContent.add(new AlertWidget(ContextualType.danger).add(new HTML(messageHtml)));
 		lockingModal.show();
 	}
 
 	public void lock(String message) {
 		initialize();
-		lockInfo.showWait(message);
+		FlowPanel modalContent = lockingModal.getModalContent();
+		modalContent.clear();
+		modalContent.add(new Image("spinner.gif"));
+		modalContent.add(new Label(message));
 		lockingModal.show();
 	}
 
