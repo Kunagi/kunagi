@@ -16,8 +16,8 @@ package scrum.client.workspace;
 
 import ilarkesto.core.logging.Log;
 import ilarkesto.gwt.client.Gwt;
-import ilarkesto.gwt.client.LockWidget;
 import ilarkesto.gwt.client.SwitcherWidget;
+import ilarkesto.gwt.client.bootstrap.ModalWidget;
 import ilarkesto.gwt.client.bootstrap.NavbarWidget;
 
 import com.google.gwt.user.client.ui.Button;
@@ -33,19 +33,21 @@ import scrum.client.common.AScrumWidget;
 
 public class WorkspaceWidget extends AScrumWidget {
 
-	private static final Log LOG = Log.get(WorkspaceWidget.class);
+	private static final Log log = Log.get(WorkspaceWidget.class);
 
 	public static final int HEADER_HEIGHT = 25;
 
-	private LockWidget locker;
 	private LockInfoWidget lockInfo;
 	private SwitcherWidget sidebar;
 	private SwitcherWidget workarea = new SwitcherWidget(false);
+
+	private ModalWidget lockingModal = new ModalWidget();
 
 	@Override
 	protected Widget onInitialization() {
 
 		lockInfo = new LockInfoWidget();
+		lockingModal.getModalContent().add(lockInfo);
 
 		HeaderWidget header = new HeaderWidget();
 		SimplePanel workspaceHeader = Gwt.createDiv("Workspace-header", header);
@@ -58,32 +60,25 @@ public class WorkspaceWidget extends AScrumWidget {
 		HorizontalPanel workspaceBody = Gwt.createHorizontalPanel(10, sidebar, workarea);
 		workspaceBody.setCellWidth(sidebar, "200px");
 
-		FlowPanel workspace = Gwt.createFlowPanel(new NavbarWidget(), workspaceHeader, workspaceBody);
+		FlowPanel workspace = Gwt.createFlowPanel(new NavbarWidget(), workspaceHeader, workspaceBody, lockingModal);
 		workspace.setStyleName("Workspace");
 
-		locker = new LockWidget(workspace);
-
-		return locker;
+		return workspace;
 	}
 
 	public void abort(String messageHtml) {
 		lockInfo.showBug(messageHtml);
-		locker.lock(lockInfo);
+		lockingModal.show();
 	}
 
 	public void lock(String message) {
 		initialize();
 		lockInfo.showWait(message);
-		locker.lock(lockInfo);
-	}
-
-	public void lock(Widget widget) {
-		initialize();
-		locker.lock(widget);
+		lockingModal.show();
 	}
 
 	public void unlock() {
-		locker.unlock();
+		lockingModal.hide();
 	}
 
 	public void showError(String message) {

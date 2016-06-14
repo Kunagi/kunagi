@@ -65,6 +65,8 @@ public class StartServlet extends AKunagiServlet {
 		html.endSTYLE();
 
 		html.LINKcss("node_modules/bootstrap/dist/css/bootstrap.min.css");
+		html.SCRIPTjavascript("node_modules/jquery/dist/jquery.min.js", null);
+		html.SCRIPTjavascript("node_modules/bootstrap/dist/js/bootstrap.min.js", null);
 		html.SCRIPTjavascript("scrum.ScrumGwtApplication/scrum.ScrumGwtApplication.nocache.js", null);
 		html.SCRIPTjavascript("codemirror/js/codemirror.js", null);
 		html.endHEAD();
@@ -73,9 +75,6 @@ public class StartServlet extends AKunagiServlet {
 		html.comment(applicationInfo.toString());
 		String analyticsId = systemConfig.getGoogleAnalyticsId();
 		if (analyticsId != null) html.googleAnalytics(analyticsId);
-
-		html.SCRIPTjavascript("node_modules/jquery/dist/jquery.min.js", null);
-		html.SCRIPTjavascript("node_modules/bootstrap/dist/js/bootstrap.min.js", null);
 
 		html.endBODY();
 
