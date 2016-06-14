@@ -2,14 +2,11 @@
 <module>
 
   <inherits name="com.google.gwt.user.User" />
-  <inherits name="com.google.gwt.user.theme.standard.Standard" />
+  <!-- <inherits name="com.google.gwt.user.theme.standard.Standard" /> -->
 
   <inherits name="com.allen_sauer.gwt.dnd.gwt-dnd" />
 
   <inherits name="gwtupload.GWTUpload" />
-  <stylesheet src="Upload.css" />
-
-  <stylesheet src="screen.css" />
 
   <entry-point class="scrum.client.ScrumGwtApplication" />
 

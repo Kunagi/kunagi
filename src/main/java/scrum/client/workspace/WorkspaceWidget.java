@@ -20,7 +20,6 @@ import ilarkesto.gwt.client.SwitcherWidget;
 import ilarkesto.gwt.client.bootstrap.AlertWidget;
 import ilarkesto.gwt.client.bootstrap.ContextualType;
 import ilarkesto.gwt.client.bootstrap.ModalWidget;
-import ilarkesto.gwt.client.bootstrap.NavbarWidget;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ClickListener;

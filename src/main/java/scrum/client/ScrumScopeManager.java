@@ -122,6 +122,7 @@ public class ScrumScopeManager {
 	}
 
 	public static Project getProject() {
+		if (!isProjectScope()) return null;
 		return (Project) projectScope.getComponent("project");
 	}
 }
