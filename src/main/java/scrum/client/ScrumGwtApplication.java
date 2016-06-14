@@ -31,6 +31,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.RootPanel;
+
 import scrum.client.admin.Auth;
 import scrum.client.admin.LogoutServiceCall;
 import scrum.client.admin.SystemMessageManager;
@@ -60,18 +64,14 @@ import scrum.client.workspace.Navigator;
 import scrum.client.workspace.Ui;
 import scrum.client.workspace.WorkspaceWidget;
 
-import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.RootPanel;
-
 public class ScrumGwtApplication extends AGwtApplication<DataTransferObject> {
 
 	public static final String LOGIN_TOKEN_COOKIE = "kunagiLoginToken";
 
 	public static final String[] REFERENCE_PREFIXES = new String[] { Requirement.REFERENCE_PREFIX,
-		Task.REFERENCE_PREFIX, Quality.REFERENCE_PREFIX, Issue.REFERENCE_PREFIX, Impediment.REFERENCE_PREFIX,
-		Risk.REFERENCE_PREFIX, File.REFERENCE_PREFIX, Subject.REFERENCE_PREFIX, SimpleEvent.REFERENCE_PREFIX,
-		Release.REFERENCE_PREFIX, BlogEntry.REFERENCE_PREFIX, Sprint.REFERENCE_PREFIX };
+			Task.REFERENCE_PREFIX, Quality.REFERENCE_PREFIX, Issue.REFERENCE_PREFIX, Impediment.REFERENCE_PREFIX,
+			Risk.REFERENCE_PREFIX, File.REFERENCE_PREFIX, Subject.REFERENCE_PREFIX, SimpleEvent.REFERENCE_PREFIX,
+			Release.REFERENCE_PREFIX, BlogEntry.REFERENCE_PREFIX, Sprint.REFERENCE_PREFIX };
 
 	private final Log log = Log.get(getClass());
 
@@ -199,11 +199,13 @@ public class ScrumGwtApplication extends AGwtApplication<DataTransferObject> {
 		}
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("<strong>Server service call error</strong><br>");
-		sb.append("Calling service <em>").append(serviceCall).append("</em> failed.<br>");
+		sb.append("<h3>Communication with server failed</h3><hr>");
+		sb.append("<p><em>Failed service call:</em> ").append(serviceCall).append("</p>");
+		sb.append("<p>");
 		for (ErrorWrapper error : errors) {
-			sb.append(Str.toHtml(error.toString())).append("<br>");
+			sb.append("<em>Cause:</em> <strong>").append(Str.toHtml(error.toString())).append("</strong><br>");
 		}
+		sb.append("</p>");
 		abort(sb.toString());
 	}
 
@@ -231,8 +233,9 @@ public class ScrumGwtApplication extends AGwtApplication<DataTransferObject> {
 	@Override
 	public void sendChangesToServer(Collection<AEntity> modified, Collection<String> deleted,
 			Map<String, Map<String, String>> modifiedProperties, Runnable callback) {
-		new UpdateEntitiesServiceCall(modifiedProperties == null ? null : new ArrayList<Map<String, String>>(
-				modifiedProperties.values()), deleted).execute(callback);
+		new UpdateEntitiesServiceCall(
+				modifiedProperties == null ? null : new ArrayList<Map<String, String>>(modifiedProperties.values()),
+				deleted).execute(callback);
 	}
 
 	public static ScrumGwtApplication get() {

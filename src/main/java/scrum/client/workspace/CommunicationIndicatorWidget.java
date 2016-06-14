@@ -14,7 +14,9 @@
  */
 package scrum.client.workspace;
 
+import ilarkesto.core.base.Str;
 import ilarkesto.core.scope.Scope;
+import ilarkesto.core.time.TimePeriod;
 import ilarkesto.core.time.Tm;
 import ilarkesto.gwt.client.AServiceCall;
 
@@ -39,6 +41,7 @@ public class CommunicationIndicatorWidget extends AScrumWidget implements Runnab
 	private Style statusStyle;
 
 	private long onTime;
+	private boolean colorFlipper;
 
 	@Override
 	protected Widget onInitialization() {
@@ -48,7 +51,7 @@ public class CommunicationIndicatorWidget extends AScrumWidget implements Runnab
 		focusPanel = new FocusPanel();
 		focusPanel.setSize("12px", "12px");
 		statusStyle = focusPanel.getElement().getStyle();
-		statusStyle.setBackgroundColor("#999");
+		statusStyle.setBackgroundColor("#090");
 		statusStyle.setProperty("borderRadius", "4px");
 		focusPanel.addClickHandler(new StatusClickHandler());
 
@@ -56,14 +59,25 @@ public class CommunicationIndicatorWidget extends AScrumWidget implements Runnab
 
 			@Override
 			public void run() {
-				if (onTime > 0) {
-					long onDuration = Tm.getCurrentTimeMillis() - onTime;
-					if (onDuration > 3000) {
-						statusStyle.setBackgroundColor("#f00");
-						focusPanel.setTitle("Waiting for server response since " + (onDuration / 1000) + " seconds...");
-						return;
-					}
+				// if (onTime > 0) {
+				// long onDuration = Tm.getCurrentTimeMillis() - onTime;
+				// if (onDuration > 3000) {
+				// statusStyle.setBackgroundColor("#f00");
+				// focusPanel.setTitle("Waiting for server response since " + (onDuration / 1000) + "
+				// seconds...");
+				// return;
+				// }
+				// }
+
+				if (pinger.isInErrorMode()) {
+					statusStyle.setBackgroundColor(colorFlipper ? "#f00" : "#ff0");
+					colorFlipper = !colorFlipper;
+					focusPanel.setTitle("Communication problem since "
+							+ new TimePeriod(Tm.getCurrentTimeMillis() - pinger.getErrorsTime()).toShortestString()
+							+ ": " + Str.concat(pinger.getErrors(), ", "));
+					return;
 				}
+
 				focusPanel.setTitle(pinger.getAvaragePingTimeMessage());
 			}
 		}.scheduleRepeating(1000);

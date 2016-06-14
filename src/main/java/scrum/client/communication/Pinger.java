@@ -17,12 +17,16 @@ package scrum.client.communication;
 import ilarkesto.core.logging.Log;
 import ilarkesto.core.time.Tm;
 import ilarkesto.gwt.client.AServiceCall;
+import ilarkesto.gwt.client.AServiceCallResultHandler;
+import ilarkesto.gwt.client.ErrorWrapper;
 
+import java.util.Collections;
 import java.util.LinkedList;
-
-import scrum.client.project.Requirement;
+import java.util.List;
 
 import com.google.gwt.user.client.Timer;
+
+import scrum.client.project.Requirement;
 
 public class Pinger extends GPinger {
 
@@ -35,6 +39,8 @@ public class Pinger extends GPinger {
 	private int maxDelay = MAX_DELAY;
 	private long lastDataReceiveTime = Tm.getCurrentTimeMillis();
 	private LinkedList<Long> pingTimes = new LinkedList<Long>();
+	private List<ErrorWrapper> errors = Collections.emptyList();
+	private long errorsTime;
 
 	private boolean disabled;
 
@@ -45,13 +51,21 @@ public class Pinger extends GPinger {
 			public void run() {
 				if (!disabled && !AServiceCall.containsServiceCall(PingServiceCall.class)) {
 					final long start = Tm.getCurrentTimeMillis();
-					new PingServiceCall().execute(new Runnable() {
+					new PingServiceCall().execute(new AServiceCallResultHandler() {
 
 						@Override
 						public void run() {
+							Pinger.this.errors = Collections.emptyList();
 							long time = Tm.getCurrentTimeMillis() - start;
 							pingTimes.add(time);
 							if (pingTimes.size() > 10) pingTimes.removeFirst();
+						}
+
+						@Override
+						public void onError(List<ErrorWrapper> errors) {
+							log.info("pinger error", errors);
+							if (Pinger.this.errors.isEmpty()) Pinger.this.errorsTime = Tm.getCurrentTimeMillis();
+							Pinger.this.errors = errors;
 						}
 					});
 				}
@@ -59,6 +73,18 @@ public class Pinger extends GPinger {
 			}
 		};
 		reschedule();
+	}
+
+	public List<ErrorWrapper> getErrors() {
+		return errors;
+	}
+
+	public boolean isInErrorMode() {
+		return errors != null && !errors.isEmpty();
+	}
+
+	public long getErrorsTime() {
+		return errorsTime;
 	}
 
 	public void setDisabled(boolean disabled) {
