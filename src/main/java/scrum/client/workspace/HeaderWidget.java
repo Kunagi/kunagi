@@ -24,22 +24,20 @@ import ilarkesto.gwt.client.undo.UndoButtonWidget;
 
 import java.util.List;
 
-import scrum.client.ApplicationInfo;
-import scrum.client.ScrumScopeManager;
-import scrum.client.admin.LogoutAction;
-import scrum.client.common.AScrumAction;
-import scrum.client.common.AScrumWidget;
-import scrum.client.common.TooltipBuilder;
-import scrum.client.project.ChangeProjectAction;
-import scrum.client.project.Project;
-import scrum.client.search.SearchInputWidget;
-import scrum.client.undo.Undo;
-
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
+
+import scrum.client.ApplicationInfo;
+import scrum.client.ScrumScopeManager;
+import scrum.client.admin.LogoutAction;
+import scrum.client.common.AScrumWidget;
+import scrum.client.project.ChangeProjectAction;
+import scrum.client.project.Project;
+import scrum.client.search.SearchInputWidget;
+import scrum.client.undo.Undo;
 
 public class HeaderWidget extends AScrumWidget {
 
@@ -94,24 +92,7 @@ public class HeaderWidget extends AScrumWidget {
 
 		if (projectOpen) {
 			switchProjectButton.clear();
-			switchProjectButton.addAction("ProjectSelectorLink", new AScrumAction() {
-
-				@Override
-				public String getLabel() {
-					return "Project Selector";
-				}
-
-				@Override
-				protected void updateTooltip(TooltipBuilder tb) {
-					tb.setText("Show all visible projects.");
-				}
-
-				@Override
-				protected void onExecute() {
-					getNavigator().gotoProjectSelector();
-				}
-
-			});
+			switchProjectButton.addAction("ProjectSelectorLink", new CloseProjectAction());
 			switchProjectButton.addSeparator();
 			List<Project> projects = Utl.sort(Project.listAll(), Project.LAST_OPENED_COMPARATOR);
 			for (Project p : projects) {
@@ -174,8 +155,8 @@ public class HeaderWidget extends AScrumWidget {
 		String info = "You are using Kunagi release " + ai.getRelease() + " while release " + ai.getCurrentRelease()
 				+ " is available.";
 		return new HTML(
-			"<a href=\"http://kunagi.org/download.html\" target=\"_blank\"><img src=\"newReleaseAvailable.png\" alt=\"Upgrade\" width=\"16px\" height=\"16px\" title=\""
-					+ info + "\" style=\"margin-top: 2px;\"></a>");
+				"<a href=\"http://kunagi.org/download.html\" target=\"_blank\"><img src=\"newReleaseAvailable.png\" alt=\"Upgrade\" width=\"16px\" height=\"16px\" title=\""
+						+ info + "\" style=\"margin-top: 2px;\"></a>");
 	}
 
 }

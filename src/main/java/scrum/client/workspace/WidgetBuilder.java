@@ -14,12 +14,15 @@
  */
 package scrum.client.workspace;
 
+import ilarkesto.gwt.client.AAction;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -70,7 +73,7 @@ public class WidgetBuilder {
 		return construct(new Li());
 	}
 
-	public Widget a(String href, String text) {
+	public A a(String href, String text) {
 		return construct(new A(href, text));
 	}
 
@@ -91,10 +94,6 @@ public class WidgetBuilder {
 			super("div");
 		}
 
-		public void addItemA(String href, String text) {
-			add(new WidgetBuilder().styles("dropdown-item").a(href, text));
-		}
-
 		public Li createWrapperLiNavLink(String text) {
 			Li li = new WidgetBuilder().styles("nav-item pull-xs-none pull-md-left dropdown").li();
 			li.add(
@@ -102,6 +101,29 @@ public class WidgetBuilder {
 
 			li.add(this);
 			return li;
+		}
+
+		public void addItemA(String href, String text) {
+			addItemA(href, text, false);
+		}
+
+		public void addItemA(String href, String text, boolean targetBlank) {
+			WidgetBuilder wb = new WidgetBuilder();
+			if (targetBlank) wb.attr("target", "_blank");
+			add(wb.styles("dropdown-item").a(href, text));
+		}
+
+		public void addItemA(AAction action) {
+			Anchor a = new Anchor(action.getLabel());
+			a.removeStyleName("gwt-Anchor");
+			a.addStyleName("dropdown-item");
+			a.setTitle(action.getTooltip());
+			a.addClickHandler(action);
+			add(a);
+		}
+
+		public void addDivider() {
+			add(new WidgetBuilder().styles("dropdown-divider").div());
 		}
 	}
 

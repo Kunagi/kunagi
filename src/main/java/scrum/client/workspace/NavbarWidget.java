@@ -20,6 +20,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+import scrum.client.admin.LogoutAction;
 import scrum.client.common.AScrumWidget;
 import scrum.client.project.Project;
 import scrum.client.workspace.WidgetBuilder.DropdownMenu;
@@ -64,17 +65,29 @@ public class NavbarWidget extends AScrumWidget {
 	private Widget createNavUser() {
 		Ul ul = new WidgetBuilder().styles("nav navbar-nav pull-xs-right").ul();
 
-		Li li = new WidgetBuilder().li();
-		ul.add(li);
-		li.add(new WidgetBuilder().styles("nav-link", "dropdown-toggle").attr("data-toggle", "dropdown").a("#",
-			"User @ Project"));
+		DropdownMenu dropdown = new WidgetBuilder().styles("dropdown-menu-right").dropdownMenu();
+		String user = getCurrentUser().getName();
+		String project = currentProject.getLabel();
+		ul.add(dropdown.createWrapperLiNavLink(user + " @ " + project));
 
-		FlowPanel dropdown = new WidgetBuilder().styles("dropdown-menu dropdown-menu-right").attr("role", "menu").div();
-		li.add(dropdown);
+		dropdown.addItemA(new CloseProjectAction());
 
-		dropdown.add(new WidgetBuilder().styles("dropdown-item").a("#", "User 1"));
-		dropdown.add(new WidgetBuilder().styles("dropdown-divider").div());
-		dropdown.add(new WidgetBuilder().styles("dropdown-item").a("#", "User 2"));
+		dropdown.addDivider();
+
+		dropdown.addItemA(Navigator.getPageHref("ProjectUserConfig"), "Personal Settings");
+		dropdown.addItemA(Navigator.getPageHref("ProjectAdmin"), "Project Settings");
+		dropdown.addItemA(Navigator.getPageHref("SystemConfig"), "Kunagi Settings");
+		dropdown.addItemA(Navigator.getPageHref("SystemMessageManager"), "System Message");
+		dropdown.addItemA(Navigator.getPageHref("UserList"), "User Management");
+		dropdown.addItemA("admin.html", "Web Application Monitoring", true);
+
+		dropdown.addDivider();
+
+		dropdown.addItemA("http://kunagi.org/support.html", "Feedback & Support", true);
+
+		dropdown.addDivider();
+
+		dropdown.addItemA(new LogoutAction());
 
 		return ul;
 	}
