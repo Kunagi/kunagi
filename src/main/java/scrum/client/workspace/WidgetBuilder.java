@@ -59,8 +59,9 @@ public class WidgetBuilder {
 		return construct(new Nav());
 	}
 
-	public Button createButton() {
+	public Button button(String text) {
 		Button button = new Button();
+		button.setText(text);
 		button.removeStyleName("gwt-Button");
 		return construct(button);
 	}
@@ -163,6 +164,28 @@ public class WidgetBuilder {
 			super("a");
 			getElement().setAttribute("href", href);
 			getElement().setInnerText(text);
+		}
+	}
+
+	public FlowPanel form() {
+		return construct(new Form());
+	}
+
+	public static class Form extends FlowPanel {
+
+		public Form() {
+			super("form");
+		}
+	}
+
+	public FlowPanel span() {
+		return construct(new Span());
+	}
+
+	public static class Span extends FlowPanel {
+
+		public Span() {
+			super("span");
 		}
 	}
 

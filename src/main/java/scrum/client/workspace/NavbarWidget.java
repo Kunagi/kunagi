@@ -14,8 +14,6 @@
  */
 package scrum.client.workspace;
 
-import ilarkesto.gwt.client.Gwt;
-
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -23,6 +21,7 @@ import com.google.gwt.user.client.ui.Widget;
 import scrum.client.admin.LogoutAction;
 import scrum.client.common.AScrumWidget;
 import scrum.client.project.Project;
+import scrum.client.search.SearchInputWidget;
 import scrum.client.workspace.WidgetBuilder.DropdownMenu;
 import scrum.client.workspace.WidgetBuilder.Li;
 import scrum.client.workspace.WidgetBuilder.Nav;
@@ -58,12 +57,12 @@ public class NavbarWidget extends AScrumWidget {
 	private Widget createCollapse() {
 		FlowPanel ret = new WidgetBuilder().styles("collapse", "navbar-toggleable-sm").div();
 		ret.add(createNavLinks());
-		// ret.add(createNavGlobal());
+		ret.add(createNavGlobal());
 		return ret;
 	}
 
 	private Widget createNavUser() {
-		Ul ul = new WidgetBuilder().styles("nav navbar-nav pull-xs-right").ul();
+		Ul ul = new WidgetBuilder().styles("nav navbar-nav pull-xs-right m-l-1").ul();
 
 		DropdownMenu dropdown = new WidgetBuilder().styles("dropdown-menu-right").dropdownMenu();
 		String user = getCurrentUser().getName();
@@ -94,9 +93,30 @@ public class NavbarWidget extends AScrumWidget {
 
 	private Widget createNavGlobal() {
 		Ul ul = new WidgetBuilder().styles("nav navbar-nav pull-xs-right").ul();
-		ul.add(Gwt.createHyperlink("#", "Global 1", false));
-		ul.add(Gwt.createHyperlink("#", "Global 2", false));
+
+		ul.add(createNavGlobalSearch());
+		// ul.add(createNavGlobalCommunicationIndicator());
+
 		return ul;
+	}
+
+	private Li createNavGlobalCommunicationIndicator() {
+		Li li = new WidgetBuilder().styles("nav-item", "pull-xs-none", "pull-md-left").li();
+
+		li.add(new CommunicationIndicatorWidget());
+
+		return li;
+	}
+
+	private Li createNavGlobalSearch() {
+		Li li = new WidgetBuilder().styles("nav-item", "pull-xs-none", "pull-md-left").li();
+
+		// FlowPanel input = new WidgetBuilder().styles("form-control").attr("type", "text")
+		// .attr("placeholder", "Search...").input();
+		SearchInputWidget inputWidget = new SearchInputWidget();
+		li.add(inputWidget);
+
+		return li;
 	}
 
 	private Widget createNavLinks() {
@@ -153,7 +173,7 @@ public class NavbarWidget extends AScrumWidget {
 
 	private Widget createTogglerButton() {
 		Button togglerButton = new WidgetBuilder().styles("navbar-toggler", "hidden-md-up")
-				.attr("data-toggle", "collapse").attr("data-target", ".navbar-toggleable-sm").createButton();
+				.attr("data-toggle", "collapse").attr("data-target", ".navbar-toggleable-sm").button("Menu");
 		togglerButton.setHTML("&#9776;"); // 3bars
 		return togglerButton;
 	}
