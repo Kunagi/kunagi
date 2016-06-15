@@ -19,6 +19,7 @@ import ilarkesto.core.scope.NonConcurrentScopeManager;
 import ilarkesto.core.scope.Scope;
 import ilarkesto.core.scope.ScopeManager;
 import ilarkesto.gwt.client.AGwtApplication;
+import ilarkesto.gwt.client.Gwt;
 
 import scrum.client.admin.Auth;
 import scrum.client.admin.SystemConfig;
@@ -107,6 +108,7 @@ public class ScrumScopeManager {
 		scope.putComponent(new IssueManager());
 
 		projectScope.wireComponents();
+		Gwt.updateRootWidget();
 	}
 
 	public static void destroyProjectScope() {
