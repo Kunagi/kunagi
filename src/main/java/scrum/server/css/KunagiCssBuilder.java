@@ -352,24 +352,7 @@ public class KunagiCssBuilder implements ICssBuilder {
 	}
 
 	private void html(CssBuilder css) {
-		css.html().padding(0).margin(0);
-		css.style("#body").padding(0).margin(0).background(cBackground).fontFamily(fontFamily).fontSize(fontSize)
-				.lineHeight(lineHeight);
-		css.style("#body table").borderCollapseCollapse();
-		css.style("#body td").verticalAlignTop().fontFamily(fontFamily).fontSize(fontSize).lineHeight(lineHeight);
-		css.style("#body a").cursorPointer().color(cLink).textDecorationUnderline().outlineNone();
-		css.style("#body p").margin(0, 0, 10, 0);
-		css.style("#body h1").fontSize(fontSize + 6).lineHeight(lineHeight + 6).fontWeightBold().margin(5, 0, 5, 0);
-		css.style("#body h2").fontSize(fontSize + 4).lineHeight(lineHeight + 4).fontWeightBold().margin(5, 0, 5, 0);
-		css.style("#body h3").fontSize(fontSize + 2).lineHeight(lineHeight + 2).fontWeightBold().margin(0, 0, 5, 0);
-		css.style("#body h4").fontSize(fontSize + 1).lineHeight(lineHeight + 1).fontWeightBold().margin(0, 0, 5, 0);
-		css.style("#body pre").margin(0, 0, 10, 0).color(cHeaderBackground).fontSize(fontSize).lineHeight(lineHeight);
-		css.style("#body code").color(cHeaderBackground).fontSize(fontSize).lineHeight(lineHeight);
-		css.style("#body ul").margin(0, 0, 10, 0).padding(0, 0, 0, 20);
-		css.style("#body ol").margin(0, 0, 10, 0).padding(0, 0, 0, 20);
-		css.style("#body img").border("0");
-		css.style("#body input").border(1, cPagePanelBorder);
-		css.style("#body textarea").border(1, cPagePanelBorder);
+		css.style("#body").background(cBackground);
 	}
 
 	private void workspace(CssBuilder css) {

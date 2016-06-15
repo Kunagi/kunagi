@@ -61,7 +61,7 @@ public class StartServlet extends AKunagiServlet {
 		html.LINKfavicon();
 
 		html.startSTYLEcss();
-		// html.html(getCss());
+		html.html(getCss());
 		html.endSTYLE();
 
 		html.LINKcss("node_modules/bootstrap/dist/css/bootstrap.min.css");
